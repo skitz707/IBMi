@@ -1,0 +1,75 @@
+000100990511     A*%%TS  SD  19990511  090516  VASANTA     REL-V3R6M0  5716-PW1
+000200981118     A*******************************************************************
+000300981118     A***                                                             ***
+000400981118     A**                PROGRAM MODIFICATIONS LOG                      **
+000500981118     A**                =========================                      **
+000600981118     A**                                                               **
+000700990218     A**  *>  :  REL4.02:  02/18/99:  9902:  DXA028                    **
+000800990218     A**  NEW PROGRAM.
+000900990218     A***
+001000981118     A*******************************************************************
+001100990511     A*%%EC
+001200990511     A                                      DSPSIZ(24 80 *DS3                  -
+001300990511     A                                             27 132 *DS4)
+001400990511     A                                      REF(*LIBL/APLUSREF)
+001500990511     A                                      CHGINPDFT
+001600990511     A                                      PRINT(*LIBL/QSYSPRT)
+001700990511     A                                      INDARA
+001800990511     A          R MAINT1
+001900990511     A*%%TS  SD  19990511  090516  VASANTA     REL-V3R6M0  5716-PW1
+002000030806     A**                                    INVITE
+002100990511     A                                      DSPMOD(*DS3)
+002200990511     A                                      SLNO(01)
+002300990511     A                                      CLRL(*ALL)
+002400990511     A                                      CF01
+002500990511     A                                      CF12
+002600990511     A                                      HELP
+002700990511     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+002800990511     A  *DS3                                HLPARA(01 001 24 080)
+002900990511     A  *DS4                                HLPARA(01 001 24 080)
+003000990511     A                                  1 55'\FDM'
+003100990511     A                                      DSPATR(ND)
+003200990511     A            K2CONM    R        O  1  2REFFLD(NAME)
+003300990511     A                                  1 34'CUSTOMER MAINTENANCE'
+003400990511     A                                      DSPATR(HI)
+003500990511     A                                      DSPATR(UL)
+003600990511     A            K2MODE        11A  O  1 61DSPATR(HI)
+003700990511     A                                      DSPATR(RI)
+003800990511     A            K2CONO    R        O  2 13REFFLD(CONO)
+003900990511     A                                      DSPATR(HI)
+004000990511     A  72                                  DSPATR(ND)
+004100990511     A                                  2 16'/'
+004200990511     A  72                                  DSPATR(ND)
+004300990511     A            K2CSNO    R        O  2 18REFFLD(CSNO)
+004400990511     A                                      DSPATR(HI)
+004500990511     A                                      EDTCDE(Z)
+004600990511     A  80                              4 15'Currency Code?'
+004700990511     A  80        K2CURR    R     A  B  4 35REFFLD(CURR)
+004800990511     A                                      DSPATR(HI)
+004900990511     A                                      DSPATR(CS)
+005000990511     A  71                                  DSPATR(PR)
+005100990511     A  80        K2CRDS        25A  O  4 45DSPATR(HI)
+005200990511     A  80                              8 15'Dflt Prc Exch?'
+005300990511     A  80        K2PREX    R     A  B  8 35REFFLD(EXCH)
+005400990511     A                                      DSPATR(HI)
+005500990511     A                                      DSPATR(CS)
+005600990511     A  71                                  DSPATR(PR)
+005700990511     A                                      DSPATR(MDT)
+005800990511     A  80        K2PRDS        25A  O  8 45DSPATR(HI)
+005900990511     A  80                             10 15'Dflt Val Exch?'
+006000990511     A  80        K2VLEX    R     A  B 10 35REFFLD(EXCH)
+006100990511     A                                      DSPATR(HI)
+006200990511     A                                      DSPATR(CS)
+006300990511     A  71                                  DSPATR(PR)
+006400990511     A                                      DSPATR(MDT)
+006500990511     A  80        K2VLDS        25A  O 10 45DSPATR(HI)
+006600990511     A  80                              6 15'Alt Currency Code?'
+006700990511     A  80        K2CUR2         3A  B  6 35DSPATR(HI)
+006800990511     A                                      DSPATR(CS)
+006900990511     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+007000990511     A  90                                  DSPATR(RI)
+007100990511     A                                 24 69'F12=Return'
+007200990511     A                                      COLOR(BLU)
+007300990511     A            MIC            4A  P
+007400990511     A  80        K2CRD2        25A  O  6 45DSPATR(HI)
+007500990511     A            K2CSNM        30A  O  2 30DSPATR(HI)
