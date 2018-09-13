@@ -1,0 +1,2132 @@
+000100021209     A*%%TS  SD  20021209  164003  MBRANIN     REL-V5R1M0  5722-WDS
+000200981118     A*******************************************************************
+000300981118     A***                                                             ***
+000400981118     A**                PROGRAM MODIFICATIONS LOG                      **
+000500981118     A**                =========================                      **
+000600981118     A**                                                               **
+000700981118     A**  *>  :  REL3.00:  06/02/94:  0829:  DGU001                    **
+000800981118     A**  ADDED NON-DISPLAY FIELD "\xxx" TO EACH SCREEN IN THE FILE.   **
+000900981118     A**  THIS TAG IS UNIQUE FOR EACH SCREEN USED BY THE A+ DESKTOP.   **
+001000981118     A**                                                               **
+001100981118     A**  *> ?:  REL2.05:  11/02/93:  0829:  DRN001                    **
+001200981118     A**  CHANGED COMPANY NUMBER AND SALES REP NUMBER TO BE ALPHA      **
+001300981118     A**  NUMERIC TO ALLOW FOR "?" WINDOWS.                            **
+001400981118     A**                                                               **
+001500981118     A**  *> A:  REL3.00:   1/06/93:  0818:  I N2TEST                  **
+001600981118     A**  GETTING CPF4737 IF SELECT MULTIPLE QUESTION MARK FIELDS AND  **
+001700981118     A**  HIT ENTER TO QUICKLY.                                        **
+001800981118     A**                                                               **
+001900981118     A**  REMOVED INVITE  KEYWORD .                                    **
+002000981118     A**                                                               **
+002100981118     A**  *> B:  REL2.04:  05/06/93:  1022:  DOE010                    **
+002200981118     A**  ADDED CHECK PRODUCT RESTRICTION CODE FIELD TO MAINT1 AND     **
+002300981118     A**  MAINT3 SCREENS.                                              **
+002400981118     A**                                                               **
+002500981118     A**  *> C:  REL2.04:  05/07/93:  1022:  DOE011                    **
+002600981118     A**  ADDED SEND MSDS SHEETS (Y/N) TO MAINT1 AND MAINT3 SCREENS    **
+002700981118     A**                                                               **
+002800981118     A**  *> D:  REL2.05:  10/29/93:  0818:  DRN001                    **
+002900981118     A**  ADDED CUSTOMER TAX CLASS AND FUNCTION KEY TO TAX OVERRIDE    **
+003000981118     A**  MAINTENANCE.                                                ***
+003100981118     A**                                                               **
+003200981118     A**  *> E:  REL2.05:  11/16/93:  0829:  DRN001                    **
+003300981118     A**  ADDED "?" CAPABILITY TO HDQTR & AR CUSTOMER NUMBER.          **
+003400981118     A**                                                               **
+003500981118     A**  *> F:  REL2.05:  11/24/93:  0829:  DRN001                    **
+003600981118     A**  ADDED REBATE CLASS TO 'MAINT2'                               **
+003700981118     A**                                                               **
+003800981118     A**  *> G:  REL2.06:  01/28/94:  0929:  DEI001                    **
+003900981118     A**  ADDED EDI INFORMATION MAINTENANCE SCREENS:                   **
+004000981118     A**  CUSTOMER MAINTENANCE  -  SCREEN MAINT4                       **
+004100981118     A**  SHIP TO MAINTENANCE   -  SCREEN MAINT5                       **
+004200981118     A**                                                               **
+004300981118     A**  *> H:  REL2.06:  02/10/94:  0929:  DFX001                    **
+004400981118     A**  ADDED FAX INFORMATION TO THE MAINT4 AND MAINT5 SCREENS       **
+004500981118     A**                                                               **
+004600981118     A**  *> I:  REL2.06:  02/18/94:  0520:  DOE015                    **
+004700981118     A**  ADDED NEW FORMAT (MAINT6).                                   **
+004800981118     A**                                                               **
+004900981118     A**  *> J:  REL2.06:  02/22/94:  0520:  I 89144                   **
+005000981118     A**  CHANGED FAX TO EXTENSION NUMBER TO HAVE EDTCDE(Z)            **
+005100981118     A**                                                               **
+005200981118     A**  *> K:  REL2.06:  02/24/94:  0520:  DOE016                    **
+005300981118     A**  ADDED SIC CODE (MAINT2).                                     **
+005400981118     A**                                                               **
+005500981118     A**  *> L:  REL3.00:  06/20/94:  0929:  I 100644                  **
+005600981118     A**  TOOK OUT EXTENSION ON FAX NUMBER TO BE CONSISTENT.           **
+005700981118     A**                                                               **
+005800981118     A**  *> M:  REL3.00:  11/11/94:  0823:  I088892                   **
+005900981118     A**  ADDED CONSTANT '(Y/N)' FOR 'PRINT PICK/PACK' AND             **
+006000981118     A**  'SEND MSDS' FOR RECORD FORMATS MAINT1, MAINT2, AND MAINT3    **
+006100981118     A**                                                               **
+006200981118     A**  *> N:  REL3.00:   1/19/95:  0829:  DEI003                    **
+006300981118     A**  ADDED FIELDS FOR EDI PHASE II (MAINT4 & MAINT5 SCREENS)      **
+006400981118     A**                                                               **
+006500981118     A**  *> O:  REL3.00:  03/28/95:  0712:  DIC002                    **
+006600981118     A**  MADE COUNTRY FIELD '?' MARKABLE IN RECORDS MAINT1 AND MAINT3 **
+006700981118     A**                                                               **
+006800981118     A**  *> P:  REL3.00:  06/07/95:  0520:  DOE020                    **
+006900981118     A**  ADDED EXTENDED ITEM COMMENT FIELDS TO SCREEN.                **
+007000981118     A**                                                               **
+007100981118     A**  *> Q:  REL3.00:  07/17/95:  0520:  DOE021                    **
+007200981118     A**  ADDED GEOCODES TO ADDRESS INFORMATION AND F5 FOR SUB-CALL    **
+007300981118     A**  TO VERTEX TAX TABLE PROGRAM.                                 **
+007400981118     A**                                                               **
+007500981118     A**  *> R:  REL3.02:  10/17/96:  0114:  DOE032                    **
+007600981118     A**  ADDED NEW FIELDS FOR GST/PST TAXATION.                       **
+007700981118     A**                                                               **
+007800981118     A**  *> S:  REL3.01:  05/02/97:  1110:  I172213                   **
+007900981118     A**  ADDED REBATE CLASS DESCRIPTION ON SCREEN MAINT2.             **
+008000981118     A**                                                               **
+008100981118     A**  *> T:  REL3.02:  07/24/97:  8929:  DOE033                    **
+008200981118     A**  ADDED ORDER MINIMUM FIELDS TO THE MAINT2 SCREEN.             **
+008300981118     A**
+008400981118     A**  *> U:  REL3.02:  07/29/97:  0806:  DAR005                    **
+008500981118     A**  MODIFIED MAINT1 SCREEN TO ADD 3 NEW FIELDS                   **
+008600981118     A**
+008700981118     A**  *> V:  REL3.02:  09/02/97:  8929:  DOE037                    **
+008800981118     A**  !# ADDED CUSTOMER CONTRACT CODE TO MAINT2 SCREEN.            **
+008900981118     A**
+009000981118     A**  *> W:  REL3.02:  09/03/97:  0806:  DOE040                    **
+009100981118     A**  ADDED CONSOLIDATED CUSTOMER BILL CODE TO MAINT2 SCREEN.      **
+009200981118     A**  PROTECT TERM CODE IF THERE IS ORDERS IN CONSOLIDATED         **
+009300981118     A**  HOLDING FILE.                                                **
+009400981118     A**
+009500981118     A**  *> X:  REL3.02:  11/04/97:  0302:  DBQ001                    **
+009600981118     A**  ADDED FAX CUSTOMER RFQ RESPONSE FIELD TO THE MAINT4 SCREEN.  **
+009700981118     A**                                                               **
+009800981118     A**  *> Y:  REL3.02:  11/04/97:  0302:  DBQ001                    **
+009900981118     A**  ADDED PRINT CUSTOMER QUOTE FIELD TO MAINT4 SCREENS           **
+010000981118     A**
+010100981118     A**  *> Z:  REL3.02:  12/12/97:  0302:  DBQ001                    **
+010200981118     A**  CHGED PRINT CUSTOMER QUOTE FIELD TO MAINT4 SCREENS           **
+010300981118     A**                                                               **
+010400981118     A**  *> 0A: REL3.01:  12/30/97:  0929:  I186488  C13              **
+010500981118     A**  CHANGED THE F5 VERTEX KEY FROM (*> Q) SINCE IT WAS OVERLAYING**
+010600981118     A**  THE F24 KEY TO DELETE NOT TO DISPLAY ON A DELETE.            **
+010700981118     A**                                                               **
+010800981118     A**  *> 0B: REL3.02:  02/10/98:  0929:  IRPM1731                  **
+010900981118     A**  ADDED NONDISPLAY FOR B&Q IF FAX NOT INSTALLED.               **
+011000981118     A**                                                               **
+011100981118     A**  *> 0C: REL3.02:  03/20/98:  1110:  I191606                   **
+011200981118     A**  ADDED PROTECT FOR B&Q IF FAX NOT INSTALLED.                  **
+011300981118     A**                                                               **
+011400981118     A**  *> 0D: REL3.03:  04/08/98:  1110:  IRPM1773                  **
+011500981118     A**  ADDED EDIT WORD FOR TAX EXEMPT EXPIRATION DATE.              **
+011600981118     A**                                                               **
+011700981118     A**  *> 0E: REL4.00:  06/30/98:  0317:  DOE044                    **
+011800981118     A**  ADDED CUSTOMER COMMITMENT CODE ON MAINT2                     **
+011900981118     A**
+012000981118     A**  *> 0F: REL3.03:  09/03/98:  0313:  I203328  C04
+012100981118     A**     ADDED PROTECTION TO MINIMUM ORDER HOLD FIELD
+012200981118     A**
+012300981118     A**  *> 0G: REL4.02:  10/14/98:  1231:  DIC004
+012400981118     A**     ADDED NEW FIELDS TO MAINT1: CXCUR2 K2CRD2 USED FOR
+012500981118     A**     ALTERNATE CUSTOMER ORDER CURRENCY.
+012600981118     A**     MOVED KXTRNO CXCURR UP 1 LINE.
+012700981118     A**     MOVED CXCKRS CXMSDS TO RIGHT.
+012800981118     A**     MOVED DESCRIPTIONS ON SCREEN TO THE LEFT 1 SPACE.
+012900981118     A**
+013000981118     A**  *> ST@: REL4.02:  11/17/98:  1217:  DXA023                   **
+013100981118     A**  DATA BASE STATE FIELD CXSTAT REPLACED WITH K2STAT FIELD.     **
+013200981118     A**
+013300990912     A**  *> 0H: REL4.02:  02/19/99:  0313:  DXA025                    **
+013400990219     A**  ADDED FREIGHT ON BOARD FIELD TO SCREENS MAINT3 AND MAINT6.   **
+013500990219     A**  ADDITION OF FIELD TO MAINT3 REQUIRED SIGNIFICANT
+013600990219     A**  REARRANGEMENT OF THE SCREEN.
+013700990324     A**
+013800990324     A**  *> 0I: REL4.02:  03/23/99: 9902: DXA028
+013900990324     A**  ADDED ADDRESS LINE 4 AND CHANGED THE PHONE AND FAX FIELDS
+014000990324     A**  REMOVED THE CURRENCY DETAILS TO PUT IT IN A DIFFERENT FILE
+014100990331     A**
+014200990912     A**  *> 0J: REL4.02:  03/17/99:  0313:  DOE054
+014300990405     A**  ADDED SALES REPS 1-3, TAX CERT # AND EXP. DATE TO MAINT3
+014400990405     A**
+014500990405     A**  *> 0K: REL4.02:  04/05/99:  0822:  DEI008
+014600990405     A**  REMOVED COMMITMENT CODE DESCRIPTION FROM THE MAINT2 SCREEN
+014700990405     A**  ADDED MINIMUM WRITE OFF AMOUNT AND PERCENT
+014800990219     A**
+014900990419     A**  *> 0L: REL4.02:  04/15/99:  0822:  DMS001
+015000990419     A**  ADDED FUNCTION KEY AND CALL TO MS830C - EMAIL CONTACT
+015100990419     A**  MAINTENANCE
+015200990419     A**
+015300990426     A**  *> 0M: REL4.02:  04/26/99:  0904:  DXA030
+015400990426     A**  ADDED FUNCTION KEY AND CALL TO CL900 - COMPLIANCE LABEL
+015500990426     A**  MAINTENANCE
+015600990630     A**
+015700990630     A**  *> 0N: REL4.02:  06/30/99:  0901:  DXA028
+015800990630     A**  ADDED EDTCDE AND FIELD PROTECTION INDICATOR TO FAX
+015900990426     A**
+016000990706     A**  *> 0O: REL4.02:  07/06/99:  0623:  DXA028
+016100990706     A**  FIXED FAX EXTN FLD TO SHOW UP ON SCRN, FIXED AP PHN NUM TO BE
+016200990706     A**  TO BE CLEARED.
+016300990706     A**
+016400990712     A**  *> 0P: REL4.02:  07/12/99:  0721:  DOE054
+016500990712     A**  CHANGED TAX EXEMPT TEXT IN MAINT3 TO MATCH THAT IN MAINT2.
+016600990823     A**
+016700990823     A**  *> 0Q: REL4.02:  08/23/99:  1203:  IRPM6698
+016800990823     A**  CHANGED ABBREVIATION FOR TAX EXEMPT CERTIFICATE NUMBER.
+016900991001     A**
+017000991001     A**  *> 0R: REL4.02:  10/01/99:  0904:  IRPM7806
+017100991001     A**  CHANGED TEXT ON MAINT2 WINDOW TO SAY MAX W/O AMT AND PCT
+017200991001     A**  INSTEAD OF W/O MIN AMT AND PCT.
+017300991213     A**
+017400991213     A**  *> 0S: REL4.02:  12/13/99:  0302:  ISCR2702
+017500991213     A**  ADDED ATTRIBUTES TO 4TH ADDRESS LINE FIELDS TO ALLOW
+017600991213     A**  PROTECTION OF FIELD WHEN USING FORM TYPE 1.
+017700991214     A**
+017800991214     A**  *> 0T: REL4.02:  12/15/99:  0313:  ISCR2831
+017900991214     A**  CHANGED DELINQUENT LETTERS TO OVERDUE NOTICE ON MAINT4
+018000991214     A**
+018100991214     A**  *> 0U: REL4.02:  12/15/99:  0313:  ISCR2819
+018200991214     A**  PUT NONDISPLAY ON WRITE OFF AMOUNT AND PERCENTAGE IF EDI
+018300991214     A**  NOT INSTALLED.
+018400000117     A**
+018500010306     A**  *> 0V: REL4.03:  01/17/00:  0313:  ISCR2979  C01
+018600000117     A**  TAX CERT DATE FIELD WAS 8 CHARACTERS LONG SHOULD BE 6.
+018700990712     A**
+018800000612     A**  *> 0W: REL4.03:  05/19/00:  1008:  T23335   C05
+018900000519     A**  MODIFIED FIELD K4FXQR SO THAT COLUMN SEPERATORS WILL NOT
+019000000519     A**  DISPLAY WHEN FIELD IS HIDDEN.
+019100020130     A**
+019200020130     A**  *> 0X: REL5.01:  01/30/02:  0203:  I29438  C10               **
+019300020130     A**  IF MAIL SERVER IS INSTALLED ALLOW EMAIL CUST/SHIP-TO DOC.    **
+019400020130     A**  WITHOUT PRINT, FAX OR EDI.                                   **
+019500021021     A**
+019600021021     A**  *> 0Y: REL5.01:  06/20/02:  9002:  DXA052  C16               **
+019700021021     A**  ADDED SCREEN SOOPT FOR SPRCIAL ORDER OPTIONS
+019800021209     A**
+019900021209     A**  *> 0Z: REL5.01:  12/09/02:  9002:  ISCR2046  C17             **
+020000021209     A**  ADDED F24=DELETE TO SOOPT SCREEN
+020100021219     A**
+020200021230     A**  *> 1A: REL5.01:  12/30/02:  9605:  ISCR2238  C17             **
+020300021230     A**  CHANGED TO ALLOW PRINT, FAX, EDI AND EMAIL FLAGS; FAX
+020400021230     A**  NUMBER AND EMAIL ADDRESS TO BE CONTROLLED AT THE CUSTOMER
+020500021230     A**  LEVEL.
+020600021230     A**
+020700021118     A**
+020800981118     A*******************************************************************
+020900981118     A* FILE: AR800FM    TEXT: Customer Master/Ship to Address File Maintenance
+021000021209     A*%%EC
+021100021021     A*%%FD Customer Master/Ship to Addr File Mnt      *DW
+021200021209     A                                      DSPSIZ(24 80 *DS3                  -
+021300021209     A                                             27 132 *DS4)
+021400021209     A                                      REF(*LIBL/APLUSREF)
+021500021209     A                                      CHGINPDFT
+021600021209     A                                      PRINT(*LIBL/QSYSPRT)
+021700021209     A                                      INDARA
+021800990419     A          R STARTC
+021900990419     A*%%TS  SD  19990419  135606  GTUDINO     REL-V3R6M0  5716-PW1
+022000990419     A                                      CF01
+022100990419     A                                      CF03
+022200990419     A                                      CF04
+022300990419     A                                      CF05
+022400990419     A                                      CF09
+022500990419     A                                      HELP
+022600990419     A  49                                  CF10
+022700990419     A  64                                  CF11
+022800021021     A  48                                  CF02
+022900990419     A                                      ALWROL
+023000030806     A**                                    INVITE
+023100990419     A                                      DSPMOD(*DS3)
+023200990419     A                                      SLNO(01)
+023300990419     A                                      CLRL(*ALL)
+023400990419     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+023500990419     A  *DS3                                HLPARA(01 001 24 080)
+023600990419     A  *DS4                                HLPARA(01 001 24 080)
+023700990419     A                                  2  4'\FBW'
+023800990419     A                                      DSPATR(ND)
+023900990419     A            K10001         2A  I  2  1DFT('S1')
+024000990419     A                                      DSPATR(PR)
+024100990419     A                                      DSPATR(ND)
+024200990419     A                                      DSPATR(MDT)
+024300990419     A                                  2 24'CUSTOMER/SHIP TO FILE MAINTENANCE'
+024400990419     A                                      DSPATR(HI)
+024500990419     A                                      DSPATR(UL)
+024600990419     A                                  6 21'Function:'
+024700990419     A            K1FNCD         1X  B  6 42DSPATR(CS)
+024800990419     A                                      DSPATR(HI)
+024900990419     A                                      DSPATR(MDT)
+025000990419     A                                  6 50'(A,C,D,R,S)'
+025100990419     A                                  8 21'Company?'
+025200990419     A  72                                  DSPATR(ND)
+025300990419     A            KQCONO    R        B  8 42REFFLD(CON$)
+025400990419     A                                      DSPATR(HI)
+025500990419     A                                      DSPATR(MDT)
+025600990419     A  72                                  DSPATR(PR)
+025700990419     A  72                                  DSPATR(ND)
+025800990419     A N72                                  DSPATR(CS)
+025900990419     A            K2CONO    R        H      REFFLD(CONO)
+026000990419     A                                  8 50'(01-99)'
+026100990419     A  72                                  DSPATR(ND)
+026200990419     A                                 10 21'Customer No:'
+026300990419     A            K2CSNO    R        B 10 42REFFLD(CSNO)
+026400990419     A                                      COMP(GE 0)
+026500990419     A                                      EDTCDE(Z)
+026600990419     A                                      DSPATR(CS)
+026700990419     A                                      DSPATR(HI)
+026800990419     A                                      DSPATR(MDT)
+026900990419     A                                 12 21'Ship To:'
+027000990419     A            K4SHP#    R        B 12 42REFFLD(SHP#)
+027100990419     A                                      DSPATR(CS)
+027200990419     A                                      DSPATR(HI)
+027300990419     A                                      DSPATR(MDT)
+027400990419     A                                 16 21'Find:'
+027500990419     A            K1FIND        40A  B 16 27DSPATR(HI)
+027600990419     A                                      DSPATR(CS)
+027700990419     A                                 17 21'City:'
+027800990419     A            K5CITY         8A  B 17 27DSPATR(CS)
+027900990419     A                                      DSPATR(MDT)
+028000990419     A                                      DSPATR(HI)
+028100990419     A                                 20  1'Last Function:'
+028200990419     A  73                                  DSPATR(ND)
+028300990419     A            K1LSFN        11A  O 20 16DSPATR(HI)
+028400990419     A  73                                  DSPATR(ND)
+028500990419     A            K1LSCO    R        O 20 28REFFLD(CONO)
+028600990419     A                                      DSPATR(HI)
+028700990419     A  73                                  DSPATR(ND)
+028800990419     A            K1LSCS    R        O 20 31REFFLD(CSNO)
+028900990419     A                                      DSPATR(HI)
+029000990419     A                                      EDTCDE(Z)
+029100990419     A  73                                  DSPATR(ND)
+029200990419     A            K1LSSH    R        O 20 42REFFLD(SHP#)
+029300990419     A                                      DSPATR(HI)
+029400990419     A  73                                  DSPATR(ND)
+029500990419     A            K1LSCN    R        O 20 50REFFLD(CSNM)
+029600990419     A                                      DSPATR(HI)
+029700990419     A  73                                  DSPATR(ND)
+029800990419     A            #MSG001       70A  O 21  6MSGID(USR &MIC QUSERMSG)
+029900990419     A  90                                  DSPATR(RI)
+030000990419     A  28        K1INUS    R        O 22 50REFFLD(INUS)
+030100990419     A                                      DSPATR(RI)
+030200990419     A                                 23 19'F3=Exit'
+030300990419     A                                      COLOR(BLU)
+030400990419     A                                      TEXT('*> 0L MOVED')
+030500990419     A                                 24 19'F4=Customer Search'
+030600990419     A                                      COLOR(BLU)
+030700990419     A                                      TEXT('*> 0L MOVED')
+030800990419     A                                 23 39'F5=Ship To Search'
+030900990419     A                                      COLOR(BLU)
+031000990419     A                                      TEXT('*> 0L MOVED')
+031100990419     A                                 14 21'Copy Customer No:'
+031200990419     A            K1CCSN    R        B 14 42REFFLD(CSNO)
+031300990419     A                                      DSPATR(CS)
+031400990419     A                                      DSPATR(HI)
+031500990419     A            MIC            4A  P
+031600990419     A                                 24 39'F9=Tax Overrides'
+031700990419     A                                      COLOR(BLU)
+031800990419     A                                      TEXT('*> 0L MOVED')
+031900990419     A  49                             23 59'F10=Ext Itm Cmnt'
+032000990419     A                                      COLOR(BLU)
+032100990419     A                                      TEXT('*> 0L MOVED')
+032200990419     A            K5STAT        10A  B 17 49TEXT('10 character search state rep-
+032300990419     A                                      laces 2 character st.')
+032400990419     A                                      DSPATR(HI)
+032500990419     A                                      DSPATR(CS)
+032600990419     A                                 17 40'St/Prov:'
+032700990419     A  64                             24 59'F11=Email Contacts'
+032800990419     A                                      COLOR(BLU)
+032900990419     A                                      TEXT('*> 0L ADDED')
+033000021022     A  48                             23  3'F2=S/O Options'
+033100021022     A                                      COLOR(BLU)
+033200991213     A          R MAINT1
+033300991213     A*%%TS  SD  19991213  220331  JBEAUDET    REL-V3R6M0  5716-PW1
+033400991213     A                                      CF01
+033500991213     A                                      CF12
+033600991213     A                                      CF24
+033700991213     A                                      HELP
+033800991213     A  60N74                               CF05
+033900991213     A N21                                  CF04
+034000991213     A                                      ALWROL
+034100991213     A                                      DSPMOD(*DS3)
+034200991213     A                                      SLNO(01)
+034300991213     A                                      CLRL(*ALL)
+034400991213     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+034500991213     A  *DS3                                HLPARA(01 001 24 080)
+034600991213     A  *DS4                                HLPARA(01 001 24 080)
+034700991213     A                                  1 55'\FBQ'
+034800991213     A                                      DSPATR(ND)
+034900991213     A            K2CONM    R        O  1  2REFFLD(NAME)
+035000991213     A  72                                  DSPATR(ND)
+035100991213     A                                  1 34'CUSTOMER MAINTENANCE'
+035200991213     A                                      DSPATR(HI)
+035300991213     A                                      DSPATR(UL)
+035400991213     A            K2MODE        11A  O  1 61DSPATR(HI)
+035500991213     A                                      DSPATR(RI)
+035600991213     A            K2CONO    R        O  2  2REFFLD(CONO)
+035700991213     A                                      DSPATR(HI)
+035800991213     A  72                                  DSPATR(ND)
+035900991213     A                                  2  5'/'
+036000991213     A  72                                  DSPATR(ND)
+036100991213     A            K2CSNO    R        O  2  7REFFLD(CSNO)
+036200991213     A                                      DSPATR(HI)
+036300991213     A                                      EDTCDE(Z)
+036400991213     A                                  2 19'Name:'
+036500991213     A            CXCSNM    R        B  2 25REFFLD(CSNM)
+036600991213     A                                      CHECK(FE)
+036700991213     A                                      CHECK(LC)
+036800991213     A                                      DSPATR(CS)
+036900991213     A                                      DSPATR(HI)
+037000991213     A                                      DSPATR(MDT)
+037100991213     A  71                                  DSPATR(PR)
+037200991213     A            CXCAD1    R        B  3 11REFFLD(CAD1)
+037300991213     A                                      CHECK(FE)
+037400991213     A                                      CHECK(LC)
+037500991213     A                                      DSPATR(CS)
+037600991213     A                                      DSPATR(HI)
+037700991213     A                                      DSPATR(MDT)
+037800991213     A  71                                  DSPATR(PR)
+037900991213     A            CXCAD2    R        B  4 11REFFLD(CAD2)
+038000991213     A                                      CHECK(FE)
+038100991213     A                                      CHECK(LC)
+038200991213     A                                      DSPATR(CS)
+038300991213     A                                      DSPATR(HI)
+038400991213     A                                      DSPATR(MDT)
+038500991213     A  71                                  DSPATR(PR)
+038600991213     A            CXCITY    R        B  7 11REFFLD(CITY)
+038700991213     A                                      CHECK(FE)
+038800991213     A                                      CHECK(LC)
+038900991213     A                                      DSPATR(CS)
+039000991213     A                                      DSPATR(HI)
+039100991213     A                                      DSPATR(MDT)
+039200991213     A  71                                  DSPATR(PR)
+039300991213     A            CXZIP4    R        B  8 49REFFLD(ZIP4)
+039400991213     A                                      CHECK(FE)
+039500991213     A                                      DSPATR(CS)
+039600991213     A                                      DSPATR(HI)
+039700991213     A                                      DSPATR(MDT)
+039800991213     A  71                                  DSPATR(PR)
+039900991213     A                                 10  2'PO Contact:'
+040000991213     A            CXPCNT    R        B 10 14REFFLD(PCNT)
+040100991213     A                                      CHECK(FE)
+040200991213     A                                      CHECK(LC)
+040300991213     A                                      DSPATR(CS)
+040400991213     A                                      DSPATR(HI)
+040500991213     A                                      DSPATR(MDT)
+040600991213     A  71                                  DSPATR(PR)
+040700991213     A                                 10 40'Phone:'
+040800991213     A            CXPOEX    R        B 10 72REFFLD(POEX)
+040900991213     A                                      COMP(GE 0)
+041000991213     A                                      EDTCDE(Z)
+041100991213     A                                      DSPATR(CS)
+041200991213     A                                      DSPATR(HI)
+041300991213     A                                      DSPATR(MDT)
+041400991213     A  71                                  DSPATR(PR)
+041500991213     A                                 11  2'AP Contact:'
+041600991213     A            CXCONT    R        B 11 14REFFLD(CONT)
+041700991213     A                                      CHECK(FE)
+041800991213     A                                      CHECK(LC)
+041900991213     A                                      DSPATR(CS)
+042000991213     A                                      DSPATR(HI)
+042100991213     A                                      DSPATR(MDT)
+042200991213     A  71                                  DSPATR(PR)
+042300991213     A                                      TEXT('Contact Name - Accounts Payab-
+042400991213     A                                      le  *> U moved left')
+042500991213     A                                 11 40'Phone:'
+042600991213     A            CXAPEX    R        B 11 72REFFLD(APEX)
+042700991213     A                                      COMP(GE 0)
+042800991213     A                                      EDTCDE(Z)
+042900991213     A                                      DSPATR(CS)
+043000991213     A                                      DSPATR(HI)
+043100991213     A                                      DSPATR(MDT)
+043200991213     A  71                                  DSPATR(PR)
+043300991213     A                                 12 40'Fax:'
+043400991213     A            CXFXEX    R        B 12 72REFFLD(FXEX)
+043500991213     A                                      TEXT('*> 0O WAS 12,75')
+043600991213     A                                      DSPATR(CS)
+043700991213     A                                      DSPATR(HI)
+043800991213     A                                      DSPATR(MDT)
+043900991213     A                                      EDTCDE(Z)
+044000991213     A                                 13  2'A/R Cust No?'
+044100991213     A            CQARCS        10A  B 13 17TEXT('*> U moved left')
+044200991213     A                                      DSPATR(CS)
+044300991213     A                                      DSPATR(HI)
+044400991213     A                                      DSPATR(MDT)
+044500991213     A  71                                  DSPATR(PR)
+044600991213     A            CXARCS    R        H      REFFLD(ARCS)
+044700991213     A            K2ARNM    R        O 13 28REFFLD(NAME)
+044800991213     A                                      DSPATR(HI)
+044900991213     A                                      TEXT('Name  *> U moved left')
+045000991213     A                                 14  2'Hdqtr Cust No?'
+045100991213     A            CQHQCS        10A  B 14 17TEXT('*> moved left')
+045200991213     A                                      DSPATR(CS)
+045300991213     A                                      DSPATR(HI)
+045400991213     A                                      DSPATR(MDT)
+045500991213     A  71                                  DSPATR(PR)
+045600991213     A            CXHQCS    R        H      REFFLD(HQCS)
+045700991213     A            K2HQNM        30A  O 14 28TEXT('*> U moved left')
+045800991213     A                                      DSPATR(HI)
+045900991213     A                                 16  2'Dft Ship To:'
+046000991213     A            CXDFSH    R        B 16 17REFFLD(DFSH)
+046100991213     A                                      CHECK(FE)
+046200991213     A                                      DSPATR(CS)
+046300991213     A                                      DSPATR(HI)
+046400991213     A                                      DSPATR(MDT)
+046500991213     A  71                                  DSPATR(PR)
+046600991213     A                                      TEXT('Default Ship-To Number  *> mo-
+046700991213     A                                      ved left')
+046800991213     A            K2SHNM    R        O 16 27REFFLD(NAME)
+046900991213     A                                      DSPATR(HI)
+047000991213     A                                      TEXT('Name  *> U moved left')
+047100991213     A                                 17  2'Sales Rep 1?'
+047200991213     A            CQRP#1    R        B 17 17REFFLD(RPN$)
+047300991213     A                                      DSPATR(CS)
+047400991213     A                                      DSPATR(HI)
+047500991213     A                                      DSPATR(MDT)
+047600991213     A  71                                  DSPATR(PR)
+047700991213     A                                      TEXT('Sales Rep Number (Alpha)  *> -
+047800991213     A                                      moved left')
+047900991213     A            CXRP#1    R        H      REFFLD(RPNO)
+048000991213     A            K2RNM1    R        O 17 27REFFLD(RPNM)
+048100991213     A                                      DSPATR(HI)
+048200991213     A                                      TEXT('Sales Representative Name  *>-
+048300991213     A                                       U moved left')
+048400991213     A                                 18  2'Sales Rep 2?'
+048500991213     A            CQRP#2    R        B 18 17REFFLD(RPN$)
+048600991213     A                                      DSPATR(CS)
+048700991213     A                                      DSPATR(HI)
+048800991213     A                                      DSPATR(MDT)
+048900991213     A  71                                  DSPATR(PR)
+049000991213     A                                      TEXT('Sales Rep Number (Alpha) *> U-
+049100991213     A                                       moved left')
+049200991213     A            CXRP#2    R        H      REFFLD(RPNO)
+049300991213     A            K2RNM2    R        O 18 27REFFLD(RPNM)
+049400991213     A                                      DSPATR(HI)
+049500991213     A                                      TEXT('Sales Representative Name  *>-
+049600991213     A                                       U move left')
+049700991213     A                                 19  2'Sales Rep 3?'
+049800991213     A            CQRP#3    R        B 19 17REFFLD(RPN$)
+049900991213     A                                      DSPATR(CS)
+050000991213     A                                      DSPATR(HI)
+050100991213     A                                      DSPATR(MDT)
+050200991213     A  71                                  DSPATR(PR)
+050300991213     A                                      TEXT('Sales Rep Number (Alpha) *> U-
+050400991213     A                                       moved left')
+050500991213     A            CXRP#3    R        H      REFFLD(RPNO)
+050600991213     A            K2RNM3    R        O 19 27REFFLD(RPNM)
+050700991213     A                                      DSPATR(HI)
+050800991213     A                                      TEXT('Sales Representative Name  *>-
+050900991213     A                                       U moved left')
+051000991213     A                                 12  2'Sort Word:'
+051100991213     A            CXCSRT    R        B 12 17REFFLD(CSRT)
+051200991213     A                                      CHECK(FE)
+051300991213     A                                      DSPATR(CS)
+051400991213     A                                      DSPATR(HI)
+051500991213     A                                      DSPATR(MDT)
+051600991213     A  71                                  DSPATR(PR)
+051700991213     A                                      TEXT('Customer Sort Word  *> U move-
+051800991213     A                                      d left')
+051900991213     A                                 20  2'Class?'
+052000991213     A            CXCSCL    R        B 20 17REFFLD(CSCL)
+052100991213     A                                      CHECK(FE)
+052200991213     A                                      DSPATR(CS)
+052300991213     A                                      DSPATR(HI)
+052400991213     A                                      DSPATR(MDT)
+052500991213     A  71                                  DSPATR(PR)
+052600991213     A                                      TEXT('Customer Class  *> U moved le-
+052700991213     A                                      ft')
+052800991213     A                                 20 20'/'
+052900991213     A            CXCSSC    R        B 20 22REFFLD(CSSC)
+053000991213     A                                      CHECK(FE)
+053100991213     A                                      DSPATR(CS)
+053200991213     A                                      DSPATR(HI)
+053300991213     A                                      DSPATR(MDT)
+053400991213     A  71                                  DSPATR(PR)
+053500991213     A                                      TEXT('Customer Subclass  *> U moved-
+053600991213     A                                       left')
+053700991213     A            K2ICDC    R        O 20 27REFFLD(NAME)
+053800991213     A                                      DSPATR(HI)
+053900991213     A                                      TEXT('Name  *> U moved left')
+054000991213     A            K2ISDC    R        O 21 27REFFLD(NAME)
+054100991213     A                                      DSPATR(HI)
+054200991213     A                                      TEXT('Name  *> U moved left')
+054300991213     A                                 22  2'Territory?'
+054400991213     A            CXTRNO    R        B 22 21REFFLD(TRNO)
+054500991213     A                                      CHECK(FE)
+054600991213     A                                      DSPATR(CS)
+054700991213     A                                      DSPATR(HI)
+054800991213     A                                      DSPATR(MDT)
+054900991213     A  71                                  DSPATR(PR)
+055000991213     A                                      TEXT('Territory Number *> U moved l-
+055100991213     A                                      eft')
+055200991213     A            K2TRDC    R        O 22 27REFFLD(NAME)
+055300991213     A                                      DSPATR(HI)
+055400991213     A                                      TEXT('Name  *> U moved left')
+055500991213     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+055600991213     A  90                                  DSPATR(RI)
+055700991213     A  74        K2FK24        10A  O 24 57COLOR(BLU)
+055800991213     A                                 24 69'F12=Return'
+055900991213     A                                      COLOR(BLU)
+056000991213     A                                 24 24'F4=Cmpl. Labels'
+056100991213     A                                      COLOR(BLU)
+056200991213     A  21                                  DSPATR(ND)
+056300991213     A            MIC            4A  P
+056400991213     A            SUS001         1A  O 17 25
+056500991213     A            SUS002         1A  O 18 25
+056600991213     A            SUS003         1A  O 19 25
+056700991213     A                                 19 58'Chk Prd Rstr:'
+056800991213     A            CXCKRS         1A  B 19 72TEXT('*> U moved left')
+056900991213     A                                      DSPATR(HI)
+057000991213     A                                      DSPATR(CS)
+057100991213     A                                      DSPATR(MDT)
+057200991213     A  71                                  DSPATR(PR)
+057300991213     A                                 19 74'(Y,N,S)'
+057400991213     A                                 20 61'Send MSDS:'
+057500991213     A            CXMSDS    R        B 20 72REFFLD(FLAG)
+057600991213     A                                      DSPATR(HI)
+057700991213     A                                      DSPATR(CS)
+057800991213     A                                      DSPATR(MDT)
+057900991213     A  71                                  DSPATR(PR)
+058000991213     A                                      TEXT('General Status/Setting Flag  -
+058100991213     A                                      *> U moved left')
+058200991213     A                                 20 74'(Y,N)'
+058300991213     A            CXCAD3    R        B  5 11REFFLD(CAD2)
+058400991213     A                                      CHECK(FE)
+058500991213     A                                      CHECK(LC)
+058600991213     A                                      DSPATR(CS)
+058700991213     A                                      DSPATR(HI)
+058800991213     A                                      DSPATR(MDT)
+058900991213     A  71                                  DSPATR(PR)
+059000991213     A            CXCTID    R     A  B  8 11REFFLD(CTID)
+059100991213     A                                      DSPATR(HI)
+059200991213     A                                      DSPATR(CS)
+059300991213     A                                      DSPATR(MDT)
+059400991213     A  71                                  DSPATR(PR)
+059500991213     A            CXPCCD    R     A  B 10 47REFFLD(CTCD)
+059600991213     A                                      DSPATR(HI)
+059700991213     A                                      DSPATR(CS)
+059800991213     A                                      DSPATR(MDT)
+059900991213     A  71                                  DSPATR(PR)
+060000991213     A            CXACCD    R     A  B 11 47REFFLD(CTCD)
+060100991213     A                                      DSPATR(HI)
+060200991213     A                                      DSPATR(CS)
+060300991213     A                                      DSPATR(MDT)
+060400991213     A  71                                  DSPATR(PR)
+060500991213     A            CXFXCD    R     A  B 12 47REFFLD(CTCD)
+060600991213     A                                      DSPATR(HI)
+060700991213     A                                      DSPATR(CS)
+060800991213     A                                      DSPATR(MDT)
+060900991213     A  71                                  DSPATR(PR)
+061000991213     A  60        K2GEOC        11A  O  8 66DSPATR(HI)
+061100991213     A  60N74                          24 46'F5=Vertex Tables'
+061200991213     A                                      COLOR(BLU)
+061300991213     A                                 14 60'A/R Call Rep?'
+061400991213     A            K2ARRP    R        B 14 74REFFLD(ARRP)
+061500991213     A                                      TEXT('*> U added')
+061600991213     A                                      DSPATR(CS)
+061700991213     A                                      COLOR(YLW)
+061800991213     A                                 15 60'Rvw Every'
+061900991213     A            K2RVDY    R        B 15 70REFFLD(RVDY)
+062000991213     A                                      TEXT('*> U added')
+062100991213     A                                      DSPATR(CS)
+062200991213     A                                      COLOR(YLW)
+062300991213     A                                      EDTCDE(Z)
+062400991213     A                                      COMP(GE 0)
+062500991213     A                                 15 74'Days'
+062600991213     A                                 16 60'Lst Crd Rpt:'
+062700991213     A            K2CRRP    R        B 16 74REFFLD(APLUS/DATE *LIBL/APLUSREF)
+062800991213     A                                      TEXT('Date  *> U added')
+062900991213     A                                      DSPATR(CS)
+063000991213     A                                      COLOR(YLW)
+063100991213     A                                 17 60'Cnsld Bill Code?'
+063200991213     A                                      TEXT('*> W added')
+063300991213     A            K2CBCD    R        B 17 77REFFLD(CBCD)
+063400991213     A                                      TEXT('Customer Bill Code  *> W adde-
+063500991213     A                                      d')
+063600991213     A                                      COLOR(YLW)
+063700991213     A  30                                  DSPATR(PR)
+063800991213     A            CXCAD4        30A  B  6 11TEXT('address line 4 *> 0S ADDED DS-
+063900991213     A                                      P ATTR')
+064000991213     A                                      DSPATR(HI)
+064100991213     A                                      DSPATR(CS)
+064200991213     A                                      CHECK(LC)
+064300991213     A  09                                  DSPATR(PR)
+064400991213     A                                      DSPATR(MDT)
+064500991213     A                                  7  2'City:'
+064600991213     A                                  7 39'St/Prov?'
+064700991213     A                                  8 39'Zip/Pstl:'
+064800991213     A            K2STAT        30A  B  7 49TEXT('30 character state')
+064900991213     A                                      DSPATR(HI)
+065000991213     A                                      DSPATR(CS)
+065100991213     A                                      CHECK(LC)
+065200991213     A            K2PPHN        20A  B 10 51TEXT('phone# (po)')
+065300991213     A                                      DSPATR(HI)
+065400991213     A                                      DSPATR(CS)
+065500991213     A            K2APHN        20A  B 11 51TEXT('phone# (ap)')
+065600991213     A                                      DSPATR(HI)
+065700991213     A                                      DSPATR(CS)
+065800991213     A            K2FXNM        20A  B 12 51TEXT('fax#')
+065900991213     A                                      DSPATR(HI)
+066000991213     A                                      DSPATR(CS)
+066100991213     A                                  3  2'Addr1:'
+066200991213     A                                  4  2'Addr2:'
+066300991213     A                                  5  2'Addr3:'
+066400991213     A                                  6  2'Addr4:'
+066500991213     A                                 15  2'Corp. Group?'
+066600991213     A            CXCRID    R     A  B 15 17REFFLD(CRID)
+066700991213     A                                      TEXT('Corporate Group Id')
+066800991213     A                                      DSPATR(CS)
+066900991213     A                                      DSPATR(HI)
+067000991213     A                                      DSPATR(MDT)
+067100991213     A            K2GRDS    R        O 15 28REFFLD(GRDS)
+067200991213     A                                      TEXT('Corporate Group Description')
+067300991213     A                                      DSPATR(HI)
+067400991213     A                                  8  2'Cntry?'
+067500990706     A*%% *> 0O- BEG OF ADD
+067600990706     A*%% *> 0O- END OF ADD
+067700990707     A*%% *> 0O DEL                         DSPATR(PR)
+067800990707     A*%% *> 0O DEL                         DSPATR(ND)
+067900981118     A*%% *> ST@ - BEG CHG
+068000981118     A*%%         CXSTAT    R        B  5 57REFFLD(STAT)
+068100981118     A*%% *> ST@ - END CHG
+068200981118     A*%%  *> 0G BEG OF ADD
+068300981118     A*%%  *> 0G END OF ADD
+068400990406     A          R MAINT2
+068500990406     A*%%TS  SD  19990406  161801  MADHURI     REL-V3R6M0  5716-PW1
+068600990406     A                                      CF01
+068700990406     A                                      CF12
+068800990406     A                                      CF24
+068900990406     A                                      HELP
+069000990406     A                                      ALWROL
+069100990406     A                                      DSPMOD(*DS3)
+069200990406     A                                      SLNO(01)
+069300990406     A                                      CLRL(*ALL)
+069400990406     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+069500990406     A  *DS3                                HLPARA(01 001 24 080)
+069600990406     A  *DS4                                HLPARA(01 001 24 080)
+069700990406     A                                  1 55'\FBR'
+069800990406     A                                      DSPATR(ND)
+069900990406     A            K2CONM    R        O  1  2REFFLD(NAME)
+070000990406     A  72                                  DSPATR(ND)
+070100990406     A                                  1 34'CUSTOMER MAINTENANCE'
+070200990406     A                                      DSPATR(HI)
+070300990406     A                                      DSPATR(UL)
+070400990406     A            K2MODE        11A  O  1 61DSPATR(HI)
+070500990406     A                                      DSPATR(RI)
+070600990406     A            K2CONO    R        O  2 17REFFLD(CONO)
+070700990406     A                                      DSPATR(HI)
+070800990406     A  72                                  DSPATR(ND)
+070900990406     A                                  2 20'/'
+071000990406     A  72                                  DSPATR(ND)
+071100990406     A            K2CSNO    R        O  2 22REFFLD(CSNO)
+071200990406     A                                      DSPATR(HI)
+071300990406     A                                      EDTCDE(Z)
+071400990406     A            CXCSNM    R        O  2 36REFFLD(CSNM)
+071500990406     A                                      DSPATR(HI)
+071600990406     A                                  4  2'Carrier Id?'
+071700990406     A            CXCACD    R        B  4 14REFFLD(CACD)
+071800990406     A                                      CHECK(FE)
+071900990406     A                                      DSPATR(CS)
+072000990406     A                                      DSPATR(HI)
+072100990406     A                                      DSPATR(MDT)
+072200990406     A  71                                  DSPATR(PR)
+072300990406     A                                  4 36'Ship Inst:'
+072400990406     A                                      TEXT('*> T moved field')
+072500990406     A            CXDSHV    R        B  4 49REFFLD(DSHV)
+072600990406     A                                      CHECK(FE)
+072700990406     A                                      CHECK(LC)
+072800990406     A                                      DSPATR(CS)
+072900990406     A                                      DSPATR(HI)
+073000990406     A                                      DSPATR(MDT)
+073100990406     A  71                                  DSPATR(PR)
+073200990406     A                                      TEXT('Default Ship Via  *> T moved -
+073300990406     A                                      field')
+073400990406     A                                  5  2'Warehouse?'
+073500990406     A            CXDFWH    R        B  5 14REFFLD(DFWH)
+073600990406     A                                      CHECK(FE)
+073700990406     A                                      DSPATR(CS)
+073800990406     A                                      DSPATR(HI)
+073900990406     A                                      DSPATR(MDT)
+074000990406     A  71                                  DSPATR(PR)
+074100990406     A            K3WHNM        18A  O  5 17DSPATR(HI)
+074200990406     A                                      TEXT('Name')
+074300990406     A                                  5 36'Alt Ship Cd?'
+074400990406     A                                      TEXT('*> T moved field')
+074500990406     A            CXWHSQ    R        B  5 49REFFLD(WHSQ)
+074600990406     A                                      CHECK(FE)
+074700990406     A                                      DSPATR(CS)
+074800990406     A                                      DSPATR(HI)
+074900990406     A                                      DSPATR(MDT)
+075000990406     A  71                                  DSPATR(PR)
+075100990406     A                                      TEXT('Warehouse Sequence Code  *> T-
+075200990406     A                                       moved field')
+075300990406     A                                  6  2'Route/Stop:'
+075400990406     A            CXROUT    R        B  6 14REFFLD(ROUT)
+075500990406     A                                      CHECK(FE)
+075600990406     A                                      DSPATR(CS)
+075700990406     A                                      DSPATR(HI)
+075800990406     A                                      DSPATR(MDT)
+075900990406     A  71                                  DSPATR(PR)
+076000990406     A                                  6 19'/'
+076100990406     A            CXSTOP    R        B  6 21REFFLD(STOP)
+076200990406     A                                      COMP(GE 0)
+076300990406     A                                      EDTCDE(Z)
+076400990406     A                                      DSPATR(CS)
+076500990406     A                                      DSPATR(HI)
+076600990406     A                                      DSPATR(MDT)
+076700990406     A  71                                  DSPATR(PR)
+076800990406     A                                  6 36'Misc Note:'
+076900990406     A                                      TEXT('*> T moved field')
+077000990406     A            CXDMSN    R        B  6 49REFFLD(DMSN)
+077100990406     A                                      CHECK(FE)
+077200990406     A                                      CHECK(LC)
+077300990406     A                                      DSPATR(CS)
+077400990406     A                                      DSPATR(HI)
+077500990406     A                                      DSPATR(MDT)
+077600990406     A  71                                  DSPATR(PR)
+077700990406     A                                      TEXT('Default Misc. Note    *> T mo-
+077800990406     A                                      ved field')
+077900990406     A  *DS4                            7 11
+078000990406     A                                  8  2'Sales Tax Code:'
+078100990406     A            CXTXCD    R        B  8 20REFFLD(TXCD)
+078200990406     A                                      CHECK(FE)
+078300990406     A                                      DSPATR(CS)
+078400990406     A                                      DSPATR(HI)
+078500990406     A                                      DSPATR(MDT)
+078600990406     A  71                                  DSPATR(PR)
+078700990406     A                                  8 25'(0-3,J)'
+078800990823     A*> 0Q                             7 36'Tax Exempt Cert #:'
+078900990823     A*> 0Q     1 LINE ADDED
+079000990823     A                                  7 36'Tax Exempt Cert#:'
+079100990406     A                                      TEXT('*> T moved field')
+079200990823     A*> 0Q       CXEXNO    R        B  7 55REFFLD(EXNO)
+079300990823     A*> 0Q     1 LINE ADDED
+079400990823     A            CXEXNO    R        B  7 54REFFLD(EXNO)
+079500990406     A                                      CHECK(FE)
+079600990406     A                                      DSPATR(CS)
+079700990406     A                                      DSPATR(HI)
+079800990406     A                                      DSPATR(MDT)
+079900990406     A  71                                  DSPATR(PR)
+080000990406     A                                      TEXT('Tax Exempt Certificate Number-
+080100990406     A                                        *> T moved field')
+080200990823     A*> 0Q                             8 36'Tax Exempt Cert # Exp Date:'
+080300990823     A*> 0Q   1 LINE ADDED
+080400990823     A                                  8 36'Tax Exempt Cert# Exp Date:'
+080500990406     A                                      TEXT('*> T moved field')
+080600990823     A*> 0Q       CXECED    R        B  8 64REFFLD(ECED)
+080700990823     A*> 0Q   1 LINE ADDED
+080800000117     A*> 0V   BEG OF CHANGE
+080900000117     A**DEL       CXECED    R        B  8 63REFFLD(ECED)
+081000000117     A            CXECED    R        B  8 63REFFLD(EXDT)
+081100000117     A                                      CHECK(FE)
+081200000117     A                                      DSPATR(CS)
+081300000117     A                                      DSPATR(HI)
+081400000117     A                                      DSPATR(MDT)
+081500000117     A  71                                  DSPATR(PR)
+081600000117     A**DEL                                 EDTWRD('  /  / 0')
+081700000117     A                                      EDTCDE(Z)
+081800000117     A*> 0V   END OF CHANGE
+081900990406     A                                      TEXT('Exemption Certf# Expir Date  -
+082000990406     A                                      *> T moved field')
+082100990406     A                                  9  2'Tax Body Number?'
+082200990406     A            CXTXBD    R        B  9 20REFFLD(TXBD)
+082300990406     A                                      CHECK(FE)
+082400990406     A                                      DSPATR(CS)
+082500990406     A                                      DSPATR(HI)
+082600990406     A                                      DSPATR(MDT)
+082700990406     A  71                                  DSPATR(PR)
+082800990406     A                                  9 36'Fed Exc. Tax Code:'
+082900990406     A                                      TEXT('*> T moved field')
+083000990406     A            CXFETC    R        B  9 55REFFLD(FETC)
+083100990406     A                                      CHECK(FE)
+083200990406     A                                      DSPATR(CS)
+083300990406     A                                      DSPATR(HI)
+083400990406     A                                      DSPATR(MDT)
+083500990406     A  71                                  DSPATR(PR)
+083600990406     A                                      TEXT('Federal Excise Tax Code   *> -
+083700990406     A                                      t moved field')
+083800990406     A                                  9 66'(Y,N)'
+083900990406     A                                 11  2'Aging Code?'
+084000990406     A            CXAGCD    R        B 11 20REFFLD(AGCD)
+084100990406     A                                      CHECK(FE)
+084200990406     A                                      DSPATR(CS)
+084300990406     A                                      DSPATR(HI)
+084400990406     A                                      DSPATR(MDT)
+084500990406     A  71                                  DSPATR(PR)
+084600990406     A                                 11 36'Assess Fin. Chgs:'
+084700990406     A                                      TEXT('*> T moved field')
+084800990406     A            CXFNCH    R        B 11 55REFFLD(FNCH)
+084900990406     A                                      CHECK(FE)
+085000990406     A                                      DSPATR(CS)
+085100990406     A                                      DSPATR(HI)
+085200990406     A                                      DSPATR(MDT)
+085300990406     A  71                                  DSPATR(PR)
+085400990406     A                                      TEXT('Assess Late Charges?  Y/N  *>-
+085500990406     A                                       t moved field')
+085600990406     A                                 11 66'(Y,N)'
+085700990406     A                                 12  2'Terms Code?'
+085800990406     A            CXTMCD    R        B 12 20REFFLD(TMCD)
+085900990406     A                                      CHECK(FE)
+086000990406     A                                      DSPATR(CS)
+086100990406     A                                      DSPATR(HI)
+086200990406     A                                      DSPATR(MDT)
+086300990406     A  30                                  DSPATR(PR)
+086400990406     A                                      TEXT('A/R Terms Code   *> W added I-
+086500990406     A                                      ndicator 30')
+086600990406     A                                 12 36'Print Statement:'
+086700990406     A                                      TEXT('*> T moved field')
+086800990406     A            CXPRST    R        B 12 55REFFLD(PRST)
+086900990406     A                                      CHECK(FE)
+087000990406     A                                      DSPATR(CS)
+087100990406     A                                      DSPATR(HI)
+087200990406     A                                      DSPATR(MDT)
+087300990406     A  71                                  DSPATR(PR)
+087400990406     A                                      TEXT('Print Statement?  Y/N   *> T -
+087500990406     A                                      moved field')
+087600990406     A                                 12 66'(Y,N)'
+087700990406     A                                 13  2'Bf/Opn Itm:'
+087800990406     A            CXBFOI    R        B 13 20REFFLD(BFOI)
+087900990406     A                                      CHECK(FE)
+088000990406     A                                      DSPATR(CS)
+088100990406     A                                      DSPATR(HI)
+088200990406     A                                      DSPATR(MDT)
+088300990406     A  71                                  DSPATR(PR)
+088400990406     A                                 13 25'(B,O)'
+088500990406     A                                 13 36'Credit Limit:'
+088600990406     A                                      TEXT('*> T moved field')
+088700990406     A N80
+088800990406     AO 80 84     CXCRLM    R        B 13 52REFFLD(CRLM)
+088900990406     A                                      COMP(GE 0)
+089000990406     A                                      EDTCDE(Z)
+089100990406     A                                      DSPATR(CS)
+089200990406     A                                      DSPATR(HI)
+089300990406     A                                      DSPATR(MDT)
+089400990406     A  71                                  DSPATR(PR)
+089500990406     A                                 14  2'Payment Type?'
+089600990406     A                                      TEXT('*> T moved field')
+089700990406     A            K3PACD    R        B 14 20REFFLD(PACD)
+089800990406     A                                      CHECK(FE)
+089900990406     A                                      DSPATR(CS)
+090000990406     A                                      DSPATR(HI)
+090100990406     A                                      DSPATR(MDT)
+090200990406     A  71                                  DSPATR(PR)
+090300990406     A                                      TEXT('Payment Code  *> T moved fiel-
+090400990406     A                                      d')
+090500990406     A                                 15  2'Commitment Code?'
+090600990406     A                                      TEXT('*> 0E Added field')
+090700990406     A            KQCSCM    R    3A  B 15 20REFFLD(CSCM)
+090800990406     A                                      DSPATR(CS)
+090900990406     A                                      DSPATR(HI)
+091000990406     A                                      TEXT('*> 0E Added field')
+091100990406     A            K2CSCM    R        H      REFFLD(CSCM)
+091200990406     A                                      TEXT('*> 0E Added field')
+091300990406     A                                 17 36'Pymt Target Days:'
+091400990406     A                                      TEXT('*> T *> 0K moved field')
+091500990406     A            K3TGPD    R     D  B 17 55REFFLD(TGPD)
+091600990406     A                                      DSPATR(CS)
+091700990406     A                                      DSPATR(HI)
+091800990406     A                                      DSPATR(MDT)
+091900990406     A                                      TEXT('Target Payment Days  *> T *> -
+092000990406     A                                      0K moved field')
+092100990406     A                                 16  2'Accept B/O:'
+092200990406     A                                      TEXT('*> T moved field')
+092300990406     A            CXACBO    R        B 16 20REFFLD(ACBO)
+092400990406     A                                      CHECK(FE)
+092500990406     A                                      DSPATR(CS)
+092600990406     A                                      DSPATR(HI)
+092700990406     A                                      DSPATR(MDT)
+092800990406     A  71                                  DSPATR(PR)
+092900990406     A                                      TEXT('Accepts Back Orders  *> T mov-
+093000990406     A                                      ed field')
+093100990406     A                                 16 25'(Y,N)'
+093200990406     A                                 18 36'P/O Required:'
+093300990406     A                                      TEXT('*> T *> 0K moved field')
+093400990406     A            CXPORQ    R        B 18 52REFFLD(PORQ)
+093500990406     A                                      CHECK(FE)
+093600990406     A                                      DSPATR(CS)
+093700990406     A                                      DSPATR(HI)
+093800990406     A                                      DSPATR(MDT)
+093900990406     A  71                                  DSPATR(PR)
+094000990406     A                                      TEXT('Purchase Order Required   *> -
+094100990406     A                                      t *> 0K moved field')
+094200990406     A                                 18 54'(Y,N)'
+094300990406     A                                      TEXT('*> T *> 0K moved field')
+094400990406     A                                 17  2'Price Disc Code:'
+094500990406     A                                      TEXT('*> T moved field')
+094600990406     A            CXPRDS    R     D  B 17 20REFFLD(PRD@)
+094700990406     A                                      DSPATR(CS)
+094800990406     A                                      DSPATR(HI)
+094900990406     A                                      DSPATR(MDT)
+095000990406     A  71                                  DSPATR(PR)
+095100990406     A                                      TEXT('Price Discount Code  *> T mov-
+095200990406     A                                      ed field')
+095300990406     A                                 17 25'(0-999)'
+095400990406     A                                 18 61'Price List:'
+095500990406     A                                      TEXT('*> T *> 0K moved field')
+095600990406     A            CXPRBK    R     D  B 18 74REFFLD(PRBK)
+095700990406     A                                      DSPATR(CS)
+095800990406     A                                      DSPATR(HI)
+095900990406     A                                      DSPATR(MDT)
+096000990406     A  71                                  DSPATR(PR)
+096100990406     A                                      TEXT('Price Bucket Code  *> T *> 0K-
+096200990406     A                                       moved field')
+096300990406     A                                 18 76'(1-5)'
+096400990406     A                                      TEXT('*> T *> 0K moved field')
+096500990406     A                                 19  2'Trade Disc Code:'
+096600990406     A                                      TEXT('*> T moved field')
+096700990406     A            CXTDCD    R     D  B 19 20REFFLD(TDCD)
+096800990406     A                                      DSPATR(CS)
+096900990406     A                                      DSPATR(HI)
+097000990406     A                                      DSPATR(MDT)
+097100990406     A  71                                  DSPATR(PR)
+097200990406     A                                      TEXT('Trade Discount Code  *> T mov-
+097300990406     A                                      ed field')
+097400990406     A                                 19 25'(0-9)'
+097500990406     A                                 19 36'User Line:'
+097600990406     A                                      TEXT('*> T moved field')
+097700990406     A            CXUS30    R        B 19 47REFFLD(US30)
+097800990406     A                                      CHECK(FE)
+097900990406     A                                      DSPATR(CS)
+098000990406     A                                      DSPATR(HI)
+098100990406     A                                      DSPATR(MDT)
+098200990406     A  71                                  DSPATR(PR)
+098300990406     A                                      TEXT('30 Character User Area   *> T-
+098400990406     A                                       moved field')
+098500990406     A                                 20  2'Cust GL Code?'
+098600990406     A                                      TEXT('*> T moved field')
+098700990406     A            K3CSGL    R        B 20 20REFFLD(CSGL)
+098800990406     A                                      DSPATR(CS)
+098900990406     A                                      DSPATR(HI)
+099000990406     A                                      DSPATR(MDT)
+099100990406     A  71                                  DSPATR(PR)
+099200990406     A                                      TEXT('Customer GL Code   *> T moved-
+099300990406     A                                       field')
+099400990406     A            K3CGDC    R        O 20 25REFFLD(NAME)
+099500990406     A                                      DSPATR(HI)
+099600990406     A                                      TEXT('Name   *> T moved field')
+099700990406     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+099800990406     A  90                                  DSPATR(RI)
+099900990406     A  74        K2FK24        10A  O 24 57COLOR(BLU)
+100000990406     A                                 24 69'F12=Return'
+100100990406     A                                      COLOR(BLU)
+100200990406     A            MIC            4A  P
+100300990406     A                                 10  2'Customer Tax Cls?'
+100400990406     A            CXCTXC         5A  B 10 20DSPATR(HI)
+100500990406     A                                      DSPATR(CS)
+100600990406     A                                 10 36'Price Pick/Pack:'
+100700990406     A                                      TEXT('*> T moved field')
+100800990406     A            CXPPPL         1A  B 10 55TEXT('*> T moved field')
+100900990406     A                                      DSPATR(HI)
+101000990406     A                                      DSPATR(CS)
+101100990406     A                                 21  2'Rebate Class?'
+101200990406     A                                      TEXT('*> T moved field')
+101300990406     A            K3RBCL    R        B 21 20REFFLD(RBCL)
+101400990406     A                                      DSPATR(HI)
+101500990406     A                                      DSPATR(CS)
+101600990406     A                                      TEXT('Rebate Class   *> T moved fie-
+101700990406     A                                      ld')
+101800990406     A            K2RCDS    R        O 21 28REFFLD(NAME)
+101900990406     A                                      DSPATR(HI)
+102000990406     A                                      TEXT('Name   *> T moved field')
+102100990406     A                                 22  2'SIC Code?'
+102200990406     A                                      TEXT('*> T moved field')
+102300990406     A            CXSICC         8A  B 22 20TEXT('*> T moved field')
+102400990406     A                                      DSPATR(HI)
+102500990406     A                                      DSPATR(CS)
+102600990406     A            K2SDSC    R        O 22 30REFFLD(LNDS)
+102700990406     A                                      DSPATR(HI)
+102800990406     A                                      TEXT('Line Description   *> T moved-
+102900990406     A                                       field')
+103000990406     A                                 10 66'(Y,N)'
+103100990406     A  80N84     CXCRLT        11Y 0B 13 53TEXT('*> T moved field')
+103200990406     A                                      DSPATR(HI)
+103300990406     A                                      DSPATR(CS)
+103400990406     A                                      EDTCDE(Z)
+103500990406     A  80N84     K3CRLL         7Y 0O 13 70TEXT('*> T moved field')
+103600990406     A                                      DSPATR(HI)
+103700990406     A                                      EDTCDE(Z)
+103800990406     A  80        K3TRCR    R        O 13 65REFFLD(CURR)
+103900990406     A                                      DSPATR(HI)
+104000990406     A                                      TEXT('Currency Code   *> T moved fi-
+104100990406     A                                      eld')
+104200990406     A  80N84     K3LCCR    R        O 13 78REFFLD(CURR)
+104300990406     A                                      DSPATR(HI)
+104400990406     A                                      TEXT('Currency Code     *> T moved -
+104500990406     A                                      field')
+104600990406     A                                 14 36'Order Min Amt:'
+104700990406     A N10                                  DSPATR(ND)
+104800990406     A                                      TEXT('*> T ADDED')
+104900990406     A N80
+105000990406     AO 80 84     K3OMAL         8Y 0B 14 52EDTCDE(Z)
+105100990406     A N10                                  DSPATR(ND)
+105200990406     A N10                                  DSPATR(PR)
+105300990406     A                                      DSPATR(HI)
+105400990406     A                                      DSPATR(CS)
+105500990406     A                                      COMP(GE 0)
+105600990406     A                                      TEXT('*> T ADDED')
+105700990406     A  80N84     K3OMAT        13Y 0B 14 51DSPATR(HI)
+105800990406     A N10                                  DSPATR(ND)
+105900990406     A N10                                  DSPATR(PR)
+106000990406     A                                      DSPATR(CS)
+106100990406     A                                      EDTCDE(Z)
+106200990406     A                                      COMP(GE 0)
+106300990406     A                                      TEXT('*> T ADDED')
+106400990406     A  80N84     K3OMLL         8Y 0O 14 69DSPATR(HI)
+106500990406     A N10                                  DSPATR(ND)
+106600990406     A                                      EDTCDE(Z)
+106700990406     A                                      TEXT('*> T ADDED')
+106800990406     A  80        K3TCR2    R    3A  O 14 65REFFLD(CURR)
+106900990406     A N10                                  DSPATR(ND)
+107000990406     A                                      DSPATR(HI)
+107100990406     A                                      TEXT('Currency Code  *> T ADDED')
+107200990406     A  80N84     K3LCR2    R    3A  O 14 78REFFLD(CURR)
+107300990406     A N10                                  DSPATR(ND)
+107400990406     A                                      DSPATR(HI)
+107500990406     A                                      TEXT('Currency Code  *> T ADDED')
+107600990406     A                                 18  2'Contract Code?'
+107700990406     A                                      TEXT('*> v new field added')
+107800990406     A            K3CSCT         4A  B 18 20TEXT('*> v new field added')
+107900990406     A                                      DSPATR(HI)
+108000990406     A                                      DSPATR(CS)
+108100991001     A* *> 0R BEGIN OF CHANGE
+108200991001     A** DEL                           15 36'W/O Min Amt:'
+108300991001     A** DEL                                TEXT('*> 0K Added text')
+108400991214     A** DEL *> 0U                     15 36'Max W/O Amt:'
+108500991001     A** DEL                           16 36'W/O Min Pct:'
+108600991001     A** DEL                                TEXT('*> 0K Added Text')
+108700991214     A** DEL *> 0U                     16 36'Max W/O Pct:'
+108800991001     A* *> 0R END OF CHANGE
+108900991214     A* *> 0U BEGIN OF CHANGE
+109000991214     A  97                             15 36'Max W/O Amt:'
+109100991214     A  97                             16 36'Max W/O Pct:'
+109200991214     A* *> 0U END OF CHANGE
+109300991214     A* *> 0U CHANGED NEXT LINE
+109400991214     A*DEL        K3WOPC    R        B 16 52REFFLD(WOPC)
+109500991214     A  97        K3WOPC    R        B 16 52REFFLD(WOPC)
+109600990406     A                                      CHECK(FE)
+109700990406     A                                      DSPATR(CS)
+109800990406     A                                      DSPATR(HI)
+109900990406     A                                      COMP(GE .000)
+110000990406     A                                      DSPATR(MDT)
+110100990406     A  71                                  DSPATR(PR)
+110200990406     A                                      TEXT('Write-Off Min Percent   *> 0K-
+110300990406     A                                      ')
+110400990406     A                                      EDTCDE(3)
+110500991214     A* *> 0U CHANGED NEXT LINE
+110600991214     A**80N84     K3WOAT        15Y 0B 15 49DSPATR(HI)
+110700991214     A  80N84 97  K3WOAT        15Y 0B 15 49DSPATR(HI)
+110800990406     A                                      DSPATR(CS)
+110900990406     A                                      EDTCDE(Z)
+111000990406     A                                      COMP(GE 0)
+111100990406     A  71                                  DSPATR(PR)
+111200990406     A                                      TEXT('*> 0K Write-Off Amount(Tradin-
+111300990406     A                                      g)')
+111400991214     A* *> 0U CHANGED THREE FIELDS
+111500991214     A**80        K3TCR3    R    3A  O 15 65REFFLD(CURR)
+111600991214     A  80 97     K3TCR3    R    3A  O 15 65REFFLD(CURR)
+111700990406     A                                      DSPATR(HI)
+111800990406     A                                      TEXT('Currency Code  *> 0K')
+111900991214     A**80N84     K3WOLL         8Y 0O 15 69DSPATR(HI)
+112000991214     A  80N84 97  K3WOLL         8Y 0O 15 69DSPATR(HI)
+112100990406     A                                      EDTCDE(Z)
+112200990406     A                                      TEXT('*> 0K')
+112300991214     A**80N84     K3LCR3    R    3A  O 15 78REFFLD(CURR)
+112400991214     A  80N84 97  K3LCR3    R    3A  O 15 78REFFLD(CURR)
+112500990406     A                                      DSPATR(HI)
+112600990406     A                                      TEXT('Currency Code  *> 0K')
+112700990406     A N80
+112800991214     A* *> 0U CHANGED THREE FIELDS
+112900991214     A**80 84     K3WOAL         8Y 0B 15 52EDTCDE(Z)
+113000991214     AO 80 84 97  K3WOAL         8Y 0B 15 52EDTCDE(Z)
+113100990406     A                                      DSPATR(HI)
+113200990406     A                                      DSPATR(CS)
+113300990406     A                                      COMP(GE 0)
+113400990406     A  71                                  DSPATR(PR)
+113500990406     A                                      TEXT('*> 0K')
+113600990405     A*%%DEL*> 0K K2CMDS        30A  O 15 30DSPATR(HI)
+113700990405     A*%%DEL*> 0K                           TEXT('*> 0E Added field')
+113800990219     A* *> TM CHANGED SCREEN (MAINT3) AND ADDED FOB FIELDS
+113900991213     A          R MAINT3
+114000991213     A*%%TS  SD  19991213  220331  JBEAUDET    REL-V3R6M0  5716-PW1
+114100991213     A                                      CF01
+114200991213     A                                      CF12
+114300991213     A                                      CF24
+114400991213     A                                      HELP
+114500991213     A N21                                  CF04
+114600991213     A  60                                  CF05
+114700991213     A                                      ALWROL
+114800991213     A                                      DSPMOD(*DS3)
+114900991213     A                                      SLNO(01)
+115000991213     A                                      CLRL(*ALL)
+115100991213     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+115200991213     A  *DS3                                HLPARA(01 001 24 080)
+115300991213     A  *DS4                                HLPARA(01 001 24 080)
+115400991213     A            MIC            4A  P
+115500991213     A            K2CONM    R        O  1  2REFFLD(NAME)
+115600991213     A  72                                  DSPATR(ND)
+115700991213     A                                  1 34'SHIP TO  MAINTENANCE'
+115800991213     A                                      DSPATR(HI)
+115900991213     A                                      DSPATR(UL)
+116000991213     A                                  1 55'\FBS'
+116100991213     A                                      DSPATR(ND)
+116200991213     A            K2MODE        11A  O  1 61DSPATR(HI)
+116300991213     A                                      DSPATR(RI)
+116400991213     A                                  2  2'Co/Customer-Ship To:'
+116500991213     A            K2CONO    R        O  2 23REFFLD(CONO)
+116600991213     A                                      DSPATR(HI)
+116700991213     A  72                                  DSPATR(ND)
+116800991213     A                                  2 26'/'
+116900991213     A  72                                  DSPATR(ND)
+117000991213     A            K2CSNO    R        O  2 28REFFLD(CSNO)
+117100991213     A                                      DSPATR(HI)
+117200991213     A                                      EDTCDE(Z)
+117300991213     A                                  2 39'-'
+117400991213     A            K4SHP#    R        O  2 41REFFLD(SHP#)
+117500991213     A                                      DSPATR(HI)
+117600991213     A            CXCSNM    R        O  2 51REFFLD(CSNM)
+117700991213     A                                      DSPATR(HI)
+117800991213     A  80                              3  2'Currency Code:'
+117900991213     A  80        K4CURR    R        O  3 23REFFLD(CURR)
+118000991213     A                                      DSPATR(HI)
+118100991213     A  80        K4CRDS        30A  O  3 28DSPATR(HI)
+118200991213     A                                  4  2'Name:'
+118300991213     A            SXSHNM    R        B  4 11REFFLD(SHNM)
+118400991213     A                                      CHECK(FE)
+118500991213     A                                      CHECK(LC)
+118600991213     A                                      DSPATR(CS)
+118700991213     A                                      DSPATR(HI)
+118800991213     A                                      DSPATR(MDT)
+118900991213     A  71                                  DSPATR(PR)
+119000991213     A            SXSAD1    R        B  5 11REFFLD(SAD1)
+119100991213     A                                      CHECK(FE)
+119200991213     A                                      CHECK(LC)
+119300991213     A                                      DSPATR(CS)
+119400991213     A                                      DSPATR(HI)
+119500991213     A                                      DSPATR(MDT)
+119600991213     A  71                                  DSPATR(PR)
+119700991213     A            SXSAD2    R        B  6 11REFFLD(SAD2)
+119800991213     A                                      CHECK(FE)
+119900991213     A                                      CHECK(LC)
+120000991213     A                                      DSPATR(CS)
+120100991213     A                                      DSPATR(HI)
+120200991213     A                                      DSPATR(MDT)
+120300991213     A  71                                  DSPATR(PR)
+120400991213     A                                  5 47'Phone:'
+120500991213     A            SXCTCD    R     A  B  5 54REFFLD(CTCD)
+120600991213     A                                      DSPATR(HI)
+120700991213     A                                      DSPATR(CS)
+120800991213     A                                  6 70'Ext:'
+120900991213     A            K4SHEX    R        B  6 75REFFLD(SHEX)
+121000991213     A                                      COMP(GE 0)
+121100991213     A                                      EDTCDE(Z)
+121200991213     A                                      DSPATR(CS)
+121300991213     A                                      DSPATR(HI)
+121400991213     A                                      DSPATR(MDT)
+121500991213     A  71                                  DSPATR(PR)
+121600991213     A            SXSAD3    R        B  7 11REFFLD(SAD2)
+121700991213     A                                      CHECK(FE)
+121800991213     A                                      CHECK(LC)
+121900991213     A                                      DSPATR(CS)
+122000991213     A                                      DSPATR(HI)
+122100991213     A                                      DSPATR(MDT)
+122200991213     A  71                                  DSPATR(PR)
+122300991213     A                                  7 47'Fax:'
+122400991213     A            SXFXCD    R     A  B  7 54REFFLD(CTCD)
+122500991213     A                                      DSPATR(HI)
+122600991213     A                                      DSPATR(CS)
+122700991213     A                                  8 70'Ext:'
+122800991213     A            SXFXEX    R        B  8 75REFFLD(FXEX)
+122900991213     A                                      COMP(GE 0)
+123000991213     A                                      EDTCDE(Z)
+123100991213     A                                      DSPATR(HI)
+123200991213     A                                      DSPATR(MDT)
+123300991213     A  71                                  DSPATR(PR)
+123400991213     A                                      DSPATR(CS)
+123500991213     A                                  9  2'City:'
+123600991213     A            SXSCTY    R        B  9 11REFFLD(SCTY)
+123700991213     A                                      CHECK(FE)
+123800991213     A                                      CHECK(LC)
+123900991213     A                                      DSPATR(CS)
+124000991213     A                                      DSPATR(HI)
+124100991213     A                                      DSPATR(MDT)
+124200991213     A  71                                  DSPATR(PR)
+124300991213     A                                 10  2'Cntry?'
+124400991213     A            SXCTID         3A  B 10 11DSPATR(HI)
+124500991213     A                                      DSPATR(CS)
+124600991213     A                                 10 38'Zip/Pstl:'
+124700991213     A            SXSZIP    R        B 10 49REFFLD(SZIP)
+124800991213     A                                      CHECK(FE)
+124900991213     A                                      DSPATR(CS)
+125000991213     A                                      DSPATR(HI)
+125100991213     A                                      DSPATR(MDT)
+125200991213     A  71                                  DSPATR(PR)
+125300991213     A  60        K4GEOC        11A  O 10 69DSPATR(HI)
+125400991213     A                                 12 42'Tax Exempt Cert #:'
+125500991213     A                                      TEXT('*> 0P')
+125600991213     A            K2EXNO    R        B 12 61REFFLD(EXNO)
+125700991213     A                                      DSPATR(CS)
+125800991213     A                                      DSPATR(HI)
+125900991213     A                                 13 42'Tax Exempt Cert # Exp Date:'
+126000991213     A                                      TEXT('*> 0P')
+126100991213     A            K2EXDT    R        B 13 72REFFLD(EXDT)
+126200991213     A                                      DSPATR(CS)
+126300991213     A                                      DSPATR(HI)
+126400991213     A                                      EDTCDE(Z)
+126500991213     A                                 13  2'Sales Tax Code:'
+126600991213     A            SXTXCD    R        B 13 20REFFLD(TXCD)
+126700991213     A                                      CHECK(FE)
+126800991213     A                                      DSPATR(CS)
+126900991213     A                                      DSPATR(HI)
+127000991213     A                                      DSPATR(MDT)
+127100991213     A  71                                  DSPATR(PR)
+127200991213     A                                 13 25'(0-3,J)'
+127300991213     A  60                             15  2'Vertex Ship To:'
+127400991213     A  60        SXVTSH         5A  B 15 20DSPATR(HI)
+127500991213     A                                      DSPATR(CS)
+127600991213     A                                 14  2'Tax Body Number?'
+127700991213     A            SXSTXB    R        B 14 20REFFLD(STXB)
+127800991213     A                                      CHECK(FE)
+127900991213     A                                      DSPATR(CS)
+128000991213     A                                      DSPATR(HI)
+128100991213     A                                      DSPATR(MDT)
+128200991213     A  71                                  DSPATR(PR)
+128300991213     A                                 21  2'Territory?'
+128400991213     A            SXSHTR    R        B 21 20REFFLD(SHTR)
+128500991213     A                                      CHECK(FE)
+128600991213     A                                      DSPATR(CS)
+128700991213     A                                      DSPATR(HI)
+128800991213     A                                      DSPATR(MDT)
+128900991213     A  71                                  DSPATR(PR)
+129000991213     A            K4TRCD    R        O 21 25REFFLD(NAME)
+129100991213     A                                      DSPATR(HI)
+129200991213     A                                 17  2'Warehouse?'
+129300991213     A            CXDFWH    R        B 17 20REFFLD(DFWH)
+129400991213     A                                      CHECK(FE)
+129500991213     A                                      DSPATR(CS)
+129600991213     A                                      DSPATR(HI)
+129700991213     A                                      DSPATR(MDT)
+129800991213     A  71                                  DSPATR(PR)
+129900991213     A            K4WHNM    R        O 17 25REFFLD(NAME)
+130000991213     A                                      DSPATR(HI)
+130100991213     A                                 18  2'Sales Rep 1?'
+130200991213     A            KTRP#1         5A  B 18 15DSPATR(CS)
+130300991213     A                                      DSPATR(HI)
+130400991213     A            K2RP#1    R        H      REFFLD(RP#1)
+130500991213     A            K2RPN1        30A  O 18 22
+130600991213     A                                 19  2'Sales Rep 2?'
+130700991213     A            KTRP#2         5A  B 19 15DSPATR(CS)
+130800991213     A                                      DSPATR(HI)
+130900991213     A            K2RP#2    R        H      REFFLD(RP#2)
+131000991213     A            K2RPN2        30A  O 19 22
+131100991213     A                                 20  2'Sales Rep 3?'
+131200991213     A            KTRP#3         5A  B 20 15DSPATR(CS)
+131300991213     A                                      DSPATR(HI)
+131400991213     A            K2RP#3    R        H      REFFLD(RP#3)
+131500991213     A            K2RPN3        30A  O 20 22
+131600991213     A                                 16  2'Customer GL Code?'
+131700991213     A            K4CSGL    R        B 16 20REFFLD(CSGL)
+131800991213     A                                      DSPATR(CS)
+131900991213     A                                      DSPATR(HI)
+132000991213     A                                      DSPATR(MDT)
+132100991213     A  71                                  DSPATR(PR)
+132200991213     A            K4CGDC    R        O 16 25REFFLD(NAME)
+132300991213     A                                 11  2'Contact:'
+132400991213     A            SXSCNT    R        B 11 11REFFLD(SCNT)
+132500991213     A                                      CHECK(FE)
+132600991213     A                                      CHECK(LC)
+132700991213     A                                      DSPATR(CS)
+132800991213     A                                      DSPATR(HI)
+132900991213     A                                      DSPATR(MDT)
+133000991213     A  71                                  DSPATR(PR)
+133100991213     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+133200991213     A  90                                  DSPATR(RI)
+133300991213     A  60                             24 37'F5=Vertex Tables'
+133400991213     A                                      COLOR(BLU)
+133500991213     A  74        K2FK24        10A  O 24 57COLOR(BLU)
+133600991213     A                                 24 69'F12=Return'
+133700991213     A                                      COLOR(BLU)
+133800991213     A                                 24 15'F4=Cmpl Labels'
+133900991213     A                                      COLOR(BLU)
+134000991213     A  21                                  DSPATR(ND)
+134100991213     A            SXSAD4        30A  B  8 11TEXT('address line 4 *> 0S ADDED DS-
+134200991213     A                                      P ATTR')
+134300991213     A                                      DSPATR(HI)
+134400991213     A                                      DSPATR(CS)
+134500991213     A                                      CHECK(LC)
+134600991213     A  09                                  DSPATR(PR)
+134700991213     A                                      DSPATR(MDT)
+134800991213     A            K4FXPN        20A  B  7 59TEXT('fax#')
+134900991213     A                                      DSPATR(HI)
+135000991213     A                                      DSPATR(CS)
+135100991213     A            K4PHNM        20A  B  5 59TEXT('phone#')
+135200991213     A                                      DSPATR(HI)
+135300991213     A                                      DSPATR(CS)
+135400991213     A            SXSHST        30A  B  9 49TEXT('30 character state')
+135500991213     A                                      DSPATR(HI)
+135600991213     A                                      DSPATR(CS)
+135700991213     A                                      CHECK(LC)
+135800991213     A                                  9 38'St/Prov?'
+135900991213     A                                  5  2'Addr1:'
+136000991213     A                                  6  2'Addr2:'
+136100991213     A                                  7  2'Addr3:'
+136200991213     A                                  8  2'Addr4:'
+136300990630     A*%% *> 0N DEL
+136400990630     A*%%         SXFXEX    R     D  B  8 75REFFLD(FXEX)
+136500990630     A*%% *> 0N ADD NEXT THREE LINES
+136600990630     A*%% *> 0N END ADD
+136700990630     A*%% *> 0N DEL                         DSPATR(PR)
+136800990630     A*%% *> 0N ADD NEXT LINE
+136900990713     A*%% DEL*> 0P                     12 42'Tax-exempt Certf#:'
+137000990713     A*%% DEL*> 0P                     13 42'Tax-exempt Certf# Expir Date:'
+137100981118     A          R MAINT4
+137200981118     A*%%TS  SD  19971230  160837  JBEAUDET    REL-V3R6M0  5716-PW1
+137300981118     A                                      CF01
+137400981118     A                                      CF12
+137500981118     A                                      HELP
+137600981118     A                                      ALWROL
+137700981118     A                                      DSPMOD(*DS3)
+137800981118     A                                      SLNO(01)
+137900981118     A                                      CLRL(*ALL)
+138000981118     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+138100981118     A  *DS3                                HLPARA(01 001 24 080)
+138200981118     A  *DS4                                HLPARA(01 001 24 080)
+138300981118     A            MIC            4A  P
+138400981118     A            K2CONM    R        O  1  2REFFLD(NAME)
+138500981118     A  72                                  DSPATR(ND)
+138600981118     A                                  1 34'ADDITIONAL INFO MAINTENANCE'
+138700981118     A                                      DSPATR(HI)
+138800981118     A                                      DSPATR(UL)
+138900981118     A                                  1 62'\FBT'
+139000981118     A                                      DSPATR(ND)
+139100981118     A            K2MODE        11A  O  1 67DSPATR(HI)
+139200981118     A                                      DSPATR(RI)
+139300981118     A            K2CONO    R        O  2 23REFFLD(CONO)
+139400981118     A                                      DSPATR(HI)
+139500981118     A  72                                  DSPATR(ND)
+139600981118     A                                  2 26'/'
+139700981118     A  72                                  DSPATR(ND)
+139800981118     A            K2CSNO    R        O  2 28REFFLD(CSNO)
+139900981118     A                                      DSPATR(HI)
+140000981118     A                                      EDTCDE(Z)
+140100981118     A            CXCSNM    R        O  2 51REFFLD(CSNM)
+140200981118     A                                      DSPATR(HI)
+140300981118     A                                  3 20'Print Invoices:'
+140400981118     A                                      TEXT('*> Y MOVED FROM 4,20')
+140500981118     A            K4PRTI    R        B  3 49REFFLD(PRTI)
+140600981118     A                                      DSPATR(CS)
+140700981118     A                                      DSPATR(HI)
+140800981118     A                                      TEXT('*> Y MOVED FROM 4,49')
+140900981118     A                                  3 55'(Y,N)'
+141000981118     A                                      TEXT('*> Y MOVED FROM 4,55')
+141100981118     A                                  4 20'Print Acknowledgements:'
+141200981118     A                                      TEXT('*> Y MOVED FROM 5,20')
+141300981118     A            K4PRTA    R        B  4 49REFFLD(PRTA)
+141400981118     A                                      DSPATR(CS)
+141500981118     A                                      DSPATR(HI)
+141600981118     A                                      TEXT('*> Y MOVED FROM 5,49')
+141700981118     A                                  4 55'(Y,N)'
+141800981118     A                                      TEXT('*> Y MOVED FROM 5,55')
+141900020130     A*> 0XN55                              5 20'Print A/R Statements:'
+142000020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+142100020130     A                                  5 20'Print A/R Statements:'
+142200981118     A                                      TEXT('*> Y MOVED FROM 6,20')
+142300020130     A*> 0XN55        K4PRTR    R        B  5 49REFFLD(PRTA)
+142400020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+142500020130     A            K4PRTR    R        B  5 49REFFLD(PRTA)
+142600981118     A                                      DSPATR(CS)
+142700981118     A                                      DSPATR(HI)
+142800981118     A                                      TEXT('*> Y MOVED FROM 6,49')
+142900020130     A*> 0XN55                              5 55'(Y,N)'
+143000020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+143100020130     A                                  5 55'(Y,N)'
+143200981118     A                                      TEXT('*> Y MOVED FROM 6,55')
+143300991214     A*%% *> 0T - BEG OF CHG
+143400020130     A*>0XN55                              6 20'Print Overdue Notices:'
+143500020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+143600020130     A                                  6 20'Print Overdue Notices:'
+143700981118     A                                      TEXT('*> Y MOVED FROM 7,20')
+143800991214     A*N55                              6 20'Print Delinquent Letters:'
+143900991214     A*%% *> 0T - END OF CHG
+144000020130     A*> 0XN55        K4PRTD    R        B  6 49REFFLD(PRTA)
+144100020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+144200020130     A            K4PRTD    R        B  6 49REFFLD(PRTA)
+144300981118     A                                      DSPATR(CS)
+144400981118     A                                      DSPATR(HI)
+144500981118     A                                      TEXT('*> Y MOVED FROM 7,49')
+144600020130     A*> 0XN55                              6 55'(Y,N)'
+144700020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+144800020130     A                                  6 55'(Y,N)'
+144900981118     A                                      TEXT('*> Y MOVED FROM 7,55')
+145000981118     A                                  8  2'EDI INFO:'
+145100981118     A                                      TEXT('*> X MOVED FROM 9,2')
+145200981118     A                                      DSPATR(HI)
+145300981118     A  54                                  DSPATR(ND)
+145400981118     A                                  8 20'Trading Partner ID:'
+145500981118     A                                      TEXT('*> X MOVED FROM 9,20')
+145600981118     A  54                                  DSPATR(ND)
+145700981118     A            K4TPID    R        B  8 49REFFLD(TPID)
+145800981118     A N54                                  DSPATR(CS)
+145900981118     A                                      DSPATR(HI)
+146000981118     A  54                                  DSPATR(ND)
+146100981118     A  54                                  DSPATR(PR)
+146200981118     A                                      TEXT('Trading Partner Id *> X MOVED-
+146300981118     A                                       FROM 9,49')
+146400981118     A                                  9 20'Store Number:'
+146500981118     A                                      TEXT('*> X MOVED FROM 10,20')
+146600981118     A  54                                  DSPATR(ND)
+146700981118     A            K4STOR    R        B  9 49REFFLD(STOR)
+146800981118     A N54                                  DSPATR(CS)
+146900981118     A                                      DSPATR(HI)
+147000981118     A  54                                  DSPATR(ND)
+147100981118     A  54                                  DSPATR(PR)
+147200981118     A                                      TEXT('Store Number *> X MOVED FROM -
+147300981118     A                                      10,49')
+147400981118     A                                 10 20'EDI Invoices:'
+147500981118     A                                      TEXT('*> X MOVED FROM 11, 20')
+147600981118     A  54                                  DSPATR(ND)
+147700981118     A            K4EIIN    R        B 10 49REFFLD(EIIN)
+147800981118     A N54                                  DSPATR(CS)
+147900981118     A                                      DSPATR(HI)
+148000981118     A  54                                  DSPATR(ND)
+148100981118     A  54                                  DSPATR(PR)
+148200981118     A                                      TEXT('EDI Invoices Y/N *> X MOVED F-
+148300981118     A                                      ROM 11,49')
+148400981118     A                                 10 55'(Y,N,I)'
+148500981118     A                                      TEXT('*> X MOVED FROM 11,55')
+148600981118     A  54                                  DSPATR(ND)
+148700981118     A                                 11 20'EDI Acknowledgements:'
+148800981118     A                                      TEXT('*> X MOVED FROM 12,20')
+148900981118     A  54                                  DSPATR(ND)
+149000981118     A            K4EIAK    R        B 11 49REFFLD(EIAK)
+149100981118     A N54                                  DSPATR(CS)
+149200981118     A                                      DSPATR(HI)
+149300981118     A  54                                  DSPATR(ND)
+149400981118     A  54                                  DSPATR(PR)
+149500981118     A                                      TEXT('EDI Acknowledgements Y/N  *> -
+149600981118     A                                      X MOVED FROM12,49')
+149700981118     A                                 11 55'(Y,N,I)'
+149800981118     A                                      TEXT('*> X MOVED FROM 12,55')
+149900981118     A  54                                  DSPATR(ND)
+150000981118     A                                 12 20'EDI Advance Ship Notice:'
+150100981118     A                                      TEXT('*> X MOVED FROM 13,20')
+150200981118     A  54                                  DSPATR(ND)
+150300981118     A            K4EIAS    R        B 12 49REFFLD(EIAS)
+150400981118     A N54                                  DSPATR(CS)
+150500981118     A                                      DSPATR(HI)
+150600981118     A  54                                  DSPATR(ND)
+150700981118     A  54                                  DSPATR(PR)
+150800981118     A                                      TEXT('EDI Advance Ship notice Y/N *-
+150900981118     A                                      > X MOVED FROM 13,49')
+151000981118     A                                 12 55'(Y,N,I)'
+151100981118     A                                      TEXT('*> X MOVED FROM 13,55')
+151200981118     A  54                                  DSPATR(ND)
+151300981118     A                                 13 20'Hold EDI Invoices:'
+151400981118     A                                      TEXT('*> X MOVED FROM 14,20')
+151500981118     A  54                                  DSPATR(ND)
+151600981118     A            K4EIIH    R        B 13 49REFFLD(EIIH)
+151700981118     A N54                                  DSPATR(CS)
+151800981118     A                                      DSPATR(HI)
+151900981118     A  54                                  DSPATR(ND)
+152000981118     A  54                                  DSPATR(PR)
+152100981118     A                                      TEXT('Hold EDI Invoices Y/N *> X MO-
+152200981118     A                                      VED FROM 14,49')
+152300981118     A                                 13 55'(Y,N,B)'
+152400981118     A                                      TEXT('*> X MOVED FROM 14,55')
+152500981118     A  54                                  DSPATR(ND)
+152600981118     A                                 14 20'Hold EDI Acknowledgements:'
+152700981118     A                                      TEXT('*> X MOVED FROM 15,20')
+152800981118     A  54                                  DSPATR(ND)
+152900981118     A            K4EIAH    R        B 14 49REFFLD(EIAH)
+153000981118     A N54                                  DSPATR(CS)
+153100981118     A                                      DSPATR(HI)
+153200981118     A  54                                  DSPATR(ND)
+153300981118     A  54                                  DSPATR(PR)
+153400981118     A                                      TEXT('Hold EDI Acknwldgmnts Y/N *> -
+153500981118     A                                      X MOVED FROM 15,49')
+153600981118     A                                 14 55'(Y,N,B)'
+153700981118     A                                      TEXT('*> X MOVED FROM 15,55')
+153800981118     A  54                                  DSPATR(ND)
+153900981118     A                                 15 20'Hold EDI ASNs:'
+154000981118     A                                      TEXT('*> X MOVED FROM 16,20')
+154100981118     A  54                                  DSPATR(ND)
+154200981118     A            K4EASH    R        B 15 49REFFLD(EASH)
+154300981118     A N54                                  DSPATR(CS)
+154400981118     A                                      DSPATR(HI)
+154500981118     A  54                                  DSPATR(ND)
+154600981118     A  54                                  DSPATR(PR)
+154700981118     A                                      TEXT('Hold EDI ASN Y/N *> X MOVED F-
+154800981118     A                                      ROM 16,49')
+154900981118     A                                 15 55'(Y,N,B)'
+155000981118     A                                      TEXT('*> X MOVED FROM 16,55')
+155100981118     A  54                                  DSPATR(ND)
+155200981118     A                                 16 20'ASN Pack(s) Req:'
+155300981118     A                                      TEXT('*> X MOVED FROM 17,20')
+155400981118     A  54                                  DSPATR(ND)
+155500981118     A            K4ASPK    R        B 16 49REFFLD(EASH)
+155600981118     A N54                                  DSPATR(CS)
+155700981118     A                                      DSPATR(HI)
+155800981118     A  54                                  DSPATR(ND)
+155900981118     A  54                                  DSPATR(PR)
+156000981118     A                                      TEXT('Hold EDI ASN Y/N *> X MOVED F-
+156100981118     A                                      ROM 17,49')
+156200981118     A                                 16 55'(Y,N)'
+156300981118     A                                      TEXT('*> X MOVED FROM 17,55')
+156400981118     A  54                                  DSPATR(ND)
+156500981118     A                                 17  2'FAX INFO:'
+156600981118     A                                      TEXT('*> X MOVED FROM 18,2')
+156700981118     A                                      DSPATR(HI)
+156800981118     A  55                                  DSPATR(ND)
+156900981118     A                                 17 20'NickName:'
+157000981118     A                                      TEXT('*> MOVED FROM 18,20')
+157100981118     A  55                                  DSPATR(ND)
+157200981118     A            K4NKNM    R        B 17 49REFFLD(NKNM)
+157300981118     A N55                                  DSPATR(CS)
+157400981118     A                                      DSPATR(HI)
+157500981118     A  55                                  DSPATR(ND)
+157600981118     A  55                                  DSPATR(PR)
+157700981118     A                                      TEXT('Nick Name  *> X MOVED FROM 18-
+157800981118     A                                      ,49')
+157900981118     A                                 18 20'Fax Invoices:'
+158000981118     A                                      TEXT('*> X MOVED FROM 19,20')
+158100981118     A  55                                  DSPATR(ND)
+158200981118     A            K4FXIN    R        B 18 49REFFLD(FXIN)
+158300981118     A N55                                  DSPATR(CS)
+158400981118     A                                      DSPATR(HI)
+158500981118     A  55                                  DSPATR(ND)
+158600981118     A  55                                  DSPATR(PR)
+158700981118     A                                      TEXT('Fax Invoices Y/N *> X MOVED F-
+158800981118     A                                      ROM 19,49')
+158900981118     A                                 18 55'(Y,N)'
+159000981118     A                                      TEXT('*> X MOVED FROM 19,55')
+159100981118     A  55                                  DSPATR(ND)
+159200981118     A                                 19 20'Fax Acknowledgements:'
+159300981118     A                                      TEXT('*> X MOVED FROM 20,20')
+159400981118     A  55                                  DSPATR(ND)
+159500981118     A            K4FXAK    R        B 19 49REFFLD(FXAK)
+159600981118     A N55                                  DSPATR(CS)
+159700981118     A                                      DSPATR(HI)
+159800981118     A  55                                  DSPATR(ND)
+159900981118     A  55                                  DSPATR(PR)
+160000981118     A                                      TEXT('Fax Acknowledgements Y/N *> X-
+160100981118     A                                       MOVED FROM 20,49')
+160200981118     A                                 19 55'(Y,N)'
+160300981118     A                                      TEXT('*> X MOVED FROM 20,55')
+160400981118     A  55                                  DSPATR(ND)
+160500981118     A                                 20 20'Fax A/R Statements:'
+160600981118     A                                      TEXT('*> X MOVED FROM 21,20')
+160700981118     A  55                                  DSPATR(ND)
+160800981118     A            K4FXSM    R        B 20 49REFFLD(FXSM)
+160900981118     A N55                                  DSPATR(CS)
+161000981118     A                                      DSPATR(HI)
+161100981118     A  55                                  DSPATR(ND)
+161200981118     A  55                                  DSPATR(PR)
+161300981118     A                                      TEXT('Fax A/R Statements Y/N  *> X -
+161400981118     A                                      MOVED FROM 21,49')
+161500981118     A                                 20 55'(Y,N)'
+161600981118     A                                      TEXT('*> X MOVED FROM 21,55')
+161700981118     A  55                                  DSPATR(ND)
+161800991214     A*%% *> 0T - BEG OF CHG
+161900991214     A                                 21 20'Fax Overdue Notices:'
+162000981118     A                                      TEXT('*> X MOVED FROM 22, 20')
+162100991214     A**Del                            21 20'Fax Delinquent letters:'
+162200991214     A*%% *> 0T - end OF CHG
+162300981118     A  55                                  DSPATR(ND)
+162400981118     A            K4FXDL    R        B 21 49REFFLD(FXDL)
+162500981118     A N55                                  DSPATR(CS)
+162600981118     A                                      DSPATR(HI)
+162700981118     A  55                                  DSPATR(ND)
+162800981118     A  55                                  DSPATR(PR)
+162900981118     A                                      TEXT('Fax Delinquent letters Y/N *>-
+163000981118     A                                       X MOVED FROM 22,49')
+163100981118     A                                 21 55'(Y,N)'
+163200981118     A                                      TEXT('*> X MOVED FROM 22,55')
+163300981118     A  55                                  DSPATR(ND)
+163400981118     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+163500981118     A  90                                  DSPATR(RI)
+163600981118     A                                 24 69'F12=Return'
+163700981118     A                                      COLOR(BLU)
+163800981118     A                                 22 20'Fax B&Q Customer Quote:'
+163900981118     A                                      TEXT('*> X ADDED CONSTANT *> Z ADDE-
+164000981118     A                                      D B&Q')
+164100981118     A  55                                  DSPATR(ND)
+164200981118     A            K4FXQR    R        B 22 49REFFLD(FXIN)
+164300981118     A                                      TEXT('*> X ADDED FIELD')
+164400000519     A*> 0W BEGIN DELETE
+164500000519     A**                                    DSPATR(HI)
+164600000519     A**                                    DSPATR(CS)
+164700000519     A*> 0W END DELETE
+164800000519     A*> 0W BEGIN ADD
+164900000519     A N55                                  DSPATR(HI)
+165000000519     A N55                                  DSPATR(CS)
+165100000519     A*> 0W END ADD
+165200981118     A  55                                  DSPATR(ND)
+165300981118     A* *> 0C BEGIN OF ADD
+165400981118     A  55                                  DSPATR(PR)
+165500981118     A* *> 0C END OF ADD
+165600981118     A                                 22 55'(Y,N)'
+165700981118     A                                      TEXT('*> X ADDED CONSTANT')
+165800981118     A  55                                  DSPATR(ND)
+165900981118     A* *> 0B - NEXT LINE CHANGED
+166000981118     A*                                 7 20'Print B&Q Customer Quote:'
+166100981118     A N55                              7 20'Print B&Q Customer Quote:'
+166200020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+166300020130     A                                  7 20'Print B&Q Customer Quote:'
+166400981118     A                                      TEXT('*> Y ADDED CONSTANT *> Z CHAN-
+166500981118     A                                      GED CONSTANT')
+166600020130     A* >0XN55        K4PRTQ    R        B  7 49REFFLD(PRTA)
+166700020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+166800020130     A            K4PRTQ    R        B  7 49REFFLD(PRTA)
+166900981118     A                                      DSPATR(CS)
+167000981118     A                                      DSPATR(HI)
+167100981118     A                                      TEXT('*> Y ADDED FIELD')
+167200020130     A* >0X N55                              7 55'(Y,N)'
+167300020130     A* *> 0X ADDED NEXT LINE - REMOVED INDICATOR
+167400020130     A                                  7 55'(Y,N)'
+167500981118     A                                      TEXT('*> Y ADDED CONSTANT')
+167600981118     A*  *> H     END OF ADD
+167700981118     A          R MAINT5
+167800981118     A*%%TS  SD  19950801  102150  KBOLIGAN    REL-V3R0M5  5763-PW1
+167900981118     A                                      CF01
+168000981118     A                                      CF12
+168100981118     A                                      HELP
+168200981118     A                                      ALWROL
+168300981118     A                                      DSPMOD(*DS3)
+168400981118     A                                      SLNO(01)
+168500981118     A                                      CLRL(*ALL)
+168600981118     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+168700981118     A  *DS3                                HLPARA(01 001 24 080)
+168800981118     A  *DS4                                HLPARA(01 001 24 080)
+168900981118     A            MIC            4A  P
+169000981118     A            K2CONM    R        O  1  2REFFLD(NAME)
+169100981118     A  72                                  DSPATR(ND)
+169200981118     A                                  1 34'ADDITIONAL INFO MAINTENANCE'
+169300981118     A                                      DSPATR(HI)
+169400981118     A                                      DSPATR(UL)
+169500981118     A                                  1 62'\FBU'
+169600981118     A                                      DSPATR(ND)
+169700981118     A            K2MODE        11A  O  1 67DSPATR(HI)
+169800981118     A                                      DSPATR(RI)
+169900981118     A                                  2  2'Co/Customer-Ship To:'
+170000981118     A            K2CONO    R        O  2 23REFFLD(CONO)
+170100981118     A                                      DSPATR(HI)
+170200981118     A  72                                  DSPATR(ND)
+170300981118     A                                  2 26'/'
+170400981118     A  72                                  DSPATR(ND)
+170500981118     A            K2CSNO    R        O  2 28REFFLD(CSNO)
+170600981118     A                                      DSPATR(HI)
+170700981118     A                                      EDTCDE(Z)
+170800981118     A                                  2 39'-'
+170900981118     A            K4SHP#    R        O  2 41REFFLD(SHP#)
+171000981118     A                                      DSPATR(HI)
+171100981118     A            CXCSNM    R        O  2 51REFFLD(CSNM)
+171200981118     A                                      DSPATR(HI)
+171300981118     A  *DS4                            2 51
+171400981118     A                                  4 20'Print Invoices:'
+171500981118     A            K5PRTI    R        B  4 49REFFLD(PRTI)
+171600981118     A                                      DSPATR(CS)
+171700981118     A                                      DSPATR(HI)
+171800021230     A* *> 1A BEGIN OF CHANGE
+171900021230     A** DEL                            4 55'(Y,N)'
+172000021230     A                                  4 55'(Y,N,C)'
+172100021230     A* *> 1A END OF CHANGE
+172200981118     A                                  5 20'Print Acknowledgements:'
+172300981118     A            K5PRTA    R        B  5 49REFFLD(PRTA)
+172400981118     A                                      DSPATR(CS)
+172500981118     A                                      DSPATR(HI)
+172600021230     A* *> 1A BEGIN OF CHANGE
+172700021230     A** DEL                            5 55'(Y,N)'
+172800021230     A                                  5 55'(Y,N,C)'
+172900021230     A* *> 1A END OF CHANGE
+173000981118     A                                  7  2'EDI INFO:'
+173100981118     A                                      DSPATR(HI)
+173200981118     A  54                                  DSPATR(ND)
+173300981118     A                                  7 20'Trading Partner ID:'
+173400981118     A  54                                  DSPATR(ND)
+173500981118     A            K4TPID    R        O  7 49REFFLD(TPID)
+173600981118     A                                      DSPATR(HI)
+173700981118     A  54                                  DSPATR(ND)
+173800981118     A                                  8 20'Store Number:'
+173900981118     A  54                                  DSPATR(ND)
+174000981118     A            K5STOR    R        B  8 49REFFLD(STOR)
+174100981118     A N54                                  DSPATR(CS)
+174200981118     A                                      DSPATR(HI)
+174300981118     A  54                                  DSPATR(ND)
+174400981118     A  54                                  DSPATR(PR)
+174500981118     A                                 10 20'EDI Invoices:'
+174600981118     A  54                                  DSPATR(ND)
+174700981118     A            K5EIIN    R        B 10 49REFFLD(EIIN)
+174800981118     A N54                                  DSPATR(CS)
+174900981118     A                                      DSPATR(HI)
+175000981118     A  54                                  DSPATR(ND)
+175100981118     A  54                                  DSPATR(PR)
+175200021230     A* *> 1A BEGIN OF CHANGE
+175300021230     A** DEL                           10 55'(Y,N,I)'
+175400021230     A                                 10 55'(Y,N,I,C)'
+175500021230     A* *> 1A END OF CHANGE
+175600981118     A  54                                  DSPATR(ND)
+175700981118     A                                 11 20'EDI Acknowledgements:'
+175800981118     A  54                                  DSPATR(ND)
+175900981118     A            K5EIAK    R        B 11 49REFFLD(EIAK)
+176000981118     A N54                                  DSPATR(CS)
+176100981118     A                                      DSPATR(HI)
+176200981118     A  54                                  DSPATR(ND)
+176300981118     A  54                                  DSPATR(PR)
+176400021230     A* *> 1A BEGIN OF CHANGE
+176500021230     A** DEL                           11 55'(Y,N,I)'
+176600021230     A                                 11 55'(Y,N,I,C)'
+176700021230     A* *> 1A END OF CHANGE
+176800981118     A  54                                  DSPATR(ND)
+176900981118     A                                 12 20'EDI Advance Ship Notice:'
+177000981118     A  54                                  DSPATR(ND)
+177100981118     A            K5EIAS    R        B 12 49REFFLD(EIAS)
+177200981118     A N54                                  DSPATR(CS)
+177300981118     A                                      DSPATR(HI)
+177400981118     A  54                                  DSPATR(ND)
+177500981118     A  54                                  DSPATR(PR)
+177600021230     A* *> 1A BEGIN OF CHANGE
+177700021230     A** DEL                           12 55'(Y,N,I)'
+177800021230     A                                 12 55'(Y,N,I,C)'
+177900021230     A* *> 1A END OF CHANGE
+178000981118     A  54                                  DSPATR(ND)
+178100981118     A                                 13 20'Hold EDI Invoices:'
+178200981118     A  54                                  DSPATR(ND)
+178300981118     A            K5EIIH    R        B 13 49REFFLD(EIIH)
+178400981118     A N54                                  DSPATR(CS)
+178500981118     A                                      DSPATR(HI)
+178600981118     A  54                                  DSPATR(ND)
+178700981118     A  54                                  DSPATR(PR)
+178800981118     A                                 13 55'(Y,N,B)'
+178900981118     A  54                                  DSPATR(ND)
+179000981118     A                                 14 20'Hold EDI Acknowledgements:'
+179100981118     A  54                                  DSPATR(ND)
+179200981118     A            K5EIAH    R        B 14 49REFFLD(EIAH)
+179300981118     A N54                                  DSPATR(CS)
+179400981118     A                                      DSPATR(HI)
+179500981118     A  54                                  DSPATR(ND)
+179600981118     A  54                                  DSPATR(PR)
+179700981118     A                                 14 55'(Y,N,B)'
+179800981118     A  54                                  DSPATR(ND)
+179900981118     A                                 15 20'Hold EDI ASNs:'
+180000981118     A  54                                  DSPATR(ND)
+180100981118     A            K5EASH    R        B 15 49REFFLD(EASH)
+180200981118     A N54                                  DSPATR(CS)
+180300981118     A                                      DSPATR(HI)
+180400981118     A  54                                  DSPATR(ND)
+180500981118     A  54                                  DSPATR(PR)
+180600981118     A                                 15 55'(Y,N,B)'
+180700981118     A  54                                  DSPATR(ND)
+180800981118     A                                 16 20'ASN Pack(s) Req:'
+180900981118     A  54                                  DSPATR(ND)
+181000981118     A            K5ASPK    R        B 16 49REFFLD(EASH)
+181100981118     A N54                                  DSPATR(CS)
+181200981118     A                                      DSPATR(HI)
+181300981118     A  54                                  DSPATR(ND)
+181400981118     A  54                                  DSPATR(PR)
+181500981118     A                                 16 55'(Y,N)'
+181600981118     A  54                                  DSPATR(ND)
+181700981118     A                                 17  2'FAX INFO:'
+181800981118     A                                      DSPATR(HI)
+181900981118     A  55                                  DSPATR(ND)
+182000981118     A                                 17 20'NickName:'
+182100981118     A  55                                  DSPATR(ND)
+182200981118     A            K5NKNM    R        B 17 49REFFLD(NKNM)
+182300981118     A N55                                  DSPATR(CS)
+182400981118     A                                      DSPATR(HI)
+182500981118     A  55                                  DSPATR(ND)
+182600981118     A  55                                  DSPATR(PR)
+182700981118     A                                 18 20'Fax Invoices:'
+182800981118     A  55                                  DSPATR(ND)
+182900981118     A            K5FXIN    R        B 18 49REFFLD(FXIN)
+183000981118     A N55                                  DSPATR(CS)
+183100981118     A                                      DSPATR(HI)
+183200981118     A  55                                  DSPATR(ND)
+183300981118     A  55                                  DSPATR(PR)
+183400021230     A* *> 1A BEGIN OF CHANGE
+183500021230     A** DEL                           18 55'(Y,N)'
+183600021230     A                                 18 55'(Y,N,C)'
+183700021230     A* *> 1A END OF CHANGE
+183800981118     A  55                                  DSPATR(ND)
+183900981118     A                                 19 20'Fax Acknowledgements:'
+184000981118     A  55                                  DSPATR(ND)
+184100981118     A            K5FXAK    R        B 19 49REFFLD(FXAK)
+184200981118     A N55                                  DSPATR(CS)
+184300981118     A                                      DSPATR(HI)
+184400981118     A  55                                  DSPATR(ND)
+184500981118     A  55                                  DSPATR(PR)
+184600021230     A* *> 1A BEGIN OF CHANGE
+184700021230     A** DEL                           19 55'(Y,N)'
+184800021230     A                                 19 55'(Y,N,C)'
+184900021230     A* *> 1A END OF CHANGE
+185000981118     A  55                                  DSPATR(ND)
+185100981118     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+185200981118     A  90                                  DSPATR(RI)
+185300981118     A                                 24 69'F12=Return'
+185400981118     A                                      COLOR(BLU)
+185500990406     A          R MAINT6
+185600990406     A*%%TS  SD  19990406  160607  MADHURI     REL-V3R6M0  5716-PW1
+185700990406     A                                      CF01
+185800990406     A                                      CF12
+185900990406     A                                      HELP
+186000990406     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+186100990406     A  *DS3                                HLPARA(01 001 24 080)
+186200990406     A  *DS4                                HLPARA(01 001 24 080)
+186300990406     A                                  1 55'\FBV'
+186400990406     A                                      DSPATR(ND)
+186500990406     A            K2CONM    R        O  1  2REFFLD(NAME)
+186600990406     A  72                                  DSPATR(ND)
+186700990406     A                                  1 34'CUSTOMER MAINTENANCE'
+186800990406     A                                      DSPATR(HI)
+186900990406     A                                      DSPATR(UL)
+187000990406     A            K2MODE        11A  O  1 61DSPATR(HI)
+187100990406     A                                      DSPATR(RI)
+187200990406     A            K2CONO    R        O  2 17REFFLD(CONO)
+187300990406     A                                      DSPATR(HI)
+187400990406     A  72                                  DSPATR(ND)
+187500990406     A                                  2 20'/'
+187600990406     A  72                                  DSPATR(ND)
+187700990406     A            K2CSNO    R        O  2 22REFFLD(CSNO)
+187800990406     A                                      DSPATR(HI)
+187900990406     A                                      EDTCDE(Z)
+188000990406     A            CXCSNM    R        O  2 36REFFLD(CSNM)
+188100990406     A                                      DSPATR(HI)
+188200990406     A            K3USH1        30A  O  6  4
+188300990406     A                                  6 35'?'
+188400990406     A  51                                  DSPATR(ND)
+188500990406     A            CXUSR1    R        B  6 37REFFLD(USR1)
+188600990406     A                                      CHECK(FE)
+188700990406     A                                      DSPATR(HI)
+188800990406     A                                      DSPATR(MDT)
+188900990406     A  51                                  DSPATR(ND)
+189000990406     A  61                                  DSPATR(PR)
+189100990406     A N61 51
+189200990406     AO 61N51
+189300990406     AON61N51                               DSPATR(CS)
+189400990406     A                                  6 41':'
+189500990406     A  51                                  DSPATR(ND)
+189600990406     A            K3USD1    R        O  6 43REFFLD(NAME)
+189700990406     A                                      DSPATR(HI)
+189800990406     A            K3USH2    R        O  7  4REFFLD(NAME)
+189900990406     A                                  7 35'?'
+190000990406     A  52                                  DSPATR(ND)
+190100990406     A            CXUSR2    R        B  7 37REFFLD(USR2)
+190200990406     A                                      CHECK(FE)
+190300990406     A                                      DSPATR(HI)
+190400990406     A                                      DSPATR(MDT)
+190500990406     A  52                                  DSPATR(ND)
+190600990406     A  62                                  DSPATR(PR)
+190700990406     A N62 52
+190800990406     AO 62N52
+190900990406     AON62N52                               DSPATR(CS)
+191000990406     A                                  7 41':'
+191100990406     A  52                                  DSPATR(ND)
+191200990406     A            K3USD2    R        O  7 43REFFLD(NAME)
+191300990406     A                                      DSPATR(HI)
+191400990406     A            K3USH3    R        O  8  4REFFLD(NAME)
+191500990406     A                                  8 35'?'
+191600990406     A  53                                  DSPATR(ND)
+191700990406     A            CXUSR3    R        B  8 37REFFLD(USR3)
+191800990406     A                                      CHECK(FE)
+191900990406     A                                      DSPATR(HI)
+192000990406     A                                      DSPATR(MDT)
+192100990406     A  53                                  DSPATR(ND)
+192200990406     A  63                                  DSPATR(PR)
+192300990406     A N63 53
+192400990406     AO 63N53
+192500990406     AON63N53                               DSPATR(CS)
+192600990406     A                                  8 41':'
+192700990406     A  53                                  DSPATR(ND)
+192800990406     A            K3USD3    R        O  8 43REFFLD(NAME)
+192900990406     A                                      DSPATR(HI)
+193000990406     A            #MSG001       70A  O 23  6MSGID(USR &MIC QUSERMSG)
+193100990406     A  90                                  DSPATR(RI)
+193200990406     A  74        K2FK24        10A  O 24 57COLOR(BLU)
+193300990406     A                                 24 69'F12=Return'
+193400990406     A                                      COLOR(BLU)
+193500990406     A            MIC            4A  P
+193600990406     A            K3UFH1        30A  O 10  4
+193700990406     A            K3UFH2    R        O 11  4REFFLD(NAME)
+193800990406     A            K3UFH3    R        O 12  4REFFLD(NAME)
+193900990406     A            K3UFH4        30A  O 13  4
+194000990406     A            K3UFH5    R        O 14  4REFFLD(NAME)
+194100990406     A            K3UFH6    R        O 15  4REFFLD(NAME)
+194200990406     A                                 10 35'?'
+194300990406     A  41                                  DSPATR(ND)
+194400990406     A                                 11 35'?'
+194500990406     A  42                                  DSPATR(ND)
+194600990406     A                                 12 35'?'
+194700990406     A  43                                  DSPATR(ND)
+194800990406     A                                 13 35'?'
+194900990406     A  44                                  DSPATR(ND)
+195000990406     A                                 14 35'?'
+195100990406     A  45                                  DSPATR(ND)
+195200990406     A                                 15 35'?'
+195300990406     A  46                                  DSPATR(ND)
+195400990406     A            CXUSF1    R     A  B 10 37REFFLD(USRF)
+195500990406     A                                      CHECK(FE)
+195600990406     A                                      DSPATR(HI)
+195700990406     A                                      DSPATR(MDT)
+195800990406     A  41                                  DSPATR(ND)
+195900990406     A  31                                  DSPATR(PR)
+196000990406     A N31 41
+196100990406     AO 31N41
+196200990406     AON31N41                               DSPATR(CS)
+196300990406     A                                 10 43':'
+196400990406     A  41                                  DSPATR(ND)
+196500990406     A            K3UFD1    R        O 10 45REFFLD(NAME)
+196600990406     A                                      DSPATR(HI)
+196700990406     A            CXUSF2    R     A  B 11 37REFFLD(USRF)
+196800990406     A                                      CHECK(FE)
+196900990406     A                                      DSPATR(HI)
+197000990406     A                                      DSPATR(MDT)
+197100990406     A  42                                  DSPATR(ND)
+197200990406     A  32                                  DSPATR(PR)
+197300990406     A N32 42
+197400990406     AO 32N42
+197500990406     AON32N42                               DSPATR(CS)
+197600990406     A                                 11 43':'
+197700990406     A  42                                  DSPATR(ND)
+197800990406     A            K3UFD2    R        O 11 45REFFLD(NAME)
+197900990406     A                                      DSPATR(HI)
+198000990406     A            CXUSF3    R     A  B 12 37REFFLD(USRF)
+198100990406     A                                      CHECK(FE)
+198200990406     A                                      DSPATR(HI)
+198300990406     A                                      DSPATR(MDT)
+198400990406     A  43                                  DSPATR(ND)
+198500990406     A  33                                  DSPATR(PR)
+198600990406     A N33 43
+198700990406     AO 33N43
+198800990406     AON33N43                               DSPATR(CS)
+198900990406     A                                 12 43':'
+199000990406     A  43                                  DSPATR(ND)
+199100990406     A            K3UFD3    R        O 12 45REFFLD(NAME)
+199200990406     A                                      DSPATR(HI)
+199300990406     A            CXUSF4    R     A  B 13 37REFFLD(USRF)
+199400990406     A                                      CHECK(FE)
+199500990406     A                                      DSPATR(HI)
+199600990406     A                                      DSPATR(MDT)
+199700990406     A  44                                  DSPATR(ND)
+199800990406     A  34                                  DSPATR(PR)
+199900990406     A N34 44
+200000990406     AO 34N44
+200100990406     AON34N44                               DSPATR(CS)
+200200990406     A                                 13 43':'
+200300990406     A  44                                  DSPATR(ND)
+200400990406     A            K3UFD4    R        O 13 45REFFLD(NAME)
+200500990406     A                                      DSPATR(HI)
+200600990406     A            CXUSF5    R     A  B 14 37REFFLD(USRF)
+200700990406     A                                      CHECK(FE)
+200800990406     A                                      DSPATR(HI)
+200900990406     A                                      DSPATR(MDT)
+201000990406     A  45                                  DSPATR(ND)
+201100990406     A  35                                  DSPATR(PR)
+201200990406     A N35 45
+201300990406     AO 35N45
+201400990406     AON35N45                               DSPATR(CS)
+201500990406     A                                 14 43':'
+201600990406     A  45                                  DSPATR(ND)
+201700990406     A            K3UFD5    R        O 14 45REFFLD(NAME)
+201800990406     A                                      DSPATR(HI)
+201900990406     A            CXUSF6    R     A  B 15 37REFFLD(USRF)
+202000990406     A                                      CHECK(FE)
+202100990406     A                                      DSPATR(HI)
+202200990406     A                                      DSPATR(MDT)
+202300990406     A  46                                  DSPATR(ND)
+202400990406     A  36                                  DSPATR(PR)
+202500990406     A N36 46
+202600990406     AO 36N46
+202700990406     AON36N46                               DSPATR(CS)
+202800990406     A                                 15 43':'
+202900990406     A  46                                  DSPATR(ND)
+203000990406     A            K3UFD6    R        O 15 45REFFLD(NAME)
+203100990406     A                                      DSPATR(HI)
+203200990406     A  50                             17  4'Customer Ext Item Cmnt Group?'
+203300990406     A  50        K6CGID         5A  B 17 37DSPATR(HI)
+203400990406     A                                      DSPATR(CS)
+203500990406     A  50        K6CGDS        25A  O 17 45DSPATR(HI)
+203600990407     A                                 18  4'FOB Code                       ?'
+203700990406     A            K6FOBC    R        B 18 37REFFLD(FOBC)
+203800990406     A                                      DSPATR(HI)
+203900990406     A                                      DSPATR(CS)
+204000990406     A            K6FOBD        30A  O 18 45DSPATR(HI)
+204100990407     A                                 18 43':'
+204200021209     A          R SOOPT
+204300021209     A*%%TS  SD  20021209  164003  MBRANIN     REL-V5R1M0  5722-WDS
+204400021209     A                                      CF01
+204500021209     A                                      CF12
+204600021209     A                                      HELP
+204700021209     A*> 0Z ADDED NEXT LINE
+204800021209     A  24                                  CF24
+204900021209     A          H                           HLPRCD(XAHELP *LIBL/XAHELPFM)
+205000021209     A  *DS3                                HLPARA(01 001 24 080)
+205100021209     A  *DS4                                HLPARA(01 001 24 080)
+205200021209     A                                  1 26'CUSTOMER SPECIAL ORDER OPTIONS'
+205300021209     A                                      DSPATR(HI)
+205400021209     A                                      DSPATR(UL)
+205500021209     A                                  5  3'Co/Customer:'
+205600021209     A                                  6  3'Ship-To:'
+205700021209     A            K2CSNO        10Y 0O  5 21DSPATR(HI)
+205800021209     A                                      EDTCDE(Z)
+205900021209     A            CXCSNM        30A  O  5 32DSPATR(HI)
+206000021209     A            K4SHP#         7A  O  6 16DSPATR(HI)
+206100021209     A                                 12  3'Assume complete shipment when S/O -
+206200021209     A                                      under-received:'
+206300021209     A  47                             16  3'Assume complete shipment when D/S -
+206400021209     A                                      under-received:'
+206500021209     A                                 24 51'F12=Return'
+206600021209     A                                      COLOR(BLU)
+206700021209     A            K7IQOS         1A  B  8 66DSPATR(HI)
+206800021209     A                                      DSPATR(CS)
+206900021209     A            K7SCUR         1A  B 12 66DSPATR(HI)
+207000021209     A                                      DSPATR(CS)
+207100021209     A  47        K7DCUR         1A  B 16 66DSPATR(HI)
+207200021209     A                                      DSPATR(CS)
+207300021209     A  47                             16 68'(Y,N)'
+207400021209     A                                 12 68'(Y,N)'
+207500021209     A                                  8 68'(Y,N)'
+207600021209     A  90        #MSG001       70A  O 22  6MSGID(USR &MIC QUSERMSG)
+207700021209     A                                      DSPATR(RI)
+207800021209     A            MIC            4A  P
+207900021209     A            K7OSVP         3Y 0B  9 66DSPATR(HI)
+208000021209     A                                      DSPATR(CS)
+208100021209     A                                      EDTCDE(Z)
+208200021209     A                                      COMP(GE 0)
+208300021209     A            K7SUSP         3Y 0B 13 66DSPATR(HI)
+208400021209     A                                      DSPATR(CS)
+208500021209     A                                      EDTCDE(Z)
+208600021209     A                                      COMP(GE 0)
+208700021209     A  47        K7DUSP         3Y 0B 17 66DSPATR(HI)
+208800021209     A                                      DSPATR(CS)
+208900021209     A                                      EDTCDE(Z)
+209000021209     A                                      COMP(GE 0)
+209100021209     A            K7OSVC         7Y 0B 10 66EDTCDE(3)
+209200021209     A                                      DSPATR(HI)
+209300021209     A                                      DSPATR(CS)
+209400021209     A                                      COMP(GE 0)
+209500021209     A                                 10 31'of the line value and less than'
+209600021209     A            K7SUSC         7Y 0B 14 66EDTCDE(3)
+209700021209     A                                      DSPATR(HI)
+209800021209     A                                      DSPATR(CS)
+209900021209     A                                      COMP(GE 0)
+210000021209     A  47        K7DUSC         7Y 0B 18 66EDTCDE(3)
+210100021209     A                                      DSPATR(HI)
+210200021209     A                                      DSPATR(CS)
+210300021209     A                                      COMP(GE 0)
+210400021209     A            K7CUR1         3A  O 10 74DSPATR(HI)
+210500021209     A            K7CUR2         3A  O 14 74DSPATR(HI)
+210600021209     A  47        K7CUR3         3A  O 18 74DSPATR(HI)
+210700021209     A                                  9 70'%'
+210800021209     A                                 13 70'%'
+210900021209     A  47                             17 70'%'
+211000021209     A                                  5 19'/'
+211100021209     A  72                                  DSPATR(ND)
+211200021209     A            K2CONO         2Y 0O  5 16EDTCDE(Z)
+211300021209     A                                      DSPATR(HI)
+211400021209     A  72                                  DSPATR(ND)
+211500021209     A                                 14 31'of the line value and less than'
+211600021209     A  47                             18 31'of the line value and less than'
+211700021209     A                                  9 16'If the value of the over-shipment -
+211800021209     A                                      is less than'
+211900021209     A                                 13 15'If the value of the under-shipment-
+212000021209     A                                       is less than'
+212100021209     A  47                             17 15'If the value of the under-shipment-
+212200021209     A                                       is less than'
+212300021209     A                                  2 30'Special Order Receipts'
+212400021209     A                                  8  3'Increase the order quantity for S/-
+212500021209     A                                      O over-shipments:'
+212600021209     A            K7SHNM        30A  O  6 32DSPATR(HI)
+212700021209     A*> 0Z BEGIN ADD
+212800021209     A  24                             24 66'F24=Delete'
+212900021209     A                                      COLOR(BLU)
+213000021209     A*> 0Z END OF ADD
+213100021021     A*%%GP SCREEN1    01
+213200021021     A*%%GP UNTITLED   01

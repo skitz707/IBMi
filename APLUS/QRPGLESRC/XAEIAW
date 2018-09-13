@@ -1,0 +1,2703 @@
+000100000000      /COPY QCPYSRC,H_SPEC
+000200000000      //***************************************************************
+000300000000      //***************************************************************
+000400000000      //**                                                          ***
+000500000000      //*                program modifications log                   **
+000600000000      //*                =========================                   **
+000700000000      //*                                                            **
+000800000000      //*  #* :   rel06.10.00:  02/22/05:  0203:  dxa075             **
+000900000000      //*  new program                                               **
+001000000000      //*                                                            **
+001100000000      //*  #*a:   rel07.00.00:  09/06/05:  0823:  i352404            **
+001200000000      //*  Corrected a divide by zero error if itmst information is  **
+001300000000      //*  not setup correctly (missing u/m conversion info, etc)    **
+001400000000      //*                                                            **
+001500000000      //*  #*b:   rel07.02.00:  01/10/06:  0520:  t34814             **
+001600000000      //*  Corrected problem with "target to small for operation"    **
+001700000000      //*  error.                                                    **
+001800000000      //*                                                            **
+001900000000      //*  #*c:   rel07.04.00:  06/08/06:  0823:  i365697            **
+002000000000      //*  Corrected a divide by zero error if itmst information is  **
+002100000000      //*  not setup correctly (missing u/m conversion info, etc)    **
+002200000000      //*  Continuation of fix #*a.                                  **
+002300000000      //*                                                            **
+002400000000      //*  #*d:   rel07.04.00:  06/20/06:  0823:  i361426            **
+002500000000      //*  if an immediate return was processed, the information was **
+002600000000      //*  going in the 'Over 360' bucket.  Corrected to place it    **
+002700000000      //*  in the Current bucket.                                    **
+002800000000      //*                                                            **
+002900000000      //*  #*e:   rel08.00.00:  12/18/06:  0823:  i361643            **
+003000000000      //*  Recounts were not calculating currently.  Corrected.      **
+003100000000      //*                                                            **
+003200000000      //*  #*f:   rel08.00.00:  03/28/07:  0929:  i377992            **
+003300000000      //*  getting error "target for numeric operation too small     **
+003400000000      //*  to hold result". this is caused by the overdue amount     **
+003500000000      //*  being too large for the work field ov(x).                 **
+003600000000      //*  changed to increase work fields to avoid target errors    **
+003700000000      //*                                                            **
+003800000000      //**                                                          ***
+003900000000      //***************************************************************
+004000000000      //***************************************************************
+004100000000      //*****                                                    ******
+004200000000      //***                  application plus                      ****
+004300000000      //*                    ================                        **
+004400000000      //*                                                            **
+004500000000      //*           program name:   xaeiaw                           **
+004600000000      //*                                                            **
+004700000000      //*           program date:   February 2005                    **
+004800000000      //*                                                            **
+004900000000      //*           description:    Executive Summary IA data load   **
+005000000000      //*                                                            **
+005100000000      //*           (c) 1992-2004 Infor Global Solutions             **
+005200000000      //*                                                            **
+005300000000      //*                                                            **
+005400000000      //*   This program loads IA information into EXRDT file.       **
+005500000000      //*                                                            **
+005600000000      //*    indicator summary                                       **
+005700000000      //*                                                            **
+005800000000      //*                                                            **
+005900000000      //***                                                        ****
+006000000000      //*****                                                    ******
+006100000000      //***************************************************************
+006200000000      //***************************************************************
+006300000000      // executive summary header output  pgm prefix: xh
+006400000000     Fexrhd     uf a e           k disk
+006500000000      // executive summary detail output  pgm prefix: xd
+006600000000     Fexrdt     uf a e           k disk
+006700000000      // item balance file    pgm prefix: ib
+006800000000     Fitba8     if   e           k disk
+006900000000     F                                     rename(itbalr:itba8r)
+007000000000      // item master file     pgm prefix: imb
+007100000000     Fitmst     if   e           k disk
+007200000000      // a+ ia transaction history detail file   pgm prefix:ia
+007300000000     Fiahst     if   e           k disk
+007400000000      // po receipt file                           pgm prefix: rc
+007500000000     Frcpt1a    if   e           k disk
+007600000000     F                                     rename(rcptr:rcpt1ar)
+007700000000      // special orders summary file  pgm prefix: ss
+007800000000     Fspsum     if   e           k disk
+007900000000      // spord logical by house/item  pgm prefix: so
+008000000000     Fspor5     if   e           k disk
+008100000000     F                                     rename(spordr:spor5r)
+008200000000      // po vendor/item file  pgm prefix: vi
+008300000000     Fvnitm     if   e           k disk    extind(*inu1)
+008400000000      //logical of podet by item, whse, comp, due date, ord
+008500000000     Fpode13    if   e           k disk
+008600000000     F                                     rename(podetr:pode13r)
+008700000000      // po transfer file by item, to warehouse  pgm prefix: op
+008800000000     Fpoxf2     if   e           k disk
+008900000000     F                                     rename(poxfrr:poxf2r)
+009000000000      // Order Control
+009100000000     Forctl     if   f  256    11aidisk    keyloc(1)
+009200000000      // control file by appid/rccd     pgm prefix: cc
+009300000000     Forct1     if   e           k disk
+009400000000     F                                     rename(orctlr:orct1r)
+009500000000      //
+009600000000      //---------------------------------------------------------------
+009700000000      // data structures
+009800000000      //---------------------------------------------------------------
+009900000000      //
+010000000000      //  lda
+010100000000     D                uds
+010200000000     D wsid                    5      6
+010300000000      // today's date
+010400000000     D                 ds                  inz
+010500000000     D @1date                         8  0
+010600000000     D  @1cc                          2  0 overlay(@1date)
+010700000000     D  @tfdat                        6  0 overlay(@1date:3)
+010800000000      // transaction date
+010900000000     D                 ds                  inz
+011000000000     D @2date                         8  0
+011100000000     D  @2cc                          2  0 overlay(@2date)
+011200000000     D  @cdate                        6  0 overlay(@2date:3)
+011300000000     D                 ds                  inz
+011400000000     D  wqt                    1     75  3
+011500000000     D                                     dim(5)                               open po qty
+011600000000     D  wqt001                 1     15  3
+011700000000     D  wqt002                16     30  3
+011800000000     D  wqt003                31     45  3
+011900000000     D  wqt004                46     60  3
+012000000000     D  wqt005                61     75  3
+012100000000      //
+012200000000     D                 ds                  inz
+012300000000     D  wDt                    1     25  0
+012400000000     D                                     dim(5)                               open po qty
+012500000000     D  wDt001                 1      5  0
+012600000000     D  wDt002                 6     10  0
+012700000000     D  wDt003                11     15  0
+012800000000     D  wDt004                16     20  0
+012900000000     D  wDt005                21     25  0
+013000000000     D                 ds                  inz
+013100000000     D  oh                     1     33  3
+013200000000     D                                     dim(3)                               qty on hand
+013300000000     D  oh0001                 1     11  3
+013400000000     D  oh0002                12     22  3
+013500000000     D  oh0003                23     33  3
+013600000000     D                 ds                  inz
+013700000000        //#*f - beg of change
+013800000000       //D  po                     1     33  3
+013900000000       //D                                     dim(3)                           amt. on purchase ord
+014000000000       //D  po0001                 1     11  3
+014100000000       //D  po0002                12     22  3
+014200000000       //D  po0003                23     33  3
+014300000000       //D                 ds                  inz
+014400000000       //D  ov                     1     33  3
+014500000000       //D                                     dim(3)                           qty on hand
+014600000000       //D  ov0001                 1     11  3
+014700000000       //D  ov0002                12     22  3
+014800000000       //D  ov0003                23     33  3
+014900000000       //D                 ds                  inz
+015000000000       //D  rc                     1     33  3
+015100000000       //D                                     dim(3)                           amt. on purchase ord
+015200000000       //D  rc0001                 1     11  3
+015300000000       //D  rc0002                12     22  3
+015400000000       //D  rc0003                23     33  3
+015500000000       //D                 ds                  inz
+015600000000       //D  tst                    1     33  3
+015700000000       //D                                     dim(3)                           amt. on purchase ord
+015800000000       //D  tst001                 1     11  3
+015900000000       //D  tst002                12     22  3
+016000000000       //D  tst003                23     33  3
+016100000000     D  po                     1     39  3
+016200000000     D                                     dim(3)                               amt. on purchase ord
+016300000000     D  po0001                 1     13  3
+016400000000     D  po0002                14     26  3
+016500000000     D  po0003                27     39  3
+016600000000     D                 ds                  inz
+016700000000     D  ov                     1     39  3
+016800000000     D                                     dim(3)                               qty on hand
+016900000000     D  ov0001                 1     13  3
+017000000000     D  ov0002                14     26  3
+017100000000     D  ov0003                27     39  3
+017200000000     D                 ds                  inz
+017300000000     D  rc                     1     39  3
+017400000000     D                                     dim(3)                               amt. on purchase ord
+017500000000     D  rc0001                 1     13  3
+017600000000     D  rc0002                14     26  3
+017700000000     D  rc0003                27     39  3
+017800000000     D                 ds                  inz
+017900000000     D  tst                    1     39  3
+018000000000     D                                     dim(3)                               amt. on purchase ord
+018100000000     D  tst001                 1     13  3
+018200000000     D  tst002                12     26  3
+018300000000     D  tst003                23     39  3
+018400000000        //#*f - end of change
+018500000000     D                 ds                  inz
+018600000000     D  unm                    1      9
+018700000000     D                                     dim(3)                               unit of measure
+018800000000     D  unm001                 1      3
+018900000000     D  unm002                 4      6
+019000000000     D  unm003                 7      9
+019100000000     D                 ds                  inz
+019200000000     D  uw                     1     27  4
+019300000000     D                                     dim(3)                               unit weight
+019400000000     D  imuwt1                 1      9  4
+019500000000     D  imuwt2                10     18  4
+019600000000     D  imuwt3                19     27  4
+019700000000     D                 ds                  inz
+019800000000     D @@alph                        30
+019900000000     D  @@numb                       17  2 overlay(@@alph)
+020000000000      //
+020100000000      // prototype for XAEIAW                                               ectXA"
+020200000000      /COPY QCPYSRC,P_XAEIAW
+020300000000      // prototype for 'xadat' "Application Plus Date Calculation Sub Program"
+020400000000      /COPY QCPYSRC,P_XADAT
+020500000000      // *entry interface for main procedure
+020600000000     D xaeiaw          pi
+020700000000     D pshtd                          1
+020800000000     D pmode                          1
+020900000000     D p1cono                         2
+021000000000     D pCall                          8
+021100000000      //
+021200000000      //---------------------------------------------------------------------
+021300000000      // Stand Alone Fields - TOP
+021400000000      //---------------------------------------------------------------------
+021500000000     D wgper1          s                   like(igper1)
+021600000000     D wgper2          s                   like(igper2)
+021700000000     D wgper3          s                   like(igper3)
+021800000000     D wgper4          s                   like(igper4)
+021900000000     D wTranQty        s                   like(iatrqt)
+022000000000     D qpsOnHand       s                   like(igper4)
+022100000000      // #*e - Beg of Add
+022200000000     D LstRecOH        s                   like(iaqolt)
+022300000000      // #*e - End of Add
+022400000000     D LCall           s              8
+022500000000     D ctlkey          s             11
+022600000000     D Dtoday          s               d
+022700000000     D Rdate           s               d
+022800000000     D Ytoday          s               d   DATFMT(*YMD&)
+022900000000     D day360          s               d   DATFMT(*YMD&)
+023000000000     D @now            s               t
+023100000000     D wDates1         s               d
+023200000000     D wDates2         s               d
+023300000000     D wDates3         s               d
+023400000000     D wDates4         s               d
+023500000000     D wDates5         s               d
+023600000000
+023700000000     D @dudat          s              9  0
+023800000000     D @dylat          s              9  0
+023900000000     D @pgdat          s              8
+024000000000     D @pjday          s              9
+024100000000     D @pshdn          s              1
+024200000000     D @today          s              9  0
+024300000000     D @xadat          s              1
+024400000000     D t$dudt          s                   like(iatrdt)
+024500000000
+024600000000     D w@x             s              1  0
+024700000000     D Foundrcpt       s              1
+024800000000     D   igitno        s                   like(ibitno)
+024900000000     D   igwhid        s                   like(ibwhid)
+025000000000     D   igcono        s                   like(whscoo)
+025100000000     D   igitcl        s                   like(ibitcl)
+025200000000     D   igitsc        s                   like(ibitsc)
+025300000000     D   igavcs        s                   like(ibavcs)
+025400000000     D   igohq1        s                   like(ibohq1)
+025500000000     D   igohq2        s                   like(ibohq2)
+025600000000     D   igohq3        s                   like(ibohq3)
+025700000000     D   igunm1        s                   like(imunm1)
+025800000000     D   igunm2        s                   like(imunm2)
+025900000000     D   igunm3        s                   like(imunm3)
+026000000000     D   igprum        s                   like(imprum)
+026100000000     D   igcurr        s             14  2
+026200000000     D   igper1        s             14  2
+026300000000     D   igper2        s             14  2
+026400000000     D   igper3        s             14  2
+026500000000     D   igper4        s             14  2
+026600000000     D   igperx        s             14  2
+026700000000
+026800000000     D a$name          s                   like(xhname)
+026900000000     D a$date          s                   like(xdcrdt)
+027000000000     D a$key1          s                   like(xdkey1)
+027100000000     D a$key2          s                   like(xdkey2)
+027200000000     D a$key3          s                   like(xdkey3)
+027300000000     D a$key4          s                   like(xdkey4)
+027400000000     D a$key5          s                   like(xdkey5)
+027500000000     D a$keu1          s                   like(xdkeu1)
+027600000000     D a$seq9          s                   like(xdsq09)
+027700000000     D wwac01          s                   like(xdac01)
+027800000000     D wwac03          s                   like(xdac03)
+027900000000     D wwnc02          s                   like(xdnc02)
+028000000000     D wwnc04          s                   like(xdnc04)
+028100000000
+028200000000     D OKrun           s              1
+028300000000     D prgday          s                   like(xhprgd)
+028400000000     D firstc          s              1
+028500000000     D @@apid          s              2
+028600000000     D @@rccd          s              2
+028700000000     D a@cono          s              2
+028800000000     D a$cono          s                   like(cccono)
+028900000000     D a$whid          s                   like(ibwhid)
+029000000000     D a$itno          s                   like(ibitno)
+029100000000     D @@poqt          s                   like(ibboq1)
+029200000000     D @@y             s              2  0
+029300000000     D vums            s              3    dim(20)
+029400000000     D vy              s              2  0
+029500000000     D @@tqtt          s            + 2    like(ssaqt1)
+029600000000     D lx              s              2  0
+029700000000     D @oh             s             17  9
+029800000000     D @po             s             17  9
+029900000000     D @qt             s             17  9
+030000000000       // #*b - Begin of Change
+030100000000       //D i@hcst          s             15  5
+030200000000       //D i@dcst          s             15  5
+030300000000       //D i@pcst          s             15  5
+030400000000       //D i@ocst          s             15  5
+030500000000       //D i@rcst          s             15  5
+030600000000     D i@hcst          s             17  5
+030700000000     D i@dcst          s             17  5
+030800000000     D i@pcst          s             17  5
+030900000000     D i@ocst          s             17  5
+031000000000     D i@rcst          s             17  5
+031100000000       // #*b - End of Change
+031200000000     D @w113           s             17  9
+031300000000     D @w115           s             16  9
+031400000000     D b$ducc          s                   like(pdducc)
+031500000000     D b$duca          s              2
+031600000000     D i$trca          s              2
+031700000000     D b$dudt          s                   like(pddudt)
+031800000000     D xxtqrc          s                   like(pdorqt)
+031900000000     D xxw155          s             15  5
+032000000000     D @w1             s                   like(ibblyo)
+032100000000     D @w2             s                   like(ibnmty)
+032200000000     D @w3             s                   like(ibqsyd)
+032300000000     D @w4             s             11  3
+032400000000     D @w5             s             14  2
+032500000000     D @w6             s                   like(ibdqyd)
+032600000000     D @conv           s             11  5
+032700000000     D @ohq            s                   like(ibohq1)
+032800000000     D @unms           s                   like(imunm1)
+032900000000       // #*b - Begin of Change
+033000000000       //D avcst           s             17  9
+033100000000     D avcst           s             20  9
+033200000000       // #*b - End of Change
+033300000000     D nt              s              5  2
+033400000000     D i$trcc          s                   like(iatrcc)
+033500000000     D i$trdt          s                   like(iatrdt)
+033600000000     D i$time          s                   like(iatime)
+033700000000     D i$sq04          s                   like(iasq04)
+033800000000     D i$unms          s                   like(iaunms)
+033900000000     D Dstock          s              1
+034000000000     D asoftm          s                   like(xdcrtm)
+034100000000     D svdate          s                   like(xdcrdt)
+034200000000     D svac01          s                   like(xdac01)
+034300000000     D svnc02          s                   like(xdnc02)
+034400000000     D svac03          s                   like(xdac03)
+034500000000     D svnc04          s                   like(xdnc04)
+034600000000     D svasdt          s                   like(xdasdt)
+034700000000     D LastFound       s              1
+034800000000     D Oknt            s              1
+034900000000     D Okage           s              1
+035000000000     D*  beg Performance
+035100000000     D*    Co/wh totals
+035200000000       // #*b - Begin of Change
+035300000000       //D   wi@hcst       s             15  5
+035400000000       //D   wi@pcst       s             15  5
+035500000000     D   wi@hcst       s             17  5
+035600000000     D   wi@pcst       s             17  5
+035700000000       // #*b - End of Change
+035800000000     D   wigcurr       s             15  5
+035900000000     D   wi@ocst       s             15  5
+036000000000     D   wigper1       s             15  5
+036100000000     D   wi@rcst       s             15  5
+036200000000     D   wigper2       s             15  5
+036300000000     D   wnt           s             15  5
+036400000000     D   wnumnt        s             10  0
+036500000000     D   wigper3       s             15  5
+036600000000     D   wibsmd1       s             15  5
+036700000000     D   wibsmd2       s             15  5
+036800000000     D   wibsmd3       s             15  5
+036900000000       // #*b - Begin of Change
+037000000000       //D   wigper4       s             15  5
+037100000000     D   wigper4       s             17  5
+037200000000       // #*b - End of Change
+037300000000     D   wibsyd1       s             15  5
+037400000000     D   wibsyd2       s             15  5
+037500000000     D   wibsyd3       s             15  5
+037600000000     D   wi@dcst       s             15  5
+037700000000     D*   It Class totals
+037800000000       // #*b - Begin of Change
+037900000000       //D   ci@hcst       s             15  5
+038000000000       //D   ci@pcst       s             15  5
+038100000000     D   ci@hcst       s             17  5
+038200000000     D   ci@pcst       s             17  5
+038300000000       // #*b - End of Change
+038400000000     D   cigcurr       s             15  5
+038500000000     D   ci@ocst       s             15  5
+038600000000     D   cigper1       s             15  5
+038700000000     D   ci@rcst       s             15  5
+038800000000     D   cigper2       s             15  5
+038900000000     D   cnt           s             15  5
+039000000000     D   cnumnt        s             10  0
+039100000000     D   cigper3       s             15  5
+039200000000     D   cibsmd1       s             15  5
+039300000000     D   cibsmd2       s             15  5
+039400000000     D   cibsmd3       s             15  5
+039500000000       // #*b - Begin of Change
+039600000000       //D   cigper4       s             15  5
+039700000000     D   cigper4       s             17  5
+039800000000       // #*b - End of Change
+039900000000     D   cibsyd1       s             15  5
+040000000000     D   cibsyd2       s             15  5
+040100000000     D   cibsyd3       s             15  5
+040200000000     D   ci@dcst       s             15  5
+040300000000     D*  It sub Class totals
+040400000000       // #*b - Begin of Change
+040500000000       //D   si@hcst       s             15  5
+040600000000       //D   si@pcst       s             15  5
+040700000000     D   si@hcst       s             17  5
+040800000000     D   si@pcst       s             17  5
+040900000000       // #*b - End of Change
+041000000000     D   sigcurr       s             15  5
+041100000000     D   si@ocst       s             15  5
+041200000000     D   sigper1       s             15  5
+041300000000     D   si@rcst       s             15  5
+041400000000     D   sigper2       s             15  5
+041500000000     D   snt           s             15  5
+041600000000     D   snumnt        s             10  0
+041700000000     D   sigper3       s             15  5
+041800000000     D   sibsmd1       s             15  5
+041900000000     D   sibsmd2       s             15  5
+042000000000     D   sibsmd3       s             15  5
+042100000000       // #*b - Begin of Change
+042200000000       //D   sigper4       s             15  5
+042300000000     D   sigper4       s             17  5
+042400000000       // #*b - End of Change
+042500000000     D   sibsyd1       s             15  5
+042600000000     D   sibsyd2       s             15  5
+042700000000     D   sibsyd3       s             15  5
+042800000000     D   si@dcst       s             15  5
+042900000000     D svitcl          s                   like(imitcl)
+043000000000     D svitsc          s                   like(imitsc)
+043100000000     D a$itcl          s                   like(imitcl)
+043200000000     D a$itsc          s                   like(imitsc)
+043300000000     D wwnc05          s                   like(xdnc04)
+043400000000     D*  End Performance
+043500000000      //---------------------------------------------------------------------
+043600000000      // Stand Alone Fields - BOTTOM
+043700000000      //-------------------------------
+043800000000      // warehouse record
+043900000000      //-------------------------------
+044000000000     Iorctl     ns       12 cW   13 cN
+044100000000     I                                 14   43  whnamo
+044200000000     I                                 44   45 0whscoo
+044300000000      //--------------------------------
+044400000000      // order entry options
+044500000000      //--------------------------------
+044600000000     Iorctl     ns       12 cO   13 cO
+044700000000     I                                 58   58  csuse
+044800000000      //
+044900000000      //--------------------------------
+045000000000      //* key for file iahst
+045100000000     C     ia0key        klist
+045200000000     C                   kfld                    ibitno
+045300000000     C                   kfld                    ibwhid
+045400000000     C                   kfld                    i$trcc
+045500000000     C                   kfld                    i$trdt
+045600000000     C                   kfld                    i$time
+045700000000     C                   kfld                    i$sq04
+045800000000     C                   kfld                    i$unms
+045900000000      //* partial key for file iahst
+046000000000     C     ia0pky        klist
+046100000000     C                   kfld                    ibitno
+046200000000     C                   kfld                    ibwhid
+046300000000      // key for file rcpt1a
+046400000000     C     rc1key        klist
+046500000000     C                   kfld                    iatrcc
+046600000000     C                   kfld                    iatrdt
+046700000000     C                   kfld                    iatime
+046800000000     C                   kfld                    iasq04
+046900000000      // key for file exrdt
+047000000000     C     xd0key        klist
+047100000000     C                   kfld                    a$name
+047200000000     C                   kfld                    a$date
+047300000000     C                   kfld                    a$key1
+047400000000     C                   kfld                    a$key2
+047500000000     C                   kfld                    a$key3
+047600000000     C                   kfld                    a$key4
+047700000000     C                   kfld                    a$key5
+047800000000     C                   kfld                    a$keu1
+047900000000     C                   kfld                    a$seq9
+048000000000      // Partial key for file exrdt  - Todays IA records
+048100000000     C     xd0pky        klist
+048200000000     C                   kfld                    a$name
+048300000000     C                   kfld                    a$date
+048400000000      // Partial key for file exrdt by date,co - For Clearing Today's rec
+048500000000     C     xd0pkc        klist
+048600000000     C                   kfld                    a$name
+048700000000     C                   kfld                    a$date
+048800000000     C                   kfld                    a$key1
+048900000000      // key for file exrhd
+049000000000     C     xh0key        klist
+049100000000     C                   kfld                    a$name
+049200000000      // Partial key for file exrdt - today
+049300000000     C     xd0ktd        klist
+049400000000     C                   kfld                    a$name
+049500000000     C                   kfld                    Dtoday
+049600000000      // Alt partial key for file exrdt - by date/company - for refresh
+049700000000     C     xd0pkr        klist
+049800000000     C                   kfld                    a$name
+049900000000     C                   kfld                    a$date
+050000000000     C                   kfld                    a$key1
+050100000000      // orct1 partial key list
+050200000000     C     cc1pky        klist
+050300000000     C                   kfld                    @@apid
+050400000000     C                   kfld                    @@rccd
+050500000000      // itba8 partial key list
+050600000000     C     ib0key        klist
+050700000000     C                   kfld                    a$whid
+050800000000     C                   kfld                    a$itno
+050900000000     C                   kfld                    a$itcl
+051000000000     C                   kfld                    a$itsc
+051100000000      // itba8 partial key list
+051200000000     C     ib0pky        klist
+051300000000     C                   kfld                    a$whid
+051400000000      // key for file spsum
+051500000000     C     ss0key        klist
+051600000000     C                   kfld                    ibwhid
+051700000000     C                   kfld                    ibitno
+051800000000      // spor5 key list
+051900000000     C     sp5key        klist
+052000000000     C                   kfld                    ibwhid
+052100000000     C                   kfld                    ibitno
+052200000000      //* partial key for file pode13
+052300000000     C     pd13ky        klist
+052400000000     C                   kfld                    ibitno
+052500000000     C                   kfld                    ibwhid
+052600000000     C                   kfld                    a$cono
+052700000000     C                   kfld                    b$ducc
+052800000000     C                   kfld                    b$dudt
+052900000000      //  partial key for file pode13
+053000000000     C     pd13kp        klist
+053100000000     C                   kfld                    ibitno
+053200000000     C                   kfld                    ibwhid
+053300000000     C                   kfld                    a$cono
+053400000000      //
+053500000000      // vnitm key
+053600000000     C     vi0key        klist
+053700000000     C                   kfld                    pditno
+053800000000     C                   kfld                    pdvnno
+053900000000      // key for file poxf2
+054000000000     C     op0key        klist
+054100000000     C                   kfld                    ibitno
+054200000000     C                   kfld                    ibwhid
+054300000000      //----------------------------------------------------*
+054400000000      //
+054500000000       //***************************************************************
+054600000000       //*          m a i n l i n e   c a l c u l a t i o n s         **
+054700000000       //***************************************************************
+054800000000       //* Set up dates
+054900000000      /free
+055000000000       if pshtd  <> 'Y';
+055100000000
+055200000000         Dtoday = %date();
+055300000000         Ytoday = %date();
+055400000000         day360 = %date() - %days(360);
+055500000000         a$name = 'IA';
+055600000000         a$date = Dtoday;
+055700000000         a$key1 = ' ';
+055800000000         a$key2 = ' ';
+055900000000         a$key3 = ' ';
+056000000000         a$key4 = ' ';
+056100000000         a$key5 = ' ';
+056200000000         a$keu1 = ' ';
+056300000000         a$seq9 = 0;
+056400000000
+056500000000         b$duca = %subst(%char(%subdt(%date():*Y)):1:2);
+056600000000         i$trca = %subst(%char(%subdt(%date():*Y)):1:2);
+056700000000      /end-free
+056800000000     C                   move      b$duca        b$ducc
+056900000000     C                   move      i$trca        i$trcc
+057000000000     C                   move      Ytoday        b$dudt
+057100000000     C                   move      day360        i$trdt
+057200000000      /free
+057300000000
+057400000000         //**** w-Dates[1] = 12/31/49.
+057500000000         wDt(1) = -1;
+057600000000         wDt(2) = 30;
+057700000000         wDt(3) = 90;
+057800000000         wDt(4) = 180;
+057900000000         wDt(5) = 360;
+058000000000
+058100000000         Rdate = Dtoday;
+058200000000         // Get/check exrhd record
+058300000000         OKrun = 'N';
+058400000000         exsr $exrhd;
+058500000000         if OKrun = 'N';
+058600000000           unlock exrhd;
+058700000000           return;
+058800000000         endif;
+058900000000
+059000000000         if pmode <> 'R';
+059100000000           // Purge records older than Purge days
+059200000000           a$date = Dtoday - %days(prgday);
+059300000000           exsr $prgdt;
+059400000000           a$date = Dtoday;
+059500000000
+059600000000           // Clear Today's + 1 records
+059700000000           a$date = Dtoday + %days(1);
+059800000000           exsr $clrtd;
+059900000000         endif;
+060000000000
+060100000000         if pmode = 'R';
+060200000000           // Find last record, create today's if needed.
+060300000000           exsr $lastr;
+060400000000           // Performance: there is no need to refresh IA today's data
+060500000000           // Release Header
+060600000000           chain a$name exrhdr;
+060700000000           if %found;
+060800000000             xhws02 = ' ';
+060900000000             xhlsdt = %date();
+061000000000             xhlstm = %time();
+061100000000             update exrhdr;
+061200000000           endif;
+061300000000
+061400000000           unlock exrhd;
+061500000000           unlock exrdt;
+061600000000           return;
+061700000000           // End Performance
+061800000000         endif;
+061900000000
+062000000000         a$name = 'IA';
+062100000000         if pmode = 'R';                // Refreshing Today's records
+062200000000           a$date = Rdate;
+062300000000           // a$date = Dtoday;
+062400000000         else;
+062500000000           a$date = Dtoday + %days(1);   // Loading Today + 1 records
+062600000000         endif;
+062700000000         a$key1 = ' ';
+062800000000         a$key2 = ' ';
+062900000000         a$key3 = ' ';
+063000000000         a$key4 = ' ';
+063100000000         a$key5 = ' ';
+063200000000         a$keu1 = ' ';
+063300000000
+063400000000         if pmode = 'R';
+063500000000      /end-free
+063600000000     C                   move      p1cono        a$cono
+063700000000      /free
+063800000000           // Clear Today's refresh fields in Today's records for company
+063900000000           a$name = 'IA';
+064000000000           a$date = Dtoday;
+064100000000           if p1cono <> *blanks;
+064200000000             a$key1 = %char(a$cono);
+064300000000           else;
+064400000000             a$key1 = ' ';
+064500000000           endif;
+064600000000           a$key2 = ' ';
+064700000000           a$key3 = ' ';
+064800000000           a$key4 = ' ';
+064900000000           a$key5 = ' ';
+065000000000           a$keu1 = ' ';
+065100000000           a$seq9 = 0;
+065200000000           if p1cono <> *blanks;
+065300000000             setll xd0key exrdtr;
+065400000000             reade xd0pkr exrdtr;
+065500000000           else;
+065600000000             setll xd0key exrdtr;
+065700000000             reade xd0pky exrdtr;
+065800000000           endif;
+065900000000           dow not %eof;
+066000000000             xdnc05 = 0;
+066100000000             xdnc06 = 0;
+066200000000             update exrdtr;
+066300000000
+066400000000             if p1cono <> *blanks;
+066500000000               reade xd0pkr exrdtr;
+066600000000             else;
+066700000000               reade xd0pky exrdtr;
+066800000000             endif;
+066900000000           enddo;
+067000000000         endif;
+067100000000
+067200000000         a$name = 'IA';
+067300000000         if pmode = 'R';                // Refreshing Today's records
+067400000000           a$date = Dtoday;
+067500000000         else;
+067600000000           a$date = Dtoday + %days(1);   // Loading Today + 1 records
+067700000000         endif;
+067800000000         a$key1 = ' ';
+067900000000         a$key2 = ' ';
+068000000000         a$key3 = ' ';
+068100000000         a$key4 = ' ';
+068200000000         a$key5 = ' ';
+068300000000         a$keu1 = ' ';
+068400000000
+068500000000         // Process by whse
+068600000000         @@apid = 'IA';
+068700000000         @@rccd = 'WN';
+068800000000         chain cc1pky orct1r;
+068900000000         *in92 = not %found;
+069000000000         dow *in92 = *off;
+069100000000
+069200000000           // check if warehouse is in company selected
+069300000000           if p1cono <> *blanks and
+069400000000             %subst(ccdata:31:2) <> p1cono;
+069500000000             reade cc1pky orct1;
+069600000000             *in92 = %eof;
+069700000000             iter;
+069800000000           endif;
+069900000000
+070000000000           a@cono = %subst(ccdata:31:2);
+070100000000      /end-free
+070200000000     C                   move      a@cono        a$cono
+070300000000      /free
+070400000000           a$whid = %subst(ccctlk:6:2);
+070500000000           a$itno = ' ';
+070600000000           exsr $IA;
+070700000000           //  next warehouse
+070800000000           reade cc1pky orct1;
+070900000000           *in92 = %eof;
+071000000000         enddo;
+071100000000
+071200000000         if pmode = 'R';
+071300000000           // Copy Today's refresh fields into Today's fields
+071400000000           a$name = 'IA';
+071500000000           a$date = Dtoday;
+071600000000           if p1cono <> *blanks;
+071700000000             a$key1 = %char(a$cono);
+071800000000           else;
+071900000000             a$key1 = ' ';
+072000000000           endif;
+072100000000           a$key2 = ' ';
+072200000000           a$key3 = ' ';
+072300000000           a$key4 = ' ';
+072400000000           a$key5 = ' ';
+072500000000           a$keu1 = ' ';
+072600000000           a$seq9 = 0;
+072700000000           if p1cono <> *blanks;
+072800000000             setll xd0key exrdtr;
+072900000000             reade xd0pkr exrdtr;
+073000000000           else;
+073100000000             setll xd0key exrdtr;
+073200000000             reade xd0pky exrdtr;
+073300000000           endif;
+073400000000           dow not %eof;
+073500000000             if xdsq09 = 1;
+073600000000               xdnc02 = xdnc05;        // On Hand
+073700000000               xdnc04 = xdnc06;        // On P/O
+073800000000             endif;
+073900000000             if xdsq09 = 3;
+074000000000               xdnc04 = xdnc06;        // In Transit
+074100000000             endif;
+074200000000             xdnc05 = 0;
+074300000000             xdnc06 = 0;
+074400000000             update exrdtr;
+074500000000
+074600000000             if p1cono <> *blanks;
+074700000000               reade xd0pkr exrdtr;
+074800000000             else;
+074900000000               reade xd0pky exrdtr;
+075000000000             endif;
+075100000000           enddo;
+075200000000         endif;
+075300000000
+075400000000
+075500000000         // Release Header
+075600000000         chain a$name exrhdr;
+075700000000         if %found;
+075800000000           xhws02 = ' ';
+075900000000           xhlsdt = %date();
+076000000000           xhlstm = %time();
+076100000000           update exrhdr;
+076200000000         endif;
+076300000000
+076400000000         unlock exrhd;
+076500000000         unlock exrdt;
+076600000000         return;
+076700000000       endif;
+076800000000
+076900000000       // end the program
+077000000000       @pshdn = 'Y';
+077100000000       exsr $xadat;
+077200000000       *inlr = *on;
+077300000000       //
+077400000000       //****************************************************************
+077500000000       begsr $lastr;
+077600000000       //****************************************************************
+077700000000
+077800000000       // Find last record, create today's if needed.
+077900000000       LastFound = 'N';
+078000000000       // Check if Today's + 1 record exist
+078100000000       a$date = Dtoday + %days(1);
+078200000000       a$key1 = ' ';
+078300000000       a$key2 = ' ';
+078400000000       a$key3 = ' ';
+078500000000       a$key4 = ' ';
+078600000000       a$key5 = ' ';
+078700000000       a$keu1 = ' ';
+078800000000       a$seq9 = 0;
+078900000000       setll  xd0key exrdtr;
+079000000000       reade(n) xd0pky exrdtr;
+079100000000       // Copy (add/update) all records into today's records
+079200000000       // Except for Today's refresahble field
+079300000000       dow not %eof;
+079400000000         LastFound = 'Y';
+079500000000         // Save Keys and fields
+079600000000         svdate = xdcrdt;
+079700000000         a$key1 = xdkey1;
+079800000000         a$key2 = xdkey2;
+079900000000         a$key3 = xdkey3;
+080000000000         a$key4 = xdkey4;
+080100000000         a$key5 = xdkey5;
+080200000000         a$keu1 = xdkeu1;
+080300000000         a$seq9 = xdsq09;
+080400000000         svac01 = xdac01;
+080500000000         svnc02 = xdnc02;
+080600000000         svac03 = xdac03;
+080700000000         svnc04 = xdnc04;
+080800000000         svasdt = xdasdt;
+080900000000         asoftm = xdcrtm;
+081000000000
+081100000000         // Add/Update Today's exrdt record
+081200000000         a$date = Dtoday;
+081300000000         chain xd0key exrdtr;
+081400000000         *in90 = not %found;
+081500000000         if *in90 = *on;
+081600000000           clear exrdtr;
+081700000000           xdname = a$name;
+081800000000           xdcrdt = a$date;
+081900000000           xdcrtm = %time();
+082000000000           xdkey1 = a$key1;
+082100000000           xdkey2 = a$key2;
+082200000000           xdkey3 = a$key3;
+082300000000           xdkey4 = a$key4;
+082400000000           xdkey5 = a$key5;
+082500000000           xdkeu1 = a$keu1;
+082600000000
+082700000000           xdcrdt = a$date;
+082800000000           xdcrtm = %time();
+082900000000           xdsq09 = a$seq9;
+083000000000         endif;
+083100000000
+083200000000         xdac01 = svac01;
+083300000000         xdnc02 = svnc02;
+083400000000         xdac03 = svac03;
+083500000000         xdnc04 = svnc04;
+083600000000
+083700000000         if *in90 = *on;
+083800000000           write exrdtr;
+083900000000         else;
+084000000000           xdasdt = svasdt;
+084100000000           xdastm = asoftm;
+084200000000           update exrdtr;
+084300000000         endif;
+084400000000
+084500000000         // Saved Date
+084600000000         a$date = svdate;
+084700000000         // Next record
+084800000000         chain(n) xd0key exrdtr;
+084900000000         reade(n) xd0pky exrdtr;
+085000000000       enddo;
+085100000000       if LastFound <> 'N';
+085200000000         leavesr;
+085300000000       endif;
+085400000000
+085500000000       // *************************************************************
+085600000000       // Check if Today's record exist
+085700000000       chain(n) xd0ktd exrdtr;
+085800000000       if %found;
+085900000000         LastFound = 'Y';
+086000000000         leavesr;
+086100000000       endif;
+086200000000
+086300000000       // *************************************************************
+086400000000       // Check if any Prior to Today's record exist
+086500000000       a$date = Dtoday;
+086600000000       a$key1 = ' ';
+086700000000       a$key2 = ' ';
+086800000000       a$key3 = ' ';
+086900000000       a$key4 = ' ';
+087000000000       a$key5 = ' ';
+087100000000       a$keu1 = ' ';
+087200000000       a$seq9 = 0;
+087300000000       setll  xd0key exrdtr;
+087400000000       readpe xh0key exrdtr;
+087500000000       dow not %eof;
+087600000000         LastFound = 'Y';
+087700000000         if pCall  = 'DAYEND' and
+087800000000            LCall <> 'DAYEND';     // This date need Day end Refresh
+087900000000           Rdate = xdcrdt;
+088000000000           leavesr;
+088100000000         endif;
+088200000000         // Save Key
+088300000000         a$date = xdcrdt;
+088400000000         a$key1 = xdkey1;
+088500000000         a$key2 = xdkey2;
+088600000000         a$key3 = xdkey3;
+088700000000         a$key4 = xdkey4;
+088800000000         a$key5 = xdkey5;
+088900000000         a$keu1 = xdkeu1;
+089000000000         a$seq9 = xdsq09;
+089100000000         asoftm = xdcrtm;
+089200000000
+089300000000         // Copy (add) all records into today's records
+089400000000         xdcrdt = Dtoday;
+089500000000         xdcrtm = %time();
+089600000000         xdasdt = a$date;
+089700000000         xdastm = asoftm;
+089800000000         write exrdtr;
+089900000000
+090000000000         // Next record
+090100000000         chain(n) xd0key exrdtr;
+090200000000         readpe(n) xd0pky exrdtr;
+090300000000       enddo;
+090400000000
+090500000000       endsr;
+090600000000       //****************************************************************
+090700000000       begsr $IA;
+090800000000       //****************************************************************
+090900000000
+091000000000       // get OE options  - cost to be used
+091100000000       ctlkey = %editc(a$cono:'X') + 'OEOPTIONS';
+091200000000       chain ctlkey orctl;
+091300000000
+091400000000       // Perfromance beg
+091500000000       firstc = 'Y';
+091600000000         // Clear Co/wh totals
+091700000000         wi@hcst = 0;
+091800000000         wi@pcst = 0;
+091900000000         wigcurr = 0;
+092000000000         wi@ocst = 0;
+092100000000         wigper1 = 0;
+092200000000         wi@rcst = 0;
+092300000000         wigper2 = 0;
+092400000000         wnt     = 0;
+092500000000         wnumnt  = 0;
+092600000000         wigper3 = 0;
+092700000000         wibsmd1 = 0;
+092800000000         wibsmd2 = 0;
+092900000000         wibsmd3 = 0;
+093000000000         wigper4 = 0;
+093100000000         wibsyd1 = 0;
+093200000000         wibsyd2 = 0;
+093300000000         wibsyd3 = 0;
+093400000000         wi@dcst = 0;
+093500000000
+093600000000         // Clear It Class totals
+093700000000         ci@hcst = 0;
+093800000000         ci@pcst = 0;
+093900000000         cigcurr = 0;
+094000000000         ci@ocst = 0;
+094100000000         cigper1 = 0;
+094200000000         ci@rcst = 0;
+094300000000         cigper2 = 0;
+094400000000         cnt     = 0;
+094500000000         cnumnt  = 0;
+094600000000         cigper3 = 0;
+094700000000         cibsmd1 = 0;
+094800000000         cibsmd2 = 0;
+094900000000         cibsmd3 = 0;
+095000000000         cigper4 = 0;
+095100000000         cibsyd1 = 0;
+095200000000         cibsyd2 = 0;
+095300000000         cibsyd3 = 0;
+095400000000         ci@dcst = 0;
+095500000000
+095600000000         // Clear It sub Class totals
+095700000000         si@hcst = 0;
+095800000000         si@pcst = 0;
+095900000000         sigcurr = 0;
+096000000000         si@ocst = 0;
+096100000000         sigper1 = 0;
+096200000000         si@rcst = 0;
+096300000000         sigper2 = 0;
+096400000000         snt     = 0;
+096500000000         snumnt  = 0;
+096600000000         sigper3 = 0;
+096700000000         sibsmd1 = 0;
+096800000000         sibsmd2 = 0;
+096900000000         sibsmd3 = 0;
+097000000000         sigper4 = 0;
+097100000000         sibsyd1 = 0;
+097200000000         sibsyd2 = 0;
+097300000000         sibsyd3 = 0;
+097400000000         si@dcst = 0;
+097500000000       // Perfromance end
+097600000000
+097700000000       //* read through the item balance file records with qty on hand
+097800000000       setll ib0key itba8r;
+097900000000       reade ib0pky itba8r;
+098000000000       dow not %eof;
+098100000000         // Test only !!
+098200000000         // if %trim(ibitno) <> 'A110' ;
+098300000000         //  reade ib0pky itba8r;
+098400000000         //  iter;
+098500000000         // endif;
+098600000000
+098700000000         // Clear aging fields
+098800000000         igcurr = 0;
+098900000000         igper1 = 0;
+099000000000         igper2 = 0;
+099100000000         igper3 = 0;
+099200000000         igper4 = 0;
+099300000000
+099400000000         // Populate fields
+099500000000         igitno = ibitno;
+099600000000         igwhid = ibwhid;
+099700000000         igcono = whscoo;
+099800000000         igitcl = ibitcl;
+099900000000         igitsc = ibitsc;
+100000000000         igavcs = ibavcs;
+100100000000         igohq1 = ibohq1;
+100200000000         igohq2 = ibohq2;
+100300000000         igohq3 = ibohq3;
+100400000000
+100500000000         chain ibitno itmstr;
+100600000000         if not %found;
+100700000000           reade ib0pky itba8r;
+100800000000           iter;
+100900000000         endif;
+101000000000
+101100000000         Okage  = 'N';
+101200000000         // On hand qty
+101300000000         Dstock = 'Y';
+101400000000         i@hcst = 0;
+101500000000         i@dcst = 0;
+101600000000         nt = 0;            // Turns
+101700000000         tst001 = ibohq1;
+101800000000         tst002 = ibohq2;
+101900000000         tst003 = ibohq3;
+102000000000         exsr $calqty;
+102100000000         // exclude negative on hand balances
+102200000000         if @qt > 0;
+102300000000           Okage  = 'Y';
+102400000000           //*********************************
+102500000000           // On Hand value for that item  - use cost from OE Options
+102600000000           select;
+102700000000             when csuse = 'A';
+102800000000       // #*b - Begin of change
+102900000000       //         i@hcst = @qt * ibavcs;
+103000000000      /end-free
+103100000000     C     ibavcs        mult      @qt           i@hcst
+103200000000      /free
+103300000000       // #*b - End of Change
+103400000000             when csuse = 'S';
+103500000000       // #*b - Begin of change
+103600000000       //         i@hcst = @qt * ibstcs;
+103700000000      /end-free
+103800000000     C     ibstcs        mult      @qt           i@hcst
+103900000000      /free
+104000000000       // #*b - End of Change
+104100000000             other;
+104200000000       // #*b - Begin of change
+104300000000       //         i@hcst = @qt * ibuscs;
+104400000000      /end-free
+104500000000     C     ibuscs        mult      @qt           i@hcst
+104600000000      /free
+104700000000       // #*b - End of Change
+104800000000           endsl;
+104900000000           //*********************************
+105000000000         endif;
+105100000000
+105200000000         igunm1 = imunm1;
+105300000000         igunm2 = imunm2;
+105400000000         igunm3 = imunm3;
+105500000000         igprum = imprum;
+105600000000
+105700000000         wqt = 0;
+105800000000         if pmode <> 'R';
+105900000000          if Okage  = 'Y';
+106000000000           exsr $agper;
+106100000000
+106200000000           //* If all qty fields are zero, but there is an on-hand balance
+106300000000           //* then it must be older then 360 days,
+106400000000           //* must be older then 360 days, so put it in the oldest bucket
+106500000000           if wqt(1) = 0 and
+106600000000             wqt(2) = 0 and
+106700000000             wqt(3) = 0 and
+106800000000             wqt(4) = 0 and
+106900000000             wqt(5) = 0;
+107000000000
+107100000000             qpsOnHand = ibohq1;
+107200000000             if imumc1 <> 0;
+107300000000               qpsOnHand = qpsOnHand + (ibohq2 / imumc1);
+107400000000             endif;
+107500000000             if imumc2 <> 0;
+107600000000               qpsOnHand = qpsOnHand + (ibohq3 / imumc2);
+107700000000             endif;
+107800000000
+107900000000             wqt(5) = qpsOnHand;
+108000000000           endif;
+108100000000
+108200000000         // Aging brakets values - use cost from OE Options
+108300000000         if imctwt <> 'Y';
+108400000000         select;
+108500000000           when csuse = 'A';
+108600000000             igcurr = wqt(1) * impumc * ibavcs;
+108700000000             igper1 = wqt(2) * impumc * ibavcs;
+108800000000             igper2 = wqt(3) * impumc * ibavcs;
+108900000000             igper3 = wqt(4) * impumc * ibavcs;
+109000000000             igper4 = wqt(5) * impumc * ibavcs;
+109100000000           when csuse = 'S';
+109200000000             igcurr = wqt(1) * impumc * ibstcs;
+109300000000             igper1 = wqt(2) * impumc * ibstcs;
+109400000000             igper2 = wqt(3) * impumc * ibstcs;
+109500000000             igper3 = wqt(4) * impumc * ibstcs;
+109600000000             igper4 = wqt(5) * impumc * ibstcs;
+109700000000           other;
+109800000000             igcurr = wqt(1) * impumc * ibuscs;
+109900000000             igper1 = wqt(2) * impumc * ibuscs;
+110000000000             igper2 = wqt(3) * impumc * ibuscs;
+110100000000             igper3 = wqt(4) * impumc * ibuscs;
+110200000000             igper4 = wqt(5) * impumc * ibuscs;
+110300000000         endsl;
+110400000000         else;
+110500000000         select;
+110600000000           when csuse = 'A';
+110700000000             igcurr = wqt(1) * uw(1)  * ibavcs;
+110800000000             igper1 = wqt(2) * uw(1)  * ibavcs;
+110900000000             igper2 = wqt(3) * uw(1)  * ibavcs;
+111000000000             igper3 = wqt(4) * uw(1)  * ibavcs;
+111100000000             igper4 = wqt(5) * uw(1)  * ibavcs;
+111200000000           when csuse = 'S';
+111300000000             igcurr = wqt(1) * uw(1)  * ibstcs;
+111400000000             igper1 = wqt(2) * uw(1)  * ibstcs;
+111500000000             igper2 = wqt(3) * uw(1)  * ibstcs;
+111600000000             igper3 = wqt(4) * uw(1)  * ibstcs;
+111700000000             igper4 = wqt(5) * uw(1)  * ibstcs;
+111800000000           other;
+111900000000             igcurr = wqt(1) * uw(1)  * ibuscs;
+112000000000             igper1 = wqt(2) * uw(1)  * ibuscs;
+112100000000             igper2 = wqt(3) * uw(1)  * ibuscs;
+112200000000             igper3 = wqt(4) * uw(1)  * ibuscs;
+112300000000             igper4 = wqt(5) * uw(1)  * ibuscs;
+112400000000           endsl;
+112500000000           endif;
+112600000000           // If any discrepancy
+112700000000           igperx = i@hcst - igcurr - igper1 - igper2 - igper3;
+112800000000           if %int(igper4) <> %int(igperx);
+112900000000            igper4 = i@hcst - igcurr - igper1 - igper2 - igper3;
+113000000000           endif;
+113100000000
+113200000000           // Dead stock?
+113300000000           if Dstock = 'Y';
+113400000000             i@dcst = i@hcst;
+113500000000           endif;
+113600000000
+113700000000          endif;      //  Okage =  'Y'
+113800000000         endif;      //  pmode <> 'R'
+113900000000
+114000000000         // Save current time and date
+114100000000         @now = %time();
+114200000000
+114300000000         // 2nd column fields
+114400000000         // Clear arrays
+114500000000         po     = 0;
+114600000000         ov     = 0;
+114700000000         rc     = 0;
+114800000000         i@pcst = 0;
+114900000000         i@ocst = 0;
+115000000000         i@rcst = 0;
+115100000000
+115200000000         // On P/O Qty
+115300000000         exsr $poval;
+115400000000         tst001 = po(1);
+115500000000         tst002 = po(2);
+115600000000         tst003 = po(3);
+115700000000         exsr $calqty;
+115800000000         // exclude negative on P/O qtys
+115900000000         if @qt > 0;
+116000000000           //*********************************
+116100000000           // On P/O value for that item  - use cost from OE Options
+116200000000           select;
+116300000000             when csuse = 'A';
+116400000000               i@pcst = @qt * ibavcs;
+116500000000             when csuse = 'S';
+116600000000               i@pcst = @qt * ibstcs;
+116700000000             other;
+116800000000               i@pcst = @qt * ibuscs;
+116900000000           endsl;
+117000000000           //*********************************
+117100000000         endif;
+117200000000
+117300000000         if pmode <> 'R';
+117400000000         // PO overdue qty
+117500000000         exsr $overd;
+117600000000         tst001 = ov(1);
+117700000000         tst002 = ov(2);
+117800000000         tst003 = ov(3);
+117900000000         exsr $calqty;
+118000000000         // exclude negative PO overdue qtys
+118100000000         if @qt > 0;
+118200000000           //*********************************
+118300000000           // Overdue P/O value for that item  - use cost from OE Options
+118400000000           select;
+118500000000             when csuse = 'A';
+118600000000               i@ocst = @qt * ibavcs;
+118700000000             when csuse = 'S';
+118800000000               i@ocst = @qt * ibstcs;
+118900000000             other;
+119000000000               i@ocst = @qt * ibuscs;
+119100000000           endsl;
+119200000000           //*********************************
+119300000000         endif;
+119400000000         endif;
+119500000000
+119600000000         // In Transit
+119700000000         exsr $intra;
+119800000000         tst001 = rc(1);
+119900000000         tst002 = rc(2);
+120000000000         tst003 = rc(3);
+120100000000         exsr $calqty;
+120200000000         // exclude negative In transit qtys
+120300000000         if @qt > 0;
+120400000000           //*********************************
+120500000000           // In Transit value for that item  - use cost from OE Options
+120600000000           select;
+120700000000             when csuse = 'A';
+120800000000               i@rcst = @qt * ibavcs;
+120900000000             when csuse = 'S';
+121000000000               i@rcst = @qt * ibstcs;
+121100000000             other;
+121200000000               i@rcst = @qt * ibuscs;
+121300000000           endsl;
+121400000000           //*********************************
+121500000000         endif;
+121600000000
+121700000000          nt = 0;
+121800000000          OKnt = 'N';
+121900000000          if pmode <> 'R';
+122000000000           exsr $turns;
+122100000000          endif;
+122200000000
+122300000000         // Populate/update exrdt records Co, whse, Item class, subclass
+122400000000         // Performance exsr $upone;
+122500000000       // Perfromance beg
+122600000000         // Accum Co/wh totals
+122700000000         wi@hcst = wi@hcst + i@hcst;
+122800000000         wi@pcst = wi@pcst + i@pcst;
+122900000000         wigcurr = wigcurr + igcurr;
+123000000000         wi@ocst = wi@ocst + i@ocst;
+123100000000         wigper1 = wigper1 + igper1;
+123200000000         wi@rcst = wi@rcst + i@rcst;
+123300000000         wigper2 = wigper2 + igper2;
+123400000000           if Oknt  <> 'N';
+123500000000         wnt     = wnt     + nt    ;
+123600000000         cnt     = cnt     + nt    ;
+123700000000         snt     = cnt     + nt    ;
+123800000000         wnumnt  = wnumnt  + 1     ;
+123900000000         cnumnt  = cnumnt  + 1     ;
+124000000000         snumnt  = cnumnt  + 1     ;
+124100000000          endif;
+124200000000         wigper3 = wigper3 + igper3;
+124300000000         wibsmd1 = wibsmd1 + ibsmd1;
+124400000000         wibsmd2 = wibsmd2 + ibsmd2;
+124500000000         wibsmd3 = wibsmd3 + ibsmd3;
+124600000000         wigper4 = wigper4 + igper4;
+124700000000         wibsyd1 = wibsyd1 + ibsyd1;
+124800000000         wibsyd2 = wibsyd2 + ibsyd2;
+124900000000         wibsyd3 = wibsyd3 + ibsyd3;
+125000000000         wi@dcst = wi@dcst + i@dcst;
+125100000000
+125200000000         // Accum It Class totals
+125300000000         ci@hcst = ci@hcst + i@hcst;
+125400000000         ci@pcst = ci@pcst + i@pcst;
+125500000000         cigcurr = cigcurr + igcurr;
+125600000000         ci@ocst = ci@ocst + i@ocst;
+125700000000         cigper1 = cigper1 + igper1;
+125800000000         ci@rcst = ci@rcst + i@rcst;
+125900000000         cigper2 = cigper2 + igper2;
+126000000000         //cnt     = cnt     + nt    ;
+126100000000         //cnumnt  = cnumnt  + 1     ;
+126200000000         cigper3 = cigper3 + igper3;
+126300000000         cibsmd1 = cibsmd1 + ibsmd1;
+126400000000         cibsmd2 = cibsmd2 + ibsmd2;
+126500000000         cibsmd3 = cibsmd3 + ibsmd3;
+126600000000         cigper4 = cigper4 + igper4;
+126700000000         cibsyd1 = cibsyd1 + ibsyd1;
+126800000000         cibsyd2 = cibsyd2 + ibsyd2;
+126900000000         cibsyd3 = cibsyd3 + ibsyd3;
+127000000000         ci@dcst = ci@dcst + i@dcst;
+127100000000
+127200000000         // Accum It sub Class totals
+127300000000         si@hcst = si@hcst + i@hcst;
+127400000000         si@pcst = si@pcst + i@pcst;
+127500000000         sigcurr = sigcurr + igcurr;
+127600000000         si@ocst = si@ocst + i@ocst;
+127700000000         sigper1 = sigper1 + igper1;
+127800000000         si@rcst = si@rcst + i@rcst;
+127900000000         sigper2 = sigper2 + igper2;
+128000000000         //snt     = snt     + nt    ;
+128100000000         //snumnt  = snumnt  + 1     ;
+128200000000         sigper3 = sigper3 + igper3;
+128300000000         sibsmd1 = sibsmd1 + ibsmd1;
+128400000000         sibsmd2 = sibsmd2 + ibsmd2;
+128500000000         sibsmd3 = sibsmd3 + ibsmd3;
+128600000000         sigper4 = sigper4 + igper4;
+128700000000         sibsyd1 = sibsyd1 + ibsyd1;
+128800000000         sibsyd2 = sibsyd2 + ibsyd2;
+128900000000         sibsyd3 = sibsyd3 + ibsyd3;
+129000000000         si@dcst = si@dcst + i@dcst;
+129100000000
+129200000000         firstc = 'N';
+129300000000         svitcl = ibitcl;
+129400000000         svitsc = ibitsc;
+129500000000       // Perfromance end
+129600000000         //
+129700000000         reade ib0pky itba8r;
+129800000000       // Perfromance end
+129900000000        // On change of Class   - write totals in exrdt
+130000000000        if svitcl <> ibitcl and
+130100000000            svitcl <> *blanks;
+130200000000           exsr $upCls;
+130300000000           // Clear Class Totals
+130400000000           ci@hcst = 0;
+130500000000           ci@pcst = 0;
+130600000000           cigcurr = 0;
+130700000000           ci@ocst = 0;
+130800000000           cigper1 = 0;
+130900000000           ci@rcst = 0;
+131000000000           cigper2 = 0;
+131100000000           cnt     = 0;
+131200000000           cnumnt  = 0;
+131300000000           cigper3 = 0;
+131400000000           cibsmd1 = 0;
+131500000000           cibsmd2 = 0;
+131600000000           cibsmd3 = 0;
+131700000000           cigper4 = 0;
+131800000000           cibsyd1 = 0;
+131900000000           cibsyd2 = 0;
+132000000000           cibsyd3 = 0;
+132100000000           ci@dcst = 0;
+132200000000           //
+132300000000           // Total for last subclass in this class
+132400000000           exsr $upSCl;
+132500000000           // Clear Class Totals
+132600000000           si@hcst = 0;
+132700000000           si@pcst = 0;
+132800000000           sigcurr = 0;
+132900000000           si@ocst = 0;
+133000000000           sigper1 = 0;
+133100000000           si@rcst = 0;
+133200000000           sigper2 = 0;
+133300000000           snt     = 0;
+133400000000           snumnt  = 0;
+133500000000           sigper3 = 0;
+133600000000           sibsmd1 = 0;
+133700000000           sibsmd2 = 0;
+133800000000           sibsmd3 = 0;
+133900000000           sigper4 = 0;
+134000000000           sibsyd1 = 0;
+134100000000           sibsyd2 = 0;
+134200000000           sibsyd3 = 0;
+134300000000           si@dcst = 0;
+134400000000           //
+134500000000        endif;
+134600000000        // On change of Sub Class   - write totals in exrdt
+134700000000        if svitsc <> ibitsc and
+134800000000           svitcl = ibitcl and            // same Class
+134900000000            svitsc <> *blanks;
+135000000000           exsr $upSCl;
+135100000000           // Clear Class Totals
+135200000000           si@hcst = 0;
+135300000000           si@pcst = 0;
+135400000000           sigcurr = 0;
+135500000000           si@ocst = 0;
+135600000000           sigper1 = 0;
+135700000000           si@rcst = 0;
+135800000000           sigper2 = 0;
+135900000000           snt     = 0;
+136000000000           snumnt  = 0;
+136100000000           sigper3 = 0;
+136200000000           sibsmd1 = 0;
+136300000000           sibsmd2 = 0;
+136400000000           sibsmd3 = 0;
+136500000000           sigper4 = 0;
+136600000000           sibsyd1 = 0;
+136700000000           sibsyd2 = 0;
+136800000000           sibsyd3 = 0;
+136900000000           si@dcst = 0;
+137000000000           //
+137100000000        endif;
+137200000000       // Perfromance end
+137300000000
+137400000000       enddo;
+137500000000       // Perfromance Beg
+137600000000
+137700000000         //  Load AR Data for current company, whse
+137800000000         exsr $upCWh;
+137900000000
+138000000000         // For the last Class - write totals in exrdt
+138100000000         if firstc <> 'Y' and     // At least one record read
+138200000000            svitcl <> *blanks;
+138300000000           exsr $upCls;
+138400000000           // Clear Class Totals
+138500000000           ci@hcst = 0;
+138600000000           ci@pcst = 0;
+138700000000           cigcurr = 0;
+138800000000           ci@ocst = 0;
+138900000000           cigper1 = 0;
+139000000000           ci@rcst = 0;
+139100000000           cigper2 = 0;
+139200000000           cnt     = 0;
+139300000000           cigper3 = 0;
+139400000000           cibsmd1 = 0;
+139500000000           cibsmd2 = 0;
+139600000000           cibsmd3 = 0;
+139700000000           cigper4 = 0;
+139800000000           cibsyd1 = 0;
+139900000000           cibsyd2 = 0;
+140000000000           cibsyd3 = 0;
+140100000000           ci@dcst = 0;
+140200000000           //
+140300000000           // Total for last subclass in this class
+140400000000           exsr $upSCl;
+140500000000           // Clear Class Totals
+140600000000           si@hcst = 0;
+140700000000           si@pcst = 0;
+140800000000           sigcurr = 0;
+140900000000           si@ocst = 0;
+141000000000           sigper1 = 0;
+141100000000           si@rcst = 0;
+141200000000           sigper2 = 0;
+141300000000           snt     = 0;
+141400000000           sigper3 = 0;
+141500000000           sibsmd1 = 0;
+141600000000           sibsmd2 = 0;
+141700000000           sibsmd3 = 0;
+141800000000           sigper4 = 0;
+141900000000           sibsyd1 = 0;
+142000000000           sibsyd2 = 0;
+142100000000           sibsyd3 = 0;
+142200000000           si@dcst = 0;
+142300000000           //
+142400000000         endif;
+142500000000
+142600000000       // Perfromance end
+142700000000
+142800000000       endsr;
+142900000000       //****************************************************************
+143000000000       begsr $exrhd;
+143100000000       //****************************************************************
+143200000000
+143300000000       // Check if header exist and if nobody is running update
+143400000000       if wsid = *blanks;
+143500000000         wsid = '$$';
+143600000000       endif;
+143700000000       chain a$name exrhdr;
+143800000000       if not %found;
+143900000000         // Creaste record, assign fields
+144000000000         clear exrhdr;
+144100000000         xhname = 'IA';
+144200000000         xhdesc = 'IA Executive Summary';
+144300000000         xhtitl = '|--------' +
+144400000000                  'Inventory Accounting/Purchasing' +
+144500000000                  '---------|';
+144600000000         xhcl01 =  ' ';
+144700000000         xhcw01 =  14;
+144800000000         xhct01 = 'C';
+144900000000         xhcf01 = ' ';
+145000000000         xhcl02 = ' ';
+145100000000                // 1234567890123456789012
+145200000000         xhcw02 = 12;
+145300000000         xhct02 = 'I';
+145400000000         xhcf02 = ' ';
+145500000000         xhcl03 = ' ';
+145600000000         xhcw03 = 12;
+145700000000         xhct03 = 'I';
+145800000000         xhcf03 = ' ';
+145900000000         xhcl04 = ' ';
+146000000000         xhcw04 = 12;
+146100000000         xhct04 = 'I';
+146200000000         xhcf04 = ' ';
+146300000000         xhkey1 = '      Company?';
+146400000000         xhkey2 = '      Warehouse?';
+146500000000                // 12345678901234567890
+146600000000         xhkey3 = '      Item Class?';
+146700000000         xhkey4 = '      Item Subclass?';
+146800000000         xhprgd = 120;
+146900000000         xhws02 = wsid;
+147000000000         xhlspr = pCall;
+147100000000      /end-free
+147200000000     C                   move      p1cono        xhlsco
+147300000000      /free
+147400000000         xhlsmd = pMode;
+147500000000         xhcrdt = a$date;
+147600000000         xhcrtm = %time();
+147700000000         xhlsdt = a$date;
+147800000000         xhlstm = %time();
+147900000000         write exrhdr;
+148000000000         OKrun = 'Y';
+148100000000         prgday = xhprgd;
+148200000000         leavesr;
+148300000000       else;       // record exist already
+148400000000         prgday = xhprgd;
+148500000000         LCall  = xhlspr;              // Last Call process saved
+148600000000         if xhws02 = *blanks or
+148700000000           pCall  = 'DAYEND';
+148800000000           OKrun = 'Y';
+148900000000           xhws02 = wsid;
+149000000000           xhlspr = pCall;
+149100000000      /end-free
+149200000000     C                   move      p1cono        xhlsco
+149300000000      /free
+149400000000           xhlsmd = pMode;
+149500000000           xhlsdt = a$date;
+149600000000           xhlstm = %time();
+149700000000           update exrhdr;
+149800000000           leavesr;
+149900000000         endif;
+150000000000
+150100000000         //  WS ID not blank - look at last date/time
+150200000000         if xhlsdt < a$date;
+150300000000           OKrun = 'Y';
+150400000000           xhws02 = wsid;
+150500000000           xhlspr = pCall;
+150600000000      /end-free
+150700000000     C                   move      p1cono        xhlsco
+150800000000      /free
+150900000000           xhlsmd = pMode;
+151000000000           xhlsdt = a$date;
+151100000000           xhlstm = %time();
+151200000000         else;
+151300000000           if %time() >= xhlstm + %minutes(50);   // More than 50 minutes
+151400000000             OKrun = 'Y';
+151500000000             xhws02 = wsid;
+151600000000             xhlspr = pCall;
+151700000000      /end-free
+151800000000     C                   move      p1cono        xhlsco
+151900000000      /free
+152000000000             xhlsmd = pMode;
+152100000000             xhlsdt = a$date;
+152200000000             xhlstm = %time();
+152300000000           endif;
+152400000000         endif;
+152500000000         update exrhdr;
+152600000000       endif;
+152700000000
+152800000000       endsr;
+152900000000       //****************************************************************
+153000000000       begsr $clrtd;
+153100000000       //****************************************************************
+153200000000
+153300000000       // Populate/update exrdt records
+153400000000       a$name = 'IA';
+153500000000       if p1cono = *blanks;
+153600000000         setll xd0key exrdtr;
+153700000000         reade xd0pky exrdtr;
+153800000000         dow not %eof;
+153900000000           delete exrdtr;
+154000000000         reade xd0pky exrdtr;
+154100000000         enddo;
+154200000000
+154300000000       else;  // p1cono <> *blanks
+154400000000      /end-free
+154500000000     C                   move      p1cono        cccono
+154600000000      /free
+154700000000         a$key1 = %char(cccono);
+154800000000         setll xd0key exrdtr;
+154900000000         reade xd0pkc exrdtr;
+155000000000         dow not %eof;
+155100000000           delete exrdtr;
+155200000000         reade xd0pkc exrdtr;
+155300000000         enddo;
+155400000000       endif;
+155500000000
+155600000000       endsr;
+155700000000       //****************************************************************
+155800000000       begsr $prgdt;
+155900000000       //****************************************************************
+156000000000
+156100000000       // Purge records older than Purge days
+156200000000       setll xd0key exrdtr;
+156300000000       readpe xh0key exrdtr;
+156400000000       dow not %eof;
+156500000000         delete exrdtr;
+156600000000       readpe xh0key exrdtr;
+156700000000       enddo;
+156800000000
+156900000000       endsr;
+157000000000       //****************************************************************
+157100000000       begsr $upone;
+157200000000       //***********************************************************
+157300000000         //
+157400000000         a$seq9 = 1;
+157500000000         wwac01 = 'Inv Value';
+157600000000         wwac03 = 'On PO';
+157700000000         wwnc02 = i@hcst;
+157800000000         wwnc04 = i@pcst;
+157900000000         exsr $oekey;
+158000000000         //
+158100000000         if pmode <> 'R';
+158200000000         a$seq9 = 2;
+158300000000         wwac01 = 'Current';
+158400000000         wwac03 = 'Overdue PO';
+158500000000         wwnc02 = igcurr;
+158600000000         wwnc04 = i@ocst;
+158700000000         exsr $oekey;
+158800000000         endif;
+158900000000         //
+159000000000         a$seq9 = 3;
+159100000000         wwac01 = 'Over 30';
+159200000000         wwac03 = 'In Transit';
+159300000000         wwnc02 = igper1;
+159400000000         wwnc04 = i@rcst;
+159500000000         exsr $oekey;
+159600000000         //
+159700000000         if pmode = 'R';
+159800000000           leavesr;
+159900000000         endif;
+160000000000         //
+160100000000         a$seq9 = 4;
+160200000000         wwac01 = 'Over 90';
+160300000000         wwac03 = 'Inv Turns';
+160400000000         wwnc02 = igper2;
+160500000000         wwnc04 = nt;
+160600000000         exsr $oekey;
+160700000000         //
+160800000000         a$seq9 = 5;
+160900000000         wwac01 = 'Over 180';
+161000000000         wwac03 = 'Stock Outs M-T-D';
+161100000000         wwnc02 = igper3;
+161200000000         wwnc04 = ibsmd1 + ibsmd2 + ibsmd3;
+161300000000         exsr $oekey;
+161400000000         //
+161500000000         a$seq9 = 6;
+161600000000         wwac01 = 'Over 360';
+161700000000         wwac03 = 'Stock Outs Y-T-D';
+161800000000         wwnc02 = igper4;
+161900000000         wwnc04 = ibsyd1 + ibsyd2 + ibsyd3;
+162000000000         exsr $oekey;
+162100000000         //
+162200000000         a$seq9 = 7;
+162300000000         wwac01 = 'Dead Stock';
+162400000000         wwac03 = ' ';
+162500000000         wwnc02 = i@dcst;
+162600000000         wwnc04 = 0;
+162700000000         exsr $oekey;
+162800000000
+162900000000       endsr;
+163000000000       //***********************************************************
+163100000000       begsr $oekey;
+163200000000       //***********************************************************
+163300000000       // update records for co, whse, source, asles Rep combinations
+163400000000       // 1) Co
+163500000000       a$key1 = %char(a$cono);
+163600000000       a$key2 = ' ';
+163700000000       a$key3 = ' ';
+163800000000       a$key4 = ' ';
+163900000000       a$key5 = ' ';
+164000000000       a$keu1 = ' ';
+164100000000       exsr $exrdt;
+164200000000
+164300000000       // 2) Co + wh
+164400000000       if a$whid <> *blanks;
+164500000000         a$key1 = %char(a$cono);
+164600000000         a$key2 = a$whid;
+164700000000         a$key3 = ' ';
+164800000000         a$key4 = ' ';
+164900000000         a$key5 = ' ';
+165000000000         a$keu1 = ' ';
+165100000000         exsr $exrdt;
+165200000000       endif;
+165300000000
+165400000000       // 3) co + Item Class
+165500000000       if imitcl <> *blanks;
+165600000000         a$key1 = %char(a$cono);
+165700000000         a$key2 = ' ';
+165800000000         a$key3 = imitcl;
+165900000000         a$key4 = ' ';
+166000000000         a$key5 = ' ';
+166100000000         a$keu1 = ' ';
+166200000000         exsr $exrdt;
+166300000000       endif;
+166400000000
+166500000000       // 4) co + wh + Item Class
+166600000000       if imitcl <> *blanks and
+166700000000          a$whid <> *blanks;
+166800000000         a$key1 = %char(a$cono);
+166900000000         a$key2 = a$whid;
+167000000000         a$key3 = imitcl;
+167100000000         a$key4 = ' ';
+167200000000         a$key5 = ' ';
+167300000000         a$keu1 = ' ';
+167400000000         exsr $exrdt;
+167500000000       endif;
+167600000000
+167700000000       // 5) Co + Item Class + Subclass
+167800000000       if imitcl <> *blanks and
+167900000000          imitsc <> *blanks;
+168000000000         a$key1 = %char(a$cono);
+168100000000         a$key2 = ' ';
+168200000000         a$key3 = imitcl;
+168300000000         a$key4 = imitsc;
+168400000000         a$key5 = ' ';
+168500000000         a$keu1 = ' ';
+168600000000         exsr $exrdt;
+168700000000       endif;
+168800000000
+168900000000       // 6) co + wh + Item Class + Subclass
+169000000000       if imitcl <> *blanks and
+169100000000          imitsc <> *blanks and
+169200000000          a$whid <> *blanks;
+169300000000         a$key1 = %char(a$cono);
+169400000000         a$key2 = a$whid;
+169500000000         a$key3 = imitcl;
+169600000000         a$key4 = imitsc;
+169700000000         a$key5 = ' ';
+169800000000         a$keu1 = ' ';
+169900000000         exsr $exrdt;
+170000000000       endif;
+170100000000
+170200000000       endsr;
+170300000000       //****************************************************************
+170400000000       begsr $exrdt;
+170500000000       //****************************************************************
+170600000000
+170700000000       // Populate/update exrdt records
+170800000000       a$name = 'IA';
+170900000000       // a$key1 = %trim(%char(igcono));
+171000000000       // a$key2 = igwhid;
+171100000000       // a$key3 = igitcl;
+171200000000       // a$key4 = igitsc;
+171300000000       // a$key5 = ' ';
+171400000000
+171500000000       // Add/Update exrdt record
+171600000000       chain xd0key exrdtr;
+171700000000       *in90 = not %found;
+171800000000       if *in90 = *on;
+171900000000         clear exrdtr;
+172000000000         xdname = a$name;
+172100000000         xdcrdt = a$date;
+172200000000         xdcrtm = %time();
+172300000000         xdkey1 = a$key1;
+172400000000         xdkey2 = a$key2;
+172500000000         xdkey3 = a$key3;
+172600000000         xdkey4 = a$key4;
+172700000000         xdkey5 = a$key5;
+172800000000         xdkeu1 = a$keu1;
+172900000000
+173000000000         xdcrdt = a$date;
+173100000000         xdcrtm = %time();
+173200000000         xdsq09 = a$seq9;
+173300000000         xdac01 = wwac01;        // First alpha column
+173400000000         xdac03 = wwac03;        // 2nd   alpha column
+173500000000
+173600000000       endif;
+173700000000
+173800000000       if pmode = 'R';
+173900000000         // Refresh mode
+174000000000         if a$seq9 = 1;
+174100000000           xdnc05 = xdnc05 + wwnc02;   // on Hand
+174200000000           xdnc06 = xdnc06 + wwnc04;   // on P/O
+174300000000         endif;
+174400000000         if a$seq9 = 3;
+174500000000           xdnc06 = xdnc06 + wwnc04;   // In Transit
+174600000000         endif;
+174700000000       else;
+174800000000         // Load mode
+174900000000         xdnc02 = xdnc02 + wwnc02;
+175000000000         if a$seq9 <> 4;
+175100000000           xdnc04 = xdnc04 + wwnc04;
+175200000000         else;
+175300000000           // for inv Turns - calculated avg.
+175400000000           // perf if Oknt  <> 'N';
+175500000000           if ( xdnc05 + wwnc05 ) > 0;
+175600000000             // xdnc04 = ( ( xdnc04 * xdnc05 ) + wwnc04 ) / ( xdnc05 + 1 );
+175700000000             // xdnc05 = xdnc05 + 1;
+175800000000          xdnc04 = ( ( xdnc04 * xdnc05 ) + wwnc04 ) / ( xdnc05 + wwnc05 );
+175900000000             xdnc05 = wwnc05;
+176000000000           endif;
+176100000000         endif;
+176200000000       endif;
+176300000000
+176400000000       if *in90 = *on;
+176500000000         write exrdtr;
+176600000000       else;
+176700000000         update exrdtr;
+176800000000       endif;
+176900000000
+177000000000       endsr;
+177100000000       // Perfromance beg
+177200000000       //****************************************************************
+177300000000       begsr $upCls;
+177400000000       //***********************************************************
+177500000000         //
+177600000000         a$seq9 = 1;
+177700000000         wwac01 = 'Inv Value';
+177800000000         wwac03 = 'On PO';
+177900000000         wwnc02 = ci@hcst;
+178000000000         wwnc04 = ci@pcst;
+178100000000         exsr $oekeC;
+178200000000         //
+178300000000         if pmode <> 'R';
+178400000000         a$seq9 = 2;
+178500000000         wwac01 = 'Current';
+178600000000         wwac03 = 'Overdue PO';
+178700000000         wwnc02 = cigcurr;
+178800000000         wwnc04 = ci@ocst;
+178900000000         exsr $oekeC;
+179000000000         endif;
+179100000000         //
+179200000000         a$seq9 = 3;
+179300000000         wwac01 = 'Over 30';
+179400000000         wwac03 = 'In Transit';
+179500000000         wwnc02 = cigper1;
+179600000000         wwnc04 = ci@rcst;
+179700000000         exsr $oekeC;
+179800000000         //
+179900000000         if pmode = 'R';
+180000000000           leavesr;
+180100000000         endif;
+180200000000         //
+180300000000         a$seq9 = 4;
+180400000000         wwac01 = 'Over 90';
+180500000000         wwac03 = 'Inv Turns';
+180600000000         wwnc02 = cigper2;
+180700000000         wwnc04 = cnt ;
+180800000000         wwnc05 = cnumnt;
+180900000000         exsr $oekeC;
+181000000000         //
+181100000000         a$seq9 = 5;
+181200000000         wwac01 = 'Over 180';
+181300000000         wwac03 = 'Stock Outs M-T-D';
+181400000000         wwnc02 = cigper3;
+181500000000         wwnc04 = cibsmd1 + cibsmd2 + cibsmd3;
+181600000000         exsr $oekeC;
+181700000000         //
+181800000000         a$seq9 = 6;
+181900000000         wwac01 = 'Over 360';
+182000000000         wwac03 = 'Stock Outs Y-T-D';
+182100000000         wwnc02 = cigper4;
+182200000000         wwnc04 = cibsyd1 + cibsyd2 + cibsyd3;
+182300000000         exsr $oekeC;
+182400000000         //
+182500000000         a$seq9 = 7;
+182600000000         wwac01 = 'Dead Stock';
+182700000000         wwac03 = ' ';
+182800000000         wwnc02 = ci@dcst;
+182900000000         wwnc04 = 0;
+183000000000         exsr $oekeC;
+183100000000
+183200000000       endsr;
+183300000000       //***********************************************************
+183400000000       begsr $oekeC;
+183500000000       //***********************************************************
+183600000000
+183700000000       // 1) co + Item Class
+183800000000       if svitcl <> *blanks;
+183900000000         a$key1 = %char(a$cono);
+184000000000         a$key2 = ' ';
+184100000000         a$key3 = svitcl;
+184200000000         a$key4 = ' ';
+184300000000         a$key5 = ' ';
+184400000000         a$keu1 = ' ';
+184500000000         exsr $exrdt;
+184600000000       endif;
+184700000000
+184800000000       // 2) co + wh + Item Class
+184900000000       if svitcl <> *blanks and
+185000000000          a$whid <> *blanks;
+185100000000         a$key1 = %char(a$cono);
+185200000000         a$key2 = a$whid;
+185300000000         a$key3 = svitcl;
+185400000000         a$key4 = ' ';
+185500000000         a$key5 = ' ';
+185600000000         a$keu1 = ' ';
+185700000000         exsr $exrdt;
+185800000000       endif;
+185900000000
+186000000000       endsr;
+186100000000       //****************************************************************
+186200000000       begsr $upSCl;
+186300000000       //***********************************************************
+186400000000         //
+186500000000         a$seq9 = 1;
+186600000000         wwac01 = 'Inv Value';
+186700000000         wwac03 = 'On PO';
+186800000000         wwnc02 = si@hcst;
+186900000000         wwnc04 = si@pcst;
+187000000000         exsr $oekeS;
+187100000000         //
+187200000000         if pmode <> 'R';
+187300000000         a$seq9 = 2;
+187400000000         wwac01 = 'Current';
+187500000000         wwac03 = 'Overdue PO';
+187600000000         wwnc02 = sigcurr;
+187700000000         wwnc04 = si@ocst;
+187800000000         exsr $oekeS;
+187900000000         endif;
+188000000000         //
+188100000000         a$seq9 = 3;
+188200000000         wwac01 = 'Over 30';
+188300000000         wwac03 = 'In Transit';
+188400000000         wwnc02 = sigper1;
+188500000000         wwnc04 = si@rcst;
+188600000000         exsr $oekeS;
+188700000000         //
+188800000000         if pmode = 'R';
+188900000000           leavesr;
+189000000000         endif;
+189100000000         //
+189200000000         a$seq9 = 4;
+189300000000         wwac01 = 'Over 90';
+189400000000         wwac03 = 'Inv Turns';
+189500000000         wwnc02 = sigper2;
+189600000000         wwnc04 = snt;
+189700000000         wwnc05 = snumnt;
+189800000000         exsr $oekeS;
+189900000000         //
+190000000000         a$seq9 = 5;
+190100000000         wwac01 = 'Over 180';
+190200000000         wwac03 = 'Stock Outs M-T-D';
+190300000000         wwnc02 = sigper3;
+190400000000         wwnc04 = sibsmd1 + sibsmd2 + sibsmd3;
+190500000000         exsr $oekeS;
+190600000000         //
+190700000000         a$seq9 = 6;
+190800000000         wwac01 = 'Over 360';
+190900000000         wwac03 = 'Stock Outs Y-T-D';
+191000000000         wwnc02 = sigper4;
+191100000000         wwnc04 = sibsyd1 + sibsyd2 + sibsyd3;
+191200000000         exsr $oekeS;
+191300000000         //
+191400000000         a$seq9 = 7;
+191500000000         wwac01 = 'Dead Stock';
+191600000000         wwac03 = ' ';
+191700000000         wwnc02 = si@dcst;
+191800000000         wwnc04 = 0;
+191900000000         exsr $oekeS;
+192000000000
+192100000000       endsr;
+192200000000       //***********************************************************
+192300000000       begsr $oekeS;
+192400000000       //***********************************************************
+192500000000
+192600000000       // 5) Co + Item Class + Subclass
+192700000000       if svitcl <> *blanks and
+192800000000          svitsc <> *blanks;
+192900000000         a$key1 = %char(a$cono);
+193000000000         a$key2 = ' ';
+193100000000         a$key3 = svitcl;
+193200000000         a$key4 = svitsc;
+193300000000         a$key5 = ' ';
+193400000000         a$keu1 = ' ';
+193500000000         exsr $exrdt;
+193600000000       endif;
+193700000000
+193800000000       // 6) co + wh + Item Class + Subclass
+193900000000       if svitcl <> *blanks and
+194000000000          svitsc <> *blanks and
+194100000000          a$whid <> *blanks;
+194200000000         a$key1 = %char(a$cono);
+194300000000         a$key2 = a$whid;
+194400000000         a$key3 = svitcl;
+194500000000         a$key4 = svitsc;
+194600000000         a$key5 = ' ';
+194700000000         a$keu1 = ' ';
+194800000000         exsr $exrdt;
+194900000000       endif;
+195000000000
+195100000000       endsr;
+195200000000       //****************************************************************
+195300000000       begsr $upCwh;
+195400000000       //***********************************************************
+195500000000         //
+195600000000         a$seq9 = 1;
+195700000000         wwac01 = 'Inv Value';
+195800000000         wwac03 = 'On PO';
+195900000000         wwnc02 = wi@hcst;
+196000000000         wwnc04 = wi@pcst;
+196100000000         exsr $oekeW;
+196200000000         //
+196300000000         if pmode <> 'R';
+196400000000         a$seq9 = 2;
+196500000000         wwac01 = 'Current';
+196600000000         wwac03 = 'Overdue PO';
+196700000000         wwnc02 = wigcurr;
+196800000000         wwnc04 = wi@ocst;
+196900000000         exsr $oekeW;
+197000000000         endif;
+197100000000         //
+197200000000         a$seq9 = 3;
+197300000000         wwac01 = 'Over 30';
+197400000000         wwac03 = 'In Transit';
+197500000000         wwnc02 = wigper1;
+197600000000         wwnc04 = wi@rcst;
+197700000000         exsr $oekeW;
+197800000000         //
+197900000000         if pmode = 'R';
+198000000000           leavesr;
+198100000000         endif;
+198200000000         //
+198300000000         a$seq9 = 4;
+198400000000         wwac01 = 'Over 90';
+198500000000         wwac03 = 'Inv Turns';
+198600000000         wwnc02 = wigper2;
+198700000000         wwnc04 = wnt;
+198800000000         wwnc05 = wnumnt;
+198900000000         exsr $oekeW;
+199000000000         //
+199100000000         a$seq9 = 5;
+199200000000         wwac01 = 'Over 180';
+199300000000         wwac03 = 'Stock Outs M-T-D';
+199400000000         wwnc02 = wigper3;
+199500000000         wwnc04 = wibsmd1 + wibsmd2 + wibsmd3;
+199600000000         exsr $oekeW;
+199700000000         //
+199800000000         a$seq9 = 6;
+199900000000         wwac01 = 'Over 360';
+200000000000         wwac03 = 'Stock Outs Y-T-D';
+200100000000         wwnc02 = wigper4;
+200200000000         wwnc04 = wibsyd1 + wibsyd2 + wibsyd3;
+200300000000         exsr $oekeW;
+200400000000         //
+200500000000         a$seq9 = 7;
+200600000000         wwac01 = 'Dead Stock';
+200700000000         wwac03 = ' ';
+200800000000         wwnc02 = wi@dcst;
+200900000000         wwnc04 = 0;
+201000000000         exsr $oekeW;
+201100000000
+201200000000       endsr;
+201300000000       //***********************************************************
+201400000000       begsr $oekeW;
+201500000000       //***********************************************************
+201600000000       // update records for co, whse, source, asles Rep combinations
+201700000000       // 1) Co
+201800000000       a$key1 = %char(a$cono);
+201900000000       a$key2 = ' ';
+202000000000       a$key3 = ' ';
+202100000000       a$key4 = ' ';
+202200000000       a$key5 = ' ';
+202300000000       a$keu1 = ' ';
+202400000000       exsr $exrdt;
+202500000000
+202600000000       // 2) Co + wh
+202700000000       if a$whid <> *blanks;
+202800000000         a$key1 = %char(a$cono);
+202900000000         a$key2 = a$whid;
+203000000000         a$key3 = ' ';
+203100000000         a$key4 = ' ';
+203200000000         a$key5 = ' ';
+203300000000         a$keu1 = ' ';
+203400000000         exsr $exrdt;
+203500000000       endif;
+203600000000
+203700000000       endsr;
+203800000000       //****************************************************************
+203900000000       // Perfromance end
+204000000000       //****************************************************************
+204100000000       begsr $agper;
+204200000000       //****************************************************************
+204300000000       //
+204400000000
+204500000000       wqt = 0;
+204600000000       Dstock = 'Y';
+204700000000
+204800000000       //* find first transaction, greater than 360 days and
+204900000000       //* use that for the oldest quantity
+205000000000       setll ia0key iahstr;
+205100000000       reade ia0pky iahstr;
+205200000000       if not %eof;
+205300000000         wqt(5) = iaqolt;
+205400000000         //* convert transaction quantity to unit of measure one
+205500000000         if imumc1 > 0;                                      // #*a
+205600000000           if iaunms = imunm2;
+205700000000             wqt(5) = iaqolt / imumc1;
+205800000000           endif;
+205900000000         endif;                                              // #*a
+206000000000         if imumc2 > 0;                                      // #*a
+206100000000           if iaunms = imunm3;
+206200000000             wqt(5) = iaqolt / imumc2;
+206300000000           endif;
+206400000000         endif;                                              // #*a
+206500000000       endif;
+206600000000
+206700000000       //* read through iahst again
+206800000000       setgt ia0key iahstr;
+206900000000       readpe ia0pky iahstr;
+207000000000       dow not %eof;
+207100000000         // calculate number of days difference
+207200000000         t$dudt = iatrdt;
+207300000000         exsr $days;
+207400000000         // if @dylat > 360 or       Started from oldest movig up anyway
+207500000000         // Skip if TR codes are ...
+207600000000         if iatrcd = 'M' or
+207700000000            iatrcd = 'C' or
+207800000000            iatrcd = 'F' or
+207900000000            iatrcd = 'G' or
+208000000000         // iatrcd = 'O' or                                  // #*e-del
+208100000000            iatrcd = 'S' or
+208200000000            iatrcd = 'U' or
+208300000000            iatrcd = 'L' ;
+208400000000           readpe ia0pky iahstr;
+208500000000           iter;
+208600000000         endif;
+208700000000
+208800000000         Dstock = 'N';
+208900000000
+209000000000         wTranQty = iatrqt;
+209100000000                                                              // #*e
+209200000000         if iatrcd = 'Y';                                     // #*e
+209300000000           wTranqty = wTranqty - LstRecOH;                    // #*e
+209400000000         endif;                                               // #*e
+209500000000
+209600000000         //* Skip 'R' types if the receipt is update inventory 'N' or it was
+209700000000         //* or it was an immediate return
+209800000000           if iatrcd = 'R';
+209900000000             exsr $getrcp;
+210000000000           endif;
+210100000000
+210200000000         //* convert transaction quantity to unit of measure one
+210300000000         if imumc1 > 0;                                      // #*c
+210400000000           if iaunms = imunm2;
+210500000000             wTranQty = iatrqt / imumc1;
+210600000000           endif;
+210700000000         endif;                                              // #*c
+210800000000         if imumc2 > 0;                                      // #*c
+210900000000           if iaunms = imunm3;
+211000000000             wTranQty = iatrqt / imumc2;
+211100000000           endif;
+211200000000         endif;                                              // #*c
+211300000000
+211400000000         //* If the transaction is going to increase the quantity,
+211500000000         //*  put the qty in the bucket equal to the transaction date
+211600000000         if iatrcd = 'R' and
+211700000000            wTranQty > 0 or
+211800000000
+211900000000            iatrcd = 'P' and
+212000000000            wTranQty > 0 or
+212100000000
+212200000000            iatrcd = 'Z' and
+212300000000            wTranQty < 0 or
+212400000000
+212500000000            iatrcd = 'I' and
+212600000000            wTranQty < 0 or
+212700000000
+212800000000            iatrcd = 'A' and
+212900000000            wTranQty > 0 or
+213000000000
+213100000000            iatrcd = 'T' and
+213200000000            wTranQty > 0 or
+213300000000
+213400000000            iatrcd = 'Y' and
+213500000000            wTranQty > 0;
+213600000000
+213700000000             exsr $calc1;
+213800000000           else;
+213900000000             //* If the transaction is going to decrease the qty, start
+214000000000             //* at the oldest bucket and decrease from there
+214100000000             exsr $calc2;
+214200000000           endif;
+214300000000
+214400000000           LstRecOH = iaqolt;                              // #*e
+214500000000
+214600000000         readpe ia0pky iahstr;
+214700000000       enddo;
+214800000000
+214900000000       endsr;
+215000000000       //***************************************************************
+215100000000       begsr $getrcp;
+215200000000         //
+215300000000         Foundrcpt = 'N';
+215400000000         chain(n) rc1key rcpt1ar;
+215500000000         *in93 = not %found;
+215600000000         // make sure have correct rcpt record with iahst item number
+215700000000         dow *in93 = *off;
+215800000000           if iaitno <> rcitno;
+215900000000             reade(n) rc1key rcpt1ar;
+216000000000             *in93 = %eof;
+216100000000           else;
+216200000000             Foundrcpt = 'Y';
+216300000000             if rcupin = 'N';
+216400000000               wTranQty = 0;
+216500000000             endif;
+216600000000             leave;
+216700000000           endif;
+216800000000         enddo;
+216900000000
+217000000000         if Foundrcpt = 'N';
+217100000000           if iacecd = 'X';
+217200000000         //  wTranQty = 0;                                   // #*d
+217300000000           endif;
+217400000000         endif;
+217500000000         //
+217600000000       endsr;
+217700000000       //***************************************************************
+217800000000       begsr $calc1;
+217900000000         //
+218000000000         if iatrcd = 'Z';
+218100000000           wTranQty = wTranQty * -1;
+218200000000         endif;
+218300000000         if iatrcd = 'I';
+218400000000           wTranQty = wTranQty * -1;
+218500000000         endif;
+218600000000
+218700000000         //* if negative quantity exists, offset that first
+218800000000         w@x = 5;
+218900000000         dow w@x >= 1 and
+219000000000            wTranQty <> 0;
+219100000000           if wqt(w@x) < 0;
+219200000000             wTranQty = wTranQty + wqt(w@x);
+219300000000             if wTranQty < 0;
+219400000000               wqt(w@x) = wTranQty;
+219500000000               wTranQty = 0;
+219600000000             else;
+219700000000               wqt(w@x) = 0;
+219800000000             endif;
+219900000000           endif;
+220000000000           w@x = w@x - 1;
+220100000000         enddo;
+220200000000         //
+220300000000
+220400000000         //* Now find the correct bucket for the remaining qty
+220500000000         w@x = 5;
+220600000000         dow w@x >= 1 and
+220700000000           wTranQty <> 0;
+220800000000           if @dylat > wDt(w@x);
+220900000000             wqt(w@x) = wqt(w@x) + wTranQty;
+221000000000             w@x = 0;
+221100000000           endif;
+221200000000           w@x = w@x - 1;
+221300000000         enddo;
+221400000000         //
+221500000000
+221600000000       endsr;
+221700000000       //***************************************************************
+221800000000       begsr $calc2;
+221900000000         //
+222000000000         if iatrcd <> 'Z' and
+222100000000            iatrcd <> 'I';
+222200000000           wTranQty = wTranQty * -1;
+222300000000         endif;
+222400000000         w@x = 5;
+222500000000         dow w@x >= 1 and
+222600000000           wTranQty <> 0;
+222700000000           if wqt(w@x) >= wTranQty;
+222800000000             wqt(w@x) = wqt(w@x) - wTranQty;
+222900000000             w@x = 0;
+223000000000             wTranQty = 0;
+223100000000           else;
+223200000000             wTranQty = wTranQty - wqt(w@x);
+223300000000             wqt(w@x) = 0;
+223400000000           endif;
+223500000000           w@x = w@x - 1;
+223600000000         enddo;
+223700000000         //
+223800000000
+223900000000         //* if for some reason, this transaction forced the qyt negative,
+224000000000         //* put it in the oldest bucket
+224100000000         if wTranQty <> 0;
+224200000000           wqt(5) = wqt(5) - wTranQty;
+224300000000         endif;
+224400000000
+224500000000         //
+224600000000       endsr;
+224700000000       //*****************************************************$days
+224800000000       // this subroutine will calculate the number of days difference
+224900000000       // today - Transaction Date.
+225000000000       begsr $days;
+225100000000       //
+225200000000       @dylat = 0;
+225300000000       @today = 0;
+225400000000       @dudat = 0;
+225500000000       //
+225600000000       // put today's date in yy/mm/dd format
+225700000000       @tfdat = 0;
+225800000000       @1cc = 0;
+225900000000      /end-free
+226000000000     C     udate         mult      10000.01      @tfdat
+226100000000     C                   movel     *year         @1cc
+226200000000      /free
+226300000000       //
+226400000000       // put today's date into julian date
+226500000000       @pgdat = %editc(@1date:'X');
+226600000000       @pjday = '000000000';
+226700000000       @pshdn = 'N';
+226800000000       exsr $xadat;
+226900000000      /end-free
+227000000000     C                   move      @pjday        @today
+227100000000      //
+227200000000      // put due date into julian date
+227300000000     C                   movel     *year         @2cc
+227400000000      /free
+227500000000       @cdate = t$dudt;
+227600000000       //
+227700000000       @pgdat = %editc(@2date:'X');
+227800000000       @pjday = '000000000';
+227900000000       @pshdn = 'N';
+228000000000       exsr $xadat;
+228100000000      /end-free
+228200000000     C                   move      @pjday        @dudat
+228300000000      //
+228400000000      // subtract number of days
+228500000000     C     @today        sub       @dudat        @dylat
+228600000000      //
+228700000000      /free
+228800000000       endsr;
+228900000000       //*************************************************** $xadat
+229000000000       // this subroutine will call the date conversion program
+229100000000       begsr $xadat;
+229200000000       //*************************************************** $xadat
+229300000000       //
+229400000000       @xadat = 'Y';
+229500000000       //
+229600000000       XADAT ( @pjday : @pgdat : @pshdn );
+229700000000       //
+229800000000       endsr;
+229900000000       //
+230000000000       //****************************************************************
+230100000000       begsr $poval;
+230200000000       //****************************************************************
+230300000000         // Clear arrays
+230400000000         po     = 0;
+230500000000         ov     = 0;
+230600000000         rc     = 0;
+230700000000
+230800000000         chain ss0key spsumr;
+230900000000         if not %found;
+231000000000           ssaqt1 = *zeros;
+231100000000           ssaqt2 = *zeros;
+231200000000           ssaqt3 = *zeros;
+231300000000           sspoq1 = *zeros;
+231400000000           sspoq2 = *zeros;
+231500000000           sspoq3 = *zeros;
+231600000000         endif;
+231700000000
+231800000000         lx = 1;
+231900000000         unm(lx) = imunm1;
+232000000000         po(lx) = ibpoq1;
+232100000000
+232200000000         // if no vendor/item then convert all u/m to u/m1
+232300000000         exsr $fillum;
+232400000000         if vums(1) = *blanks;
+232500000000          // convert all u/m to u/m1
+232600000000           @@tqtt = ssaqt1 + (ssaqt2 * imumc2)
+232700000000                + (ssaqt2 * imumc2);
+232800000000         else;
+232900000000           @@tqtt = ssaqt1;
+233000000000         endif;
+233100000000         if @@tqtt <= sspoq1;
+233200000000            po(lx) = po(lx) - @@tqtt;
+233300000000         else;
+233400000000            po(lx) = po(lx) - sspoq1;
+233500000000         endif;
+233600000000         //
+233700000000         lx = lx + 1;
+233800000000         unm(lx) = imunm2;
+233900000000         //
+234000000000         po(lx) = ibpoq2;
+234100000000         //
+234200000000         // if u/m2 is vendor/item alt u/m then sub total spord
+234300000000         vy = 1;
+234400000000         vy = %lookup(vialum:vums:vy);
+234500000000         if %EQUAL;
+234600000000           exsr $sppoq;
+234700000000           po(lx) = po(lx) - @@poqt;
+234800000000         endif;
+234900000000
+235000000000         //
+235100000000         lx = lx + 1;
+235200000000         unm(lx) = imunm3;
+235300000000         //
+235400000000         po(lx) = ibpoq3;
+235500000000         //
+235600000000         // if u/m3 is vendor/item alt u/m then sub total spord
+235700000000         vy = 1;
+235800000000         vy = %lookup(vialum:vums:vy);
+235900000000         if %EQUAL;
+236000000000           exsr $sppoq;
+236100000000           po(lx) = po(lx) - @@poqt;
+236200000000         endif;
+236300000000
+236400000000       endsr;
+236500000000       //
+236600000000       //****************************************************************
+236700000000       begsr $overd;
+236800000000       //****************************************************************
+236900000000
+237000000000       setgt pd13ky pode13r;
+237100000000       readpe pd13kp pode13r;
+237200000000       dow not %eof;
+237300000000         if pdlnst = 'O';
+237400000000           // Overdue qty
+237500000000           xxtqrc = ( pdorqt - pdqrcd );
+237600000000           exsr $cvqty;
+237700000000           ov(1) = ov(1) + xxtqrc;
+237800000000
+237900000000         endif;
+238000000000       readpe pd13kp pode13r;
+238100000000       enddo;
+238200000000
+238300000000       endsr;
+238400000000       //
+238500000000       //****************************************************************
+238600000000       begsr $intra;
+238700000000       //****************************************************************
+238800000000       // calculate total In TRansit for this Item
+238900000000       //
+239000000000       rc0001 = *zero;
+239100000000       rc0002 = *zero;
+239200000000       rc0003 = *zero;
+239300000000       //
+239400000000       chain op0key poxf2r;
+239500000000       *in95 = not %found;
+239600000000       dow *in95 = *off;
+239700000000         //
+239800000000         if opunms = imunm1;
+239900000000      /end-free
+240000000000     C                   add       opqtsh        rc0001
+240100000000      /free
+240200000000         else;
+240300000000           if opunms = imunm2;
+240400000000      /end-free
+240500000000     C                   add       opqtsh        rc0002
+240600000000      /free
+240700000000           else;
+240800000000             if opunms = imunm2;
+240900000000      /end-free
+241000000000     C                   add       opqtsh        rc0003
+241100000000      /free
+241200000000             endif;
+241300000000           endif;
+241400000000         endif;
+241500000000         //
+241600000000         reade op0key poxf2r;
+241700000000         *in95 = %eof;
+241800000000       enddo;
+241900000000       //
+242000000000       endsr;
+242100000000       //****************************************************************
+242200000000       begsr $turns;
+242300000000       //****************************************************************
+242400000000
+242500000000         if imunm1 <> *blank
+242600000000           and ibohq1 <= 0;
+242700000000           if imunm2 = *blank;
+242800000000             leavesr;
+242900000000           endif;
+243000000000           if ibohq2 <= 0;
+243100000000             if imunm3 = *blank;
+243200000000               leavesr;
+243300000000             endif;
+243400000000             if ibohq3 <= 0;
+243500000000               leavesr;
+243600000000             endif;
+243700000000           endif;
+243800000000         endif;
+243900000000       //
+244000000000         if ibohq1 < 0;
+244100000000           if ibohq2 < 0;
+244200000000             if ibohq3 < 0;
+244300000000               leavesr;
+244400000000             endif;
+244500000000           endif;
+244600000000         endif;
+244700000000       //
+244800000000       nt = 0;
+244900000000       avcst = 0;
+245000000000       @oh = 0;
+245100000000       @ohq = 0;
+245200000000       @w115 = 0;
+245300000000       @w113 = 0;
+245400000000       @unms = *blanks;
+245500000000       //
+245600000000       // capture default unit of measure
+245700000000       if imdumc = 1;
+245800000000         @unms = imunm1;
+245900000000       endif;
+246000000000       if imdumc = 2;
+246100000000         @unms = imunm2;
+246200000000       endif;
+246300000000       if imdumc = 3;
+246400000000         @unms = imunm3;
+246500000000       endif;
+246600000000       //
+246700000000       // get conversion factor of default u/m.
+246800000000       if imdumc = 1;
+246900000000         @conv = 1;
+247000000000       endif;
+247100000000       if imdumc = 2;
+247200000000         @conv = imumc1;
+247300000000       endif;
+247400000000       if imdumc = 3;
+247500000000         @conv = imumc2;
+247600000000       endif;
+247700000000       //
+247800000000       // calculate percent of total inventory
+247900000000       //  (non catch weight items)
+248000000000       if ibohq1 > *zeros;
+248100000000         @w115 = @conv / 1;
+248200000000      /end-free
+248300000000     C     @w115         mult      ibohq1        @w113
+248400000000     C                   add       @w113         @oh
+248500000000      /free
+248600000000       endif;
+248700000000       if ibohq2 > *zeros;
+248800000000         if imumc1 > 0;
+248900000000      /end-free
+249000000000     C     @conv         div       imumc1        @w115
+249100000000     C     @w115         mult      ibohq2        @w113
+249200000000     C                   add       @w113         @oh
+249300000000      /free
+249400000000         endif;
+249500000000       endif;
+249600000000       if ibohq3 > *zeros;
+249700000000         if imumc2 > 0;
+249800000000      /end-free
+249900000000     C     @conv         div       imumc2        @w115
+250000000000     C     @w115         mult      ibohq3        @w113
+250100000000     C                   add       @w113         @oh
+250200000000      /free
+250300000000         endif;
+250400000000       endif;
+250500000000      /end-free
+250600000000     C                   z-add     @oh           @ohq
+250700000000      /free
+250800000000       //
+250900000000       // for non-catch weight items, calculate on-hand qty
+251000000000       //   in price u/m
+251100000000       if imctwt = 'N';
+251200000000         if imprum <> @unms
+251300000000           and @conv > 0;
+251400000000      /end-free
+251500000000     C     impumc        div       @conv         @w115
+251600000000     C     @w115         mult      @oh           @oh
+251700000000      /free
+251800000000         endif;
+251900000000         // catch weight items, calculate weight of on-hand qty
+252000000000       else;
+252100000000      /end-free
+252200000000     C     imuwt1        mult      ibohq1        @w113
+252300000000      /free
+252400000000         @oh = @w113;
+252500000000      /end-free
+252600000000     C     imuwt2        mult      ibohq2        @w113
+252700000000     C                   add       @w113         @oh
+252800000000     C     imuwt3        mult      ibohq3        @w113
+252900000000     C                   add       @w113         @oh
+253000000000      /free
+253100000000       endif;
+253200000000       //
+253300000000       if @oh <  0;
+253400000000         leavesr;
+253500000000       endif;
+253600000000       OKnt = 'Y';
+253700000000       //
+253800000000       // calculate value for that item
+253900000000      /end-free
+254000000000     C***  @oh           mult      ibavcs        avcst
+254100000000      /free
+254200000000         select;
+254300000000           when csuse = 'A';
+254400000000             avcst  = @oh * ibavcs;
+254500000000           when csuse = 'S';
+254600000000             avcst  = @oh * ibstcs;
+254700000000           other;
+254800000000             avcst  = @oh * ibuscs;
+254900000000         endsl;
+255000000000       //*********************************
+255100000000       //
+255200000000       //
+255300000000       // calculate number of turns
+255400000000      /end-free
+255500000000     C     ibblyo        add       ibblly        @w1
+255600000000     C     ibnmty        add       ibnmly        @w2
+255700000000     C     ibqsyd        add       ibqsly        @w3
+255800000000     C     ibdqyd        add       ibdqly        @w6
+255900000000     C     @w3           sub       @w6           @w3
+256000000000      /free
+256100000000       if @w2 > 0;
+256200000000      /end-free
+256300000000     C     @w1           div       @w2           @w4
+256400000000      /free
+256500000000       endif;
+256600000000       @w5 = @w3 * 12;
+256700000000       if @w2 > 0;
+256800000000      /end-free
+256900000000     C     @w5           div       @w2           @w5
+257000000000      /free
+257100000000       endif;
+257200000000       if @w4 > 0;
+257300000000      /end-free
+257400000000     C     @w5           div       @w4           nt
+257500000000      /free
+257600000000       endif;
+257700000000       //
+257800000000
+257900000000       endsr;
+258000000000       //
+258100000000       //***************************************************************
+258200000000       begsr $sppoq;
+258300000000       //***************************************************************
+258400000000       //
+258500000000       @@poqt = 0;
+258600000000       setll sp5key spor5r;
+258700000000       reade sp5key spor5r;
+258800000000       dow not %eof;
+258900000000         if vums(vy) = soumpo;
+259000000000           @@poqt = @@poqt + sopoqt;
+259100000000         endif;
+259200000000         reade sp5key spor5r;
+259300000000       enddo;
+259400000000       //
+259500000000       endsr;
+259600000000       //***************************************************************
+259700000000       begsr $fillum;
+259800000000       //***************************************************************
+259900000000       //
+260000000000       // fill array with alt u/m for all vnitm for item
+260100000000       @@y = 0;
+260200000000       vums = *blanks;
+260300000000       setll ibitno vnitmr;
+260400000000       reade ibitno vnitmr;
+260500000000       dow not %eof;
+260600000000         vy = 1;
+260700000000         vy = %lookup(vialum:vums:vy);
+260800000000         if %EQUAL;
+260900000000           @@y = @@y + 1;
+261000000000           vums(@@y) = vialum;
+261100000000         endif;
+261200000000         reade ibitno vnitmr;
+261300000000       enddo;
+261400000000       //
+261500000000       endsr;
+261600000000       //****************************************************************
+261700000000       begsr $calqty;
+261800000000       //****************************************************************
+261900000000         @qt = 0;
+262000000000       if imctwt <> 'Y';
+262100000000       if tst001 > *zeros;
+262200000000         @w115 = impumc / 1;
+262300000000      /end-free
+262400000000     C     @w115         mult      tst001        @w113
+262500000000     C                   add       @w113         @qt
+262600000000      /free
+262700000000       endif;
+262800000000       if tst002 > *zeros;
+262900000000         if imumc1 > 0;
+263000000000      /end-free
+263100000000     C     impumc        div       imumc1        @w115
+263200000000     C     @w115         mult      tst002        @w113
+263300000000     C                   add       @w113         @qt
+263400000000      /free
+263500000000         endif;
+263600000000       endif;
+263700000000       if tst003 > *zeros;
+263800000000         if imumc2 > 0;
+263900000000      /end-free
+264000000000     C     impumc        div       imumc2        @w115
+264100000000     C     @w115         mult      tst003        @w113
+264200000000     C                   add       @w113         @qt
+264300000000      /free
+264400000000         endif;
+264500000000       endif;
+264600000000       else;
+264700000000       //
+264800000000       if tst001 > 0;
+264900000000      /end-free
+265000000000     C     uw(1)         mult      tst001        @w113
+265100000000     C                   add       @w113         @qt
+265200000000      /free
+265300000000       endif;
+265400000000       if tst002 > 0;
+265500000000      /end-free
+265600000000     C     uw(2)         mult      tst002        @w113
+265700000000     C                   add       @w113         @qt
+265800000000      /free
+265900000000       endif;
+266000000000       if tst003 > 0;
+266100000000      /end-free
+266200000000     C     uw(3)         mult      tst003        @w113
+266300000000     C                   add       @w113         @qt
+266400000000      /free
+266500000000       endif;
+266600000000       endif;
+266700000000       //
+266800000000       endsr;
+266900000000       //****************************************************************
+267000000000       begsr $cvqty;
+267100000000       //****************************************************************
+267200000000       //* convert total receiver quantity
+267300000000       //
+267400000000      /end-free
+267500000000     C     pdunms        cabeq     imunm1        #cvqty
+267600000000     C     pdunms        cabeq     imunm2        #cvqty
+267700000000     C     pdunms        cabeq     imunm3        #cvqty
+267800000000      /free
+267900000000       //
+268000000000       xxw155 = xxtqrc;
+268100000000       //
+268200000000       if pditno <> viitno
+268300000000         or pdvnno <> vivnno;
+268400000000         chain vi0key vnitmr;
+268500000000         *in91 = not %found;
+268600000000      /end-free
+268700000000     C     *in91         cabeq     *on           #cvqty
+268800000000      /free
+268900000000       endif;
+269000000000       //
+269100000000       if pdunms = vialum
+269200000000         and viaumc <> *zero;
+269300000000      /end-free
+269400000000     C     xxw155        div(h)    viaumc        xxw155
+269500000000      /free
+269600000000       endif;
+269700000000       //
+269800000000      /end-free
+269900000000     C     xxw155        mult(h)   viumcn        xxtqrc
+270000000000      //
+270100000000     C     #cvqty        endsr
+270200000000      /free
+270300000000       //

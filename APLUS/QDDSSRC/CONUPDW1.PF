@@ -1,0 +1,31 @@
+000100000000     A**************************************************************************
+000200000000     A*
+000300000000     A*  GEMKO INFORMATION GROUP
+000400000000     A*
+000500000000     A*  NAME:  CONUPDW1
+000600000000     A*  TYPE:  PHYSICAL FILE
+000700000000     A*  NAME:  CONTRACT PRICE MASS UPDATE
+000800000000     A*
+000900000000     A**************************************************************************
+001000000000     A*
+001100000000     A          R RCONUPD
+001200000000     A*
+001300000000     A            W1CONO    R               REFFLD(CUSMSR/CMCONO CUSMS)
+001400000000     A            W1CSNO    R               REFFLD(CUSMSR/CMCSNO CUSMS)
+001500000000     A            W1CSNM    R               REFFLD(CUSMSR/CMCSNM CUSMS)
+001600000000     A            W1CPPC    R               REFFLD(CUSMSR/CMUS5B CUSMS)
+001700000000     A            W1ITCL    R               REFFLD(ITMSTR/IMITCL ITMST)
+001800000000     A            W1ITSC    R               REFFLD(ITMSTR/IMITSC ITMST)
+001900000000     A            W1ITNO    R               REFFLD(ITMSTR/IMITNO ITMST)
+002000000000     A            W1ITD1    R               REFFLD(ITMSTR/IMITD1 ITMST)
+002100000000     A            W1NGPR    R               REFFLD(CONTRR/CPNGPR CONTR)
+002200000000     A            W1STCC    R               REFFLD(CONTRR/CPSTCC CONTR)
+002300000000     A            W1STDT    R               REFFLD(CONTRR/CPSTDT CONTR)
+002400000000     A            W1EXCC    R               REFFLD(CONTRR/CPEXCC CONTR)
+002500000000     A            W1EXDT    R               REFFLD(CONTRR/CPEXDT CONTR)
+002600000000     A*
+002700000000     A          K W1CONO
+002800000000     A          K W1CSNO
+002900000000     A          K W1ITNO
+003000000000     A*
+003100000000     A**************************************************************************

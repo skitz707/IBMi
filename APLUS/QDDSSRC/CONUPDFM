@@ -1,0 +1,129 @@
+000100000000     A**************************************************************************
+000200000000     A*
+000300000000     A*  GEMKO INFORMATION GROUP
+000400000000     A*
+000500000000     A*  NAME:  CONUPDFM
+000600000000     A*  TYPE:  DISPLAY FILE
+000700000000     A*  NAME:  CONTRACT PRICE MASS UPDATE
+000800000000     A*
+000900000000     A**************************************************************************
+001000000000     A*
+001100000000     A*  INDICATORS USED
+001200000000     A*
+001300000000     A*  NO  KEY  DESCRIPTION
+001400000000     A*  --  ---  --------------------------------------------------------------
+001500000000     A*  03  F03  EXIT TO MENU
+001600000000     A*
+001700000000     A*  73       INVALID, MISSING OR OUT OF SEQUENCE EXPIRATION DATE
+001800000000     A*  74       INVALID, MISSING OR OUT OF SEQUENCE START DATE
+001900000000     A*  75       SPECIFY PRICE DIFFERENCE IN DOLLARS OR PERCENT, BUT NOT BOTH
+002000000000     A*  76       INVALID OR MISSING CUSTOMER PRICE CHANGE CODE
+002100000000     A*  77       INVALID OR MISSING ITEM SUBCLASS
+002200000000     A*  78       INVALID OR MISSING ITEM CLASS
+002300000000     A*  79       INVALID OR MISSING WAREHOUSE I/D
+002400000000     A*
+002500000000     A**************************************************************************
+002600000000     A*
+002700000000     A                                      DSPSIZ(24 80 *DS3)
+002800000000     A                                      PRINT
+002900000000     A*
+003000000000     A**************************************************************************
+003100000000     A*
+003200000000     A*  PROMPT FOR PARAMETERS
+003300000000     A*
+003400000000     A          R CONUPDF1
+003500000000     A*
+003600000000     A                                      OVERLAY
+003700000000     A                                      PUTOVR
+003800000000     A                                      CA03(03 'Exit')
+003900000000     A                                  1 20'        Contract Price Mass Update-
+004000000000     A                                              '
+004100000000     A                                      DSPATR(RI)
+004200000000     A                                      COLOR(BLU)
+004300000000     A            F1PROG        10A  O  2 20OVRDTA
+004400000000     A            F1USRP        10A  O  2 32OVRDTA
+004500000000     A                                  2 44DATE
+004600000000     A                                      EDTCDE(Y)
+004700000000     A                                  2 54TIME
+004800000000     A                                  4 20'Item Class/Subclass (** = All) ?'
+004900000000     A            F1ITCL         2A  B  4 55OVRDTA
+005000000000     A                                      COLOR(YLW)
+005100000000     A  78                                  ERRMSG('Invalid Or Missing Item Cla-
+005200000000     A                                      ss' 78)
+005300000000     A                                  4 58'/'
+005400000000     A            F1ITSC         2A  B  4 60OVRDTA
+005500000000     A                                      COLOR(YLW)
+005600000000     A  77                                  ERRMSG('Invalid Or Missing Item Sub-
+005700000000     A                                      class' 77)
+005800000000     A                                  5 20'Customer Price Change Code'
+005900000000     A            F1CPCC         1A  B  5 61OVRDTA
+006000000000     A                                      COLOR(YLW)
+006100000000     A  76                                  ERRMSG('Invalid Or Missing Customer-
+006200000000     A                                       Price Change Code' 76)
+006300000000     A                                  7 20'New Price Diff In Dollars'
+006400000000     A            F1DIFD         9Y 5B  7 50COLOR(YLW)
+006500000000     A                                      CHECK(FE)
+006600000000     A                                      OVRDTA
+006700000000     A                                      EDTCDE(O)
+006800000000     A  75                                  ERRMSG('Specify Price Difference In-
+006900000000     A                                       Dollars Or Percent, But Not Both' -
+007000000000     A                                      75)
+007100000000     A                                  8 35'OR Percent'
+007200000000     A            F1DIFP         8Y 5B  8 52COLOR(YLW)
+007300000000     A                                      CHECK(FE)
+007400000000     A                                      OVRDTA
+007500000000     A                                      EDTCDE(O)
+007600000000     A                                 10 20'New Start Date'
+007700000000     A            F1STDT         6D  B 10 56COLOR(YLW)
+007800000000     A                                      CHECK(FE)
+007900000000     A                                      CHECK(RZ)
+008000000000     A                                      OVRDTA
+008100000000     A  74                                  ERRMSG('Invalid, Missing Or Out Of -
+008200000000     A                                      Sequence Start Date' 74)
+008300000000     A                                 11 20'New Expiration Date'
+008400000000     A            F1EXDT         6D  B 11 56COLOR(YLW)
+008500000000     A                                      CHECK(FE)
+008600000000     A                                      CHECK(RZ)
+008700000000     A                                      OVRDTA
+008800000000     A  73                                  ERRMSG('Invalid, Missing Or Out Of -
+008900000000     A                                      Sequence Expiration Date' 73)
+009000000000     A                                 13 20'               Last Update        -
+009100000000     A                                              '
+009200000000     A                                      DSPATR(RI)
+009300000000     A                                      COLOR(BLU)
+009400000000     A                                 15 20'Item Class/Subclass'
+009500000000     A            FSITCL    R        O 15 55REFFLD(F1ITCL *SRC)
+009600000000     A                                      OVRDTA
+009700000000     A                                      DSPATR(HI)
+009800000000     A                                 15 58'/'
+009900000000     A            FSITSC    R        O 15 60REFFLD(F1ITSC *SRC)
+010000000000     A                                      OVRDTA
+010100000000     A                                      DSPATR(HI)
+010200000000     A                                 16 20'Customer Price Change Code'
+010300000000     A            FSCPCC    R        O 16 61REFFLD(F1CPCC *SRC)
+010400000000     A                                      OVRDTA
+010500000000     A                                      DSPATR(HI)
+010600000000     A                                 18 20'New Price Diff In Dollars'
+010700000000     A            FSDIFD    R        O 18 50REFFLD(F1DIFD *SRC)
+010800000000     A                                      OVRDTA
+010900000000     A                                      DSPATR(HI)
+011000000000     A                                      EDTCDE(O)
+011100000000     A                                 19 35'OR Percent'
+011200000000     A            FSDIFP    R        O 19 52REFFLD(F1DIFP *SRC)
+011300000000     A                                      OVRDTA
+011400000000     A                                      DSPATR(HI)
+011500000000     A                                      EDTCDE(O)
+011600000000     A                                 21 20'New Start Date'
+011700000000     A            FSSTDT        10A  O 21 52DSPATR(HI)
+011800000000     A                                      OVRDTA
+011900000000     A                                 22 20'New Expiration Date'
+012000000000     A            FSEXDT        10A  O 22 52DSPATR(HI)
+012100000000     A                                      OVRDTA
+012200000000     A                                 23  2'F3=Exit'
+012300000000     A                                      COLOR(BLU)
+012400000000     A                                 23 20'Records Updated'
+012500000000     A            FSRUPD         5Y 0O 23 56EDTCDE(2)
+012600000000     A                                      OVRDTA
+012700000000     A                                      DSPATR(HI)
+012800000000     A*
+012900000000     A**************************************************************************
